@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.SplashController">
+   <children>
+      <VBox prefHeight="50.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="productImage" fitHeight="194.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" promptText="\@Copyright" text="This is a Product Management Application template developed by Rijai Consulting." wrapText="true">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </TextArea>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="btnProceed" mnemonicParsing="false" onAction="#onProceed" text="Proceed" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

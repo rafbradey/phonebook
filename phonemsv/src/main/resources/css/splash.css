@@ -1,0 +1,17 @@
+.root{
+    -fx-background-color: Pink;
+    -fx-alignment:center;
+}
+
+#textArea{
+   -fx-text-fill: Blue;
+   -fx-font-size: 20;
+
+}
+
+#pane{
+   -fx-border-style:solid;
+   -fx-border-width:10;
+   -fx-border-color:Black;
+
+}

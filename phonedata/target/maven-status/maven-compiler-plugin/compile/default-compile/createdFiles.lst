@@ -1,0 +1,4 @@
+com\gabriel\prodmsapp\repository\ProductDataRepository.class
+com\gabriel\prodmsapp\entity\ProductData.class
+com\gabriel\prodmsapp\service\ProductService.class
+com\gabriel\prodmsapp\model\Product.class
