@@ -10,6 +10,7 @@ public class Phone {
     String email;
     String message;
 
+    //support tables
     int groupId;
     String groupName;
 

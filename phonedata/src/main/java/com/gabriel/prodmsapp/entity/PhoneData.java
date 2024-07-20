@@ -20,6 +20,7 @@ public class PhoneData {
     String email;
     String message;
 
+    //support table
     int groupId;
     String groupName;
 

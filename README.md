@@ -1,5 +1,4 @@
 its181 project
-raf bradey matoza
 - Raf Bradey F. Matoza
 - Joaquin Carlos Vizconde
 - Ron Gerrovir Viernes
@@ -12,7 +11,7 @@ Patch Notes v1.1
 - Changed variable names to be more descriptive
 - Changed "UOM" to "GROUP" in the database
 - Bug Fixes in PhoneServices
-- Added variables in PhoneData
+- Added email, and message variables in PhoneData
 
 Patch Notes v1.0
 - Initial commit
