@@ -16,7 +16,9 @@ public class PhoneData {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String name;
-    String description;
+    String phoneNumber;
+    String email;
+    String message;
 
     int groupId;
     String groupName;

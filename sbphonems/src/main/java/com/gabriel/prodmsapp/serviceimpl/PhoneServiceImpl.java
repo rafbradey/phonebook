@@ -2,7 +2,7 @@ package com.gabriel.prodmsapp.serviceimpl;
 
 import com.gabriel.prodmsapp.entity.PhoneData;
 import com.gabriel.prodmsapp.model.Phone;
-import com.gabriel.prodmsapp.repository.ProductDataRepository;
+import com.gabriel.prodmsapp.repository.PhoneDataRepository;
 import com.gabriel.prodmsapp.service.PhoneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,23 +16,25 @@ public class PhoneServiceImpl implements PhoneService {
     Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
     @Autowired
-    ProductDataRepository productDataRepository;
+    PhoneDataRepository phoneDataRepository;
 
     @Override
-    public Phone[] getProducts() {
-        List<PhoneData> productsData = new ArrayList<>();
+    public Phone[] getPhones() {
+        List<PhoneData> phonesData = new ArrayList<>();
         List<Phone> phones = new ArrayList<>();
-        productDataRepository.findAll().forEach(productsData::add);
-        Iterator<PhoneData> it = productsData.iterator();
+        phoneDataRepository.findAll().forEach(phonesData::add);
+        Iterator<PhoneData> it = phonesData.iterator();
 
         while(it.hasNext()) {
             Phone phone = new Phone();
             PhoneData phoneData = it.next();
             phone.setId(phoneData.getId());
             phone.setName(phoneData.getName());
-            phone.setDescription(phoneData.getDescription());
+            phone.setPhoneNumber(phoneData.getPhoneNumber());
             phone.setGroupId(phoneData.getGroupId());
             phone.setGroupName(phoneData.getGroupName());
+            phone.setEmail(phoneData.getEmail());
+            phone.setMessage(phoneData.getMessage());
             phones.add(phone);
         }
 
@@ -49,19 +51,24 @@ public class PhoneServiceImpl implements PhoneService {
         logger.info("add: Input"+ phone.toString());
         PhoneData phoneData = new PhoneData();
         phoneData.setName(phone.getName());
-        phoneData.setDescription(phone.getDescription());
+        phoneData.setPhoneNumber(phone.getPhoneNumber());
         phoneData.setGroupId(phone.getGroupId());
         phoneData.setGroupName(phone.getGroupName());
+        phoneData.setEmail(phone.getEmail());
+        phoneData.setMessage(phone.getMessage());
+        
 
-        phoneData = productDataRepository.save(phoneData);
+        phoneData = phoneDataRepository.save(phoneData);
         logger.info("add: Input"+ phoneData.toString());
 
         Phone newPhone = new Phone();
         newPhone.setId(phoneData.getId());
         newPhone.setName(phoneData.getName());
-        newPhone.setDescription(phoneData.getDescription());
+        newPhone.setPhoneNumber(phoneData.getPhoneNumber());
         newPhone.setGroupId(phoneData.getGroupId());
         newPhone.setGroupName(phoneData.getGroupName());
+        newPhone.setEmail(phoneData.getEmail());
+        newPhone.setMessage(phoneData.getMessage());
         return newPhone;
     }
 
@@ -70,37 +77,45 @@ public class PhoneServiceImpl implements PhoneService {
         PhoneData phoneData = new PhoneData();
         phoneData.setId(phone.getId());
         phoneData.setName(phone.getName());
-        phoneData.setDescription(phone.getDescription());
+        phoneData.setPhoneNumber(phone.getPhoneNumber());
         phoneData.setGroupId(phone.getGroupId());
         phoneData.setGroupName(phone.getGroupName());
+        phoneData.setEmail(phone.getEmail());
+        phoneData.setMessage(phone.getMessage());
 
-        phoneData = productDataRepository.save(phoneData);
+        phoneData = phoneDataRepository.save(phoneData);
 
         Phone newPhone = new Phone();
         newPhone.setId(phoneData.getId());
         newPhone.setName(phoneData.getName());
-        newPhone.setDescription(phoneData.getDescription());
+        newPhone.setPhoneNumber(phoneData.getPhoneNumber());
         newPhone.setGroupId(phoneData.getGroupId());
         newPhone.setGroupName(phoneData.getGroupName());
+        newPhone.setEmail(phoneData.getEmail());
+        newPhone.setMessage(phoneData.getMessage());
+
         return newPhone;
     }
 
     @Override
-    public Phone getProduct(Integer id) {
+    public Phone getPhone(Integer id) {
         logger.info("Input id >> "+  Integer.toString(id) );
-        Optional<PhoneData> optional = productDataRepository.findById(id);
+        Optional<PhoneData> optional = phoneDataRepository.findById(id);
         if(optional.isPresent()) {
             logger.info("Is present >> ");
             Phone phone = new Phone();
-            PhoneData productDatum = optional.get();
-            phone.setId(productDatum.getId());
-            phone.setName(productDatum.getName());
-            phone.setDescription(productDatum.getDescription());
-            phone.setGroupId(productDatum.getGroupId());
-            phone.setGroupName(productDatum.getGroupName());
+            PhoneData phoneDatum = optional.get();
+            phone.setId(phoneDatum.getId());
+            phone.setName(phoneDatum.getName());
+            phone.setPhoneNumber(phoneDatum.getPhoneNumber());
+            phone.setGroupId(phoneDatum.getGroupId());
+            phone.setGroupName(phoneDatum.getGroupName());
+            phone.setEmail(phoneDatum.getEmail());
+            phone.setMessage(phoneDatum.getMessage());
+
             return phone;
         }
-        logger.info("Failed  >> unable to locate product" );
+        logger.info("Failed  >> unable to locate phone" );
         return null;
     }
 
@@ -108,17 +123,19 @@ public class PhoneServiceImpl implements PhoneService {
     public void delete(Integer id) {
         Phone phone = null;
         logger.info("Input >> " + Integer.toString(id));
-         Optional<PhoneData> optional = productDataRepository.findById(id);
+         Optional<PhoneData> optional = phoneDataRepository.findById(id);
          if( optional.isPresent()) {
-             PhoneData productDatum = optional.get();
-             productDataRepository.delete(optional.get());
-             logger.info("Successfully deleted >> " + productDatum.toString());
+             PhoneData phoneDatum = optional.get();
+             phoneDataRepository.delete(optional.get());
+             logger.info("Successfully deleted >> " + phoneDatum.toString());
              phone = new Phone();
              phone.setId(optional.get().getId());
              phone.setName(optional.get().getName());
-             phone.setDescription(optional.get().getDescription());
+             phone.setPhoneNumber(optional.get().getPhoneNumber());
              phone.setGroupId(optional.get().getGroupId());
              phone.setGroupName(optional.get().getGroupName());
+             phone.setEmail(optional.get().getEmail());
+             phone.setMessage(optional.get().getMessage());
          }
          else {
              logger.info("Failed  >> unable to locate phone id: " +  Integer.toString(id));

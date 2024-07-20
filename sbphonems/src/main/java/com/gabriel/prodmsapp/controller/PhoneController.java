@@ -17,14 +17,14 @@ public class PhoneController {
     @Autowired
     private PhoneService phoneService;
 
-    @GetMapping("/api/product")
-    public ResponseEntity<?> listProducts()
+    @GetMapping("/api/phone")
+    public ResponseEntity<?> listPhones()
     {
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
 
         try {
-            Phone[] phones = phoneService.getProducts();
+            Phone[] phones = phoneService.getPhones();
             response =  ResponseEntity.ok().headers(headers).body(phones);
         }
         catch( Exception ex)
@@ -69,13 +69,13 @@ public class PhoneController {
         return response;
     }
 
-    @GetMapping("api/product/{id}")
+    @GetMapping("api/phone/{id}")
     public ResponseEntity<?> get(@PathVariable final Integer id){
-        logger.info("Input product id >> "+  Integer.toString(id));
+        logger.info("Input phone id >> "+  Integer.toString(id));
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
-            Phone phone = phoneService.getProduct(id);
+            Phone phone = phoneService.getPhone(id);
             response = ResponseEntity.ok(phone);
         }
         catch( Exception ex)
@@ -85,7 +85,7 @@ public class PhoneController {
         return response;
     }
 
-    @DeleteMapping("api/product/{id}")
+    @DeleteMapping("api/phone/{id}")
     public ResponseEntity<?> delete(@PathVariable final Integer id){
         logger.info("Input >> "+  Integer.toString(id));
         HttpHeaders headers = new HttpHeaders();

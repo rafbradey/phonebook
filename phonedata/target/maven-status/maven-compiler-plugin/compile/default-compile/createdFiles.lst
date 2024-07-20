@@ -1,8 +1,8 @@
 com\gabriel\prodmsapp\service\PhoneService.class
 com\gabriel\prodmsapp\entity\GroupData.class
-com\gabriel\prodmsapp\repository\ProductDataRepository.class
 com\gabriel\prodmsapp\entity\SocialData.class
 com\gabriel\prodmsapp\model\Social.class
+com\gabriel\prodmsapp\repository\PhoneDataRepository.class
 com\gabriel\prodmsapp\repository\SocialDataRepository.class
 com\gabriel\prodmsapp\service\SocialService.class
 com\gabriel\prodmsapp\service\GroupService.class
