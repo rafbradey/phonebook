@@ -1,4 +1,12 @@
+com\gabriel\prodmsapp\service\PhoneService.class
+com\gabriel\prodmsapp\entity\GroupData.class
 com\gabriel\prodmsapp\repository\ProductDataRepository.class
-com\gabriel\prodmsapp\entity\ProductData.class
-com\gabriel\prodmsapp\service\ProductService.class
-com\gabriel\prodmsapp\model\Product.class
+com\gabriel\prodmsapp\entity\SocialData.class
+com\gabriel\prodmsapp\model\Social.class
+com\gabriel\prodmsapp\repository\SocialDataRepository.class
+com\gabriel\prodmsapp\service\SocialService.class
+com\gabriel\prodmsapp\service\GroupService.class
+com\gabriel\prodmsapp\model\Group.class
+com\gabriel\prodmsapp\model\Phone.class
+com\gabriel\prodmsapp\entity\PhoneData.class
+com\gabriel\prodmsapp\repository\GroupDataRepository.class

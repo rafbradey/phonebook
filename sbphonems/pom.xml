@@ -101,7 +101,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>com.gabriel.prodmsapp.ProductMSApplication</mainClass>
+                    <mainClass>com.gabriel.prodmsapp.PhoneMSApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,5 +1,7 @@
-com\gabriel\prodmsapp\serviceimpl\ProductServiceImpl.class
-com\gabriel\prodmsapp\controller\UomController.class
-com\gabriel\prodmsapp\serviceimpl\UomServiceImpl.class
-com\gabriel\prodmsapp\ProductMSApplication.class
-com\gabriel\prodmsapp\controller\ProductController.class
+com\gabriel\prodmsapp\controller\SocialController.class
+com\gabriel\prodmsapp\controller\GroupController.class
+com\gabriel\prodmsapp\PhoneMSApplication.class
+com\gabriel\prodmsapp\serviceimpl\SocialServiceImpl.class
+com\gabriel\prodmsapp\serviceimpl\PhoneServiceImpl.class
+com\gabriel\prodmsapp\serviceimpl\GroupServiceImpl.class
+com\gabriel\prodmsapp\controller\PhoneController.class
