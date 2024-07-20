@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="prodmsv1" />
+        <module name="prodmsv2" />
+        <module name="phonedata" />
+        <module name="phonemsv" />
+        <module name="prodmsv3" />
+        <module name="sbphonems" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="prodms" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="phonedata" options="-parameters" />
+      <module name="phonemsv" options="-parameters" />
+      <module name="prodms" options="-parameters" />
+      <module name="prodmsv1" options="-parameters" />
+      <module name="prodmsv2" options="-parameters" />
+      <module name="prodmsv3" options="-parameters" />
+      <module name="sbphonems" options="-parameters" />
+    </option>
+  </component>
+</project>
