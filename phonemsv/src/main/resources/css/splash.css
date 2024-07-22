@@ -1,5 +1,5 @@
 .root{
-    -fx-background-color: Pink;
+    -fx-background-color: #b6bcde;
     -fx-alignment:center;
 }
 
@@ -14,4 +14,18 @@
    -fx-border-width:10;
    -fx-border-color:Black;
 
+}
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #8084c6, #5e6194);
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 4px 8px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 4, 0, 0, 2);
+    -fx-cursor: hand;
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #f4f4f5;
 }
