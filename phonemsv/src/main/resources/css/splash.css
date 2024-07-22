@@ -1,31 +1,13 @@
 .root{
-    -fx-background-color: #b6bcde;
+    -fx-background-color: #e4d8f2;
     -fx-alignment:center;
 }
 
-#textArea{
-   -fx-text-fill: Blue;
-   -fx-font-size: 20;
-
+#txLabel{
+    -fx-font-size: 30;
+    -fx-fill: #a57cd2;
+    -fx-font-weight: 900;
 }
 
-#pane{
-   -fx-border-style:solid;
-   -fx-border-width:10;
-   -fx-border-color:Black;
 
-}
 
-.button {
-    -fx-background-color: linear-gradient(to bottom, #8084c6, #5e6194);
-    -fx-text-fill: white;
-    -fx-font-size: 12px;
-    -fx-padding: 4px 8px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 4, 0, 0, 2);
-    -fx-cursor: hand;
-     -fx-font-size: 12px;
-     -fx-font-weight: bold;
-     -fx-text-fill: #f4f4f5;
-}

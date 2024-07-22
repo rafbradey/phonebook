@@ -1,5 +1,6 @@
 package com.gabriel.prodmsv;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import lombok.Data;
 import lombok.Setter;
 
@@ -21,18 +24,13 @@ import java.util.ResourceBundle;
 public class SplashController implements Initializable {
     @Setter
     Stage stage;
-    @javafx.fxml.FXML
     @Setter
-    public ImageView productImage;
-    @Setter
-    Image image;
     @javafx.fxml.FXML
     private Button btnProceed;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        image = new Image(getClass().getResourceAsStream("/images/wink.gif"));
-        productImage.setImage(image);
+
     }
 
    @javafx.fxml.FXML
@@ -47,11 +45,17 @@ public class SplashController implements Initializable {
             ProdManController prodManController  = fxmlLoader.getController();
             prodManController.setStage(stage);
             Scene scene = new Scene(root, 300, 600);
-            stage.setTitle("Product Management");
+            stage.setTitle("Phone Management");
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {
             System.out.println("Error occured" + ex.getMessage());
         }
+
     }
+
+
+
 }
+
+

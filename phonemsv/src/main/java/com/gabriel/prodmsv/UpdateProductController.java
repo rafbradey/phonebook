@@ -1,9 +1,9 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
-import com.gabriel.prodmsv.ServiceImpl.UomService;
-import com.gabriel.prodmsv.model.Product;
-import com.gabriel.prodmsv.model.Uom;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
+import com.gabriel.prodmsv.ServiceImpl.GroupService;
+import com.gabriel.prodmsv.model.Phone;
+import com.gabriel.prodmsv.model.Group;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -37,17 +37,19 @@ public class UpdateProductController implements Initializable {
     @FXML
     private TextField tfUom;
     @FXML
-    private ComboBox<Uom> cbUom;
+    private ComboBox<Group> cbUom;
 
     public void refresh() throws Exception{
-        Product product=ProdManController.product;
-        tfId.setText(Integer.toString(product.getId()));
-        tfName.setText(product.getName());
-        tfDesc.setText(product.getDescription());
+        Phone phone =ProdManController.phone;
+        tfId.setText(Integer.toString(phone.getId()));
+        tfName.setText(phone.getName());
+        //tfPhoneNumber dapat to
+        tfDesc.setText(phone.getPhoneNumber());
         cbUom.getItems().clear();
-        Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
-        cbUom.getItems().addAll(uoms);
-        cbUom.getSelectionModel().select(UomService.getService().getUom(product.getUomId()));
+        Group[] groups =  (Group[]) GroupService.getService().getGroups();
+        cbUom.getItems().addAll(groups);
+        cbUom.getSelectionModel().select(GroupService.getService().getGroup(phone.getGroupId()));
+        // if may combo box yung social,, add dito -- raf
     }
 
     @Override
@@ -63,18 +65,19 @@ public class UpdateProductController implements Initializable {
     }
 
     public void onSubmit(ActionEvent actionEvent) {
-        Product product = new Product();
-        product.setId(Integer.parseInt(tfId.getText()));
-        product.setName(tfName.getText());
-        product.setDescription(tfDesc.getText());
-        Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setUomId(uom.getId());
-        product.setUomName(uom.getName());
+        Phone phone = new Phone();
+        phone.setId(Integer.parseInt(tfId.getText()));
+        phone.setName(tfName.getText());
+        //tfPhoneNumber dapat to
+        phone.setPhoneNumber(tfDesc.getText());
+        Group group = cbUom.getSelectionModel().getSelectedItem();
+        phone.setGroupId(group.getId());
+        phone.setGroupName(group.getName());
 
         try{
-            product= ProductService.getService().update(product);
+            phone = PhoneService.getService().update(phone);
             controller.refresh();
-            controller.setControlTexts(product);
+            controller.setControlTexts(phone);
             onBack(actionEvent);
         }
         catch(Exception ex){

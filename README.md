@@ -5,6 +5,9 @@ its181 project
 
   ![aaaaaaaaaa](https://github.com/user-attachments/assets/f0fa42ac-1efc-4f29-86c8-043d5df9c947)
 
+Patch Notes v1.2
+- Changed everything spring boot microservice to phone services
+- Added comments in CreateProductController, DeleteProduct Controller, UpdateProduct Controller
 
 Patch Notes v1.1
 - Added README.md

@@ -1,10 +1,12 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
-import com.gabriel.prodmsv.model.Product;
-import com.gabriel.prodmsv.model.Uom;
-import com.gabriel.prodmsv.ServiceImpl.UomService;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
+import com.gabriel.prodmsv.ServiceImpl.SocialService;
+import com.gabriel.prodmsv.model.Phone;
+import com.gabriel.prodmsv.model.Group;
+import com.gabriel.prodmsv.ServiceImpl.GroupService;
 
+import com.gabriel.prodmsv.model.Social;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +32,7 @@ public class CreateProductController implements Initializable {
     @FXML
     public TextField tfDesc;
     @FXML
-    private ComboBox<Uom> cbUom;
+    private ComboBox<Group> cbGroup;
     public Button btnSubmit;
     public Button btnNext;
 
@@ -38,18 +41,24 @@ public class CreateProductController implements Initializable {
     @Setter
     Scene parentScene;
     @Setter
-    ProductService productService;
+    PhoneService phoneService;
     @Setter
-    UomService  uomService;
+    GroupService groupService;
+    @Setter
+    SocialService socialService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         System.out.println("CreateProductController: initialize");
 
         try{
-        Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
-        cbUom.getItems().clear();;
-        cbUom.getItems().addAll(uoms);
+        Group[] groups =  (Group[]) GroupService.getService().getGroups();
+        cbGroup.getItems().clear();;
+        cbGroup.getItems().addAll(groups);
+
+
+        Social[] socials =  (Social[]) SocialService.getService().getSocials();
+        //if may combobox yung socials add dito ^^ similar sa gawa ng Group (cb)
 
         tfName.setText("");
         tfDesc.setText("");
@@ -58,10 +67,14 @@ public class CreateProductController implements Initializable {
         }
     }
 
+
+
+
+
     public void clearControlTexts(){
         tfName.setText("");
         tfDesc.setText("");
-        cbUom.getSelectionModel().clearSelection();
+        cbGroup.getSelectionModel().clearSelection();
     }
 
     public void onNext(ActionEvent actionEvent) {
@@ -74,15 +87,24 @@ public class CreateProductController implements Initializable {
         stage.show();
     }
 
+    //palitan mamaya yung tfDesc etc after mabago yung UI design --raf
     public void onSubmit(ActionEvent actionEvent) throws Exception{
-        Product product = new Product();
-        product.setName(tfName.getText());
-        product.setDescription(tfDesc.getText());
-        Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setUomId(uom.getId());
-        product.setUomName(uom.getName());
+        Phone phone = new Phone();
+        phone.setName(tfName.getText());
+        phone.setPhoneNumber(tfDesc.getText());
+        //  phone.setPhoneNumber(tfPhoneNumber.getText());
+        // phone.setEmail(tfEmail.getText());
+
+
+        //hindi applicable message dito, pero just in acase
+        // phone.setMessage(tfMessage.getText();
+
+        //combobox part -
+        Group group = cbGroup.getSelectionModel().getSelectedItem();
+        phone.setGroupId(group.getId());
+        phone.setGroupName(group.getName());
         try{
-            product=productService.create(product);
+            phone = phoneService.create(phone);
             prodManController.refresh();
             onBack(actionEvent);
         }
