@@ -9,8 +9,8 @@
 
 <Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="85.0" layoutY="522.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
-      <Rectangle fx:id="cbUom" arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="57.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="85.0" layoutY="523.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
+      <Rectangle fx:id="cbUom" arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="-5.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
       <ListView fx:id="lvProducts" layoutX="37.0" layoutY="86.0" onMouseClicked="#onMouseClicked" prefHeight="180.0" prefWidth="287.0" />
       <HBox layoutX="70.0" layoutY="293.0" prefHeight="50.0" prefWidth="220.0">
          <children>
@@ -37,31 +37,23 @@
             <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
-      <HBox alignment="CENTER" layoutX="43.0" layoutY="536.0" prefHeight="50.0" prefWidth="275.0">
+      <HBox alignment="CENTER" layoutX="43.0" layoutY="540.0" prefHeight="50.0" prefWidth="275.0" spacing="20.0">
          <children>
-            <Button fx:id="updateButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onUpdate" text="Modify">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" text="Delete">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="closeButton" alignment="CENTER" onAction="#onClose" text="Close">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
+            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="60.0" text="Edit" />
+            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="60.0" text="Delete" />
+            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Settings" />
          </children>
       </HBox>
       <Button fx:id="createButton" alignment="CENTER" layoutX="294.0" layoutY="476.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
-      <HBox layoutX="14.0" layoutY="11.0" prefHeight="34.0" prefWidth="200.0">
+      <HBox layoutX="14.0" layoutY="6.0" prefHeight="34.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="productImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="txtitle" prefHeight="25.0" prefWidth="135.0" text="Contacts" />
+            <ImageView fx:id="productImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin></ImageView>
+            <Label fx:id="txtitle" prefHeight="17.0" prefWidth="135.0" text="Contacts" />
          </children>
       </HBox>
+      <Button fx:id="closeButton" alignment="CENTER" layoutX="320.0" layoutY="14.0" onAction="#onClose" text="X" />
    </children>
 </Pane>
