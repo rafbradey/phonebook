@@ -15,17 +15,17 @@
 
 <Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
    <children>
-      <ScrollPane layoutX="36.0" layoutY="109.0" prefHeight="400.0" prefWidth="288.0">
+      <ScrollPane layoutX="36.0" layoutY="109.0" prefHeight="411.0" prefWidth="288.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="286.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="286.0">
                <children>
-                  <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="412.0" prefWidth="287.0" />
-                  <Button fx:id="createButton" alignment="CENTER" layoutX="218.0" layoutY="349.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
+                  <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="412.0" prefWidth="288.0" />
+                  <Button fx:id="createButton" alignment="CENTER" layoutX="208.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="85.0" layoutY="523.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="73.0" layoutY="535.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
       <Rectangle fx:id="cbUom" arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="-5.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
       <HBox layoutX="413.0" layoutY="275.0" prefHeight="50.0" prefWidth="220.0">
          <children>
@@ -52,7 +52,7 @@
             <TextField fx:id="tfGroup" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
-      <HBox alignment="CENTER" layoutX="8.0" layoutY="541.0" prefHeight="50.0" prefWidth="345.0" spacing="20.0">
+      <HBox alignment="CENTER" layoutX="8.0" layoutY="552.0" prefHeight="39.0" prefWidth="345.0" spacing="20.0">
          <children>
             <Button fx:id="contactButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Contacts" />
             <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="75.0" text="Edit" />
