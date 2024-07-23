@@ -51,6 +51,12 @@ public class ProdManController implements Initializable {
     public Button deleteButton;
     @FXML
     public Button closeButton;
+    @FXML
+    public Button contactButton;
+    @FXML
+    public Button favoritesButton;
+    @FXML
+    public Button settingsButton;
 
     public static Phone phone;
     @FXML
@@ -79,6 +85,41 @@ public class ProdManController implements Initializable {
                 puffy = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
                 wink = new Image(getClass().getResourceAsStream("/images/wink.gif"));
                 productImage.setImage(puffy);
+
+                // Load the edit icon and set it to the update button
+                Image contactsIcon = new Image(getClass().getResourceAsStream("images/contacts.jpg"));
+                ImageView contactsIconView = new ImageView(contactsIcon);
+                contactsIconView.setFitWidth(18);
+                contactsIconView.setFitHeight(18);
+                contactButton.setGraphic(contactsIconView);
+                contactButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+
+                Image favoritesIcon = new Image(getClass().getResourceAsStream("images/favorite.png"));
+                ImageView favoritesView = new ImageView(favoritesIcon);
+                favoritesView.setFitWidth(18);
+                favoritesView.setFitHeight(18);
+                favoritesButton.setGraphic(favoritesView);
+                favoritesButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+
+                Image settingsIcon = new Image(getClass().getResourceAsStream("images/settings.jpg"));
+                ImageView settingsIconView = new ImageView(settingsIcon);
+                settingsIconView.setFitWidth(16);
+                settingsIconView.setFitHeight(16);
+                settingsButton.setGraphic(settingsIconView);
+
+                Image updateIcon = new Image(getClass().getResourceAsStream("images/edit.jpg"));
+                ImageView updateIconView = new ImageView(updateIcon);
+                updateIconView.setFitWidth(16);
+                updateIconView.setFitHeight(16);
+                updateButton.setGraphic(updateIconView);
+                updateButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+
+                Image deleteIcon = new Image(getClass().getResourceAsStream("images/delete.png"));
+                ImageView deleteIconView = new ImageView(deleteIcon);
+                deleteIconView.setFitWidth(16);
+                deleteIconView.setFitHeight(16);
+                deleteButton.setGraphic(deleteIconView);
+                deleteButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
             }
             catch(Exception ex){
                 System.out.println("Error with image: " + ex.getMessage());

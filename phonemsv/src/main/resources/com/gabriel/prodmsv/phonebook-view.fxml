@@ -37,11 +37,12 @@
             <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
-      <HBox alignment="CENTER" layoutX="43.0" layoutY="540.0" prefHeight="50.0" prefWidth="275.0" spacing="20.0">
+      <HBox alignment="CENTER" layoutX="3.0" layoutY="541.0" prefHeight="50.0" prefWidth="354.0" spacing="20.0">
          <children>
-            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="60.0" text="Edit" />
-            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="60.0" text="Delete" />
-            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Settings" />
+            <Button fx:id="contactButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Contacts" />
+            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="92.0" text="Edit" />
+            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="92.0" text="Delete" />
+            <Button fx:id="favoritesButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Favorites" />
          </children>
       </HBox>
       <Button fx:id="createButton" alignment="CENTER" layoutX="294.0" layoutY="476.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
@@ -54,6 +55,11 @@
             <Label fx:id="txtitle" prefHeight="17.0" prefWidth="135.0" text="Contacts" />
          </children>
       </HBox>
-      <Button fx:id="closeButton" alignment="CENTER" layoutX="320.0" layoutY="14.0" onAction="#onClose" text="X" />
+      <HBox layoutX="286.0" layoutY="14.0" prefHeight="39.0" prefWidth="60.0" spacing="12.0">
+         <children>
+            <Button fx:id="settingsButton" mnemonicParsing="false" />
+            <Button fx:id="closeButton" alignment="CENTER" onAction="#onClose" text="X" />
+         </children>
+      </HBox>
    </children>
 </Pane>
