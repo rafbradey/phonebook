@@ -34,8 +34,8 @@ public class DeleteProductController implements Initializable {
         Product product= ProdManController.product;
         tfId.setText(Integer.toString(product.getId()));
         tfName.setText(product.getName());
-        tfDesc.setText(product.getDescription());
-        tfUom.setText(product.getUomName());
+        tfDesc.setText(product.getPhoneNumber());
+        tfUom.setText(product.getGroupName());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class DeleteProductController implements Initializable {
                 product.setId(Integer.parseInt(tfId.getText()));
             }
             product.setName(tfName.getText());
-            product.setDescription(tfDesc.getText());
+            product.setPhoneNumber(tfDesc.getText());
         }catch (Exception e){
             showErrorDialog("Error" ,e.getMessage());
         }

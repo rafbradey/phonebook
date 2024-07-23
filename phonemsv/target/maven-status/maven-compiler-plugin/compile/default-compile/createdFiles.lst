@@ -1,12 +1,12 @@
-com\gabriel\prodmsv\DeleteProductController.class
 com\gabriel\prodmsv\CreateProductController.class
+com\gabriel\prodmsv\util\ApplicationUtil.class
+com\gabriel\prodmsv\ProdManApplication.class
+com\gabriel\prodmsv\ServiceImpl\UomService.class
+com\gabriel\prodmsv\DeleteProductController.class
 com\gabriel\prodmsv\model\Product.class
 com\gabriel\prodmsv\model\Uom.class
-com\gabriel\prodmsv\util\ApplicationUtil.class
 com\gabriel\prodmsv\UpdateProductController.class
-com\gabriel\prodmsv\ProdManApplication.class
 com\gabriel\prodmsv\ProdManController.class
 com\gabriel\prodmsv\SplashApp.class
 com\gabriel\prodmsv\SplashController.class
-com\gabriel\prodmsv\ServiceImpl\UomService.class
 com\gabriel\prodmsv\ServiceImpl\ProductService.class

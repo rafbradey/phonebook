@@ -77,10 +77,10 @@ public class CreateProductController implements Initializable {
     public void onSubmit(ActionEvent actionEvent) throws Exception{
         Product product = new Product();
         product.setName(tfName.getText());
-        product.setDescription(tfDesc.getText());
+        product.setPhoneNumber(tfDesc.getText());
         Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setUomId(uom.getId());
-        product.setUomName(uom.getName());
+        product.setGroupId(uom.getId());
+        product.setGroupName(uom.getName());
         try{
             product=productService.create(product);
             prodManController.refresh();

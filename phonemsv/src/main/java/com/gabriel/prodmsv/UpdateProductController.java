@@ -43,11 +43,11 @@ public class UpdateProductController implements Initializable {
         Product product=ProdManController.product;
         tfId.setText(Integer.toString(product.getId()));
         tfName.setText(product.getName());
-        tfDesc.setText(product.getDescription());
+        tfDesc.setText(product.getPhoneNumber());
         cbUom.getItems().clear();
         Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
         cbUom.getItems().addAll(uoms);
-        cbUom.getSelectionModel().select(UomService.getService().getUom(product.getUomId()));
+        cbUom.getSelectionModel().select(UomService.getService().getUom(product.getGroupId()));
     }
 
     @Override
@@ -66,10 +66,10 @@ public class UpdateProductController implements Initializable {
         Product product = new Product();
         product.setId(Integer.parseInt(tfId.getText()));
         product.setName(tfName.getText());
-        product.setDescription(tfDesc.getText());
+        product.setPhoneNumber(tfDesc.getText());
         Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setUomId(uom.getId());
-        product.setUomName(uom.getName());
+        product.setGroupId(uom.getId());
+        product.setGroupName(uom.getName());
 
         try{
             product= ProductService.getService().update(product);

@@ -6,9 +6,19 @@ import lombok.Data;
 public class Product {
     int id;
     String name;
-    String description;
-    int uomId;
-    String uomName;
+    String phoneNumber;
+    String email;
+    String message;
+
+    //support table
+    int groupId;
+    String groupName;
+
+    int socialId;
+    String socialName;
+
+
+
 
     @Override
     public String toString(){

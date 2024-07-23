@@ -99,8 +99,8 @@ public class ProdManController implements Initializable {
 
     public void setControlTexts(Product product){
         tfName.setText(product.getName());
-        tfDesc.setText(product.getDescription());
-        tfUom.setText(product.getUomName());
+        tfDesc.setText(product.getPhoneNumber());
+        tfUom.setText(product.getGroupName());
     }
 
     public void clearControlTexts(){
