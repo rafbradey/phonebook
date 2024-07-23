@@ -1,9 +1,9 @@
 package com.gabriel.prodmsv;
 
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
-import com.gabriel.prodmsv.ServiceImpl.UomService;
+import com.gabriel.prodmsv.ServiceImpl.GroupService;
 import com.gabriel.prodmsv.model.Phone;
-import com.gabriel.prodmsv.model.Uom;
+import com.gabriel.prodmsv.model.Group;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -35,19 +35,19 @@ public class UpdateProductController implements Initializable {
     @FXML
     private TextField tfDesc;
     @FXML
-    private TextField tfUom;
+    private TextField tfGroup;
     @FXML
-    private ComboBox<Uom> cbUom;
+    private ComboBox<Group> cbGroup;
 
     public void refresh() throws Exception{
         Phone phone =ProdManController.phone;
         tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
         tfDesc.setText(phone.getPhoneNumber());
-        cbUom.getItems().clear();
-        Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
-        cbUom.getItems().addAll(uoms);
-        cbUom.getSelectionModel().select(UomService.getService().getUom(phone.getGroupId()));
+        cbGroup.getItems().clear();
+        Group[] groups =  (Group[]) GroupService.getService().getGroups();
+        cbGroup.getItems().addAll(groups);
+        cbGroup.getSelectionModel().select(GroupService.getService().getGroup(phone.getGroupId()));
     }
 
     @Override
@@ -67,9 +67,9 @@ public class UpdateProductController implements Initializable {
         phone.setId(Integer.parseInt(tfId.getText()));
         phone.setName(tfName.getText());
         phone.setPhoneNumber(tfDesc.getText());
-        Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        phone.setGroupId(uom.getId());
-        phone.setGroupName(uom.getName());
+        Group group = cbGroup.getSelectionModel().getSelectedItem();
+        phone.setGroupId(group.getId());
+        phone.setGroupName(group.getName());
 
         try{
             phone = PhoneService.getService().update(phone);

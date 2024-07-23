@@ -17,7 +17,7 @@ public class PhoneService {
     Logger logger = LoggerFactory.getLogger(PhoneService.class);
     static PhoneService service=null;
     @Value("${service.api.endpoint}")
-    private String endpointUrl = "http://localhost:8080/api/Phone";
+    private String endpointUrl = "http://localhost:8080/api/phone";
     RestTemplate restTemplate = null;
 
     public static PhoneService getService(){

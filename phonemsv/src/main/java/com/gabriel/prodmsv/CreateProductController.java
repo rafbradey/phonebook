@@ -2,8 +2,8 @@ package com.gabriel.prodmsv;
 
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.model.Phone;
-import com.gabriel.prodmsv.model.Uom;
-import com.gabriel.prodmsv.ServiceImpl.UomService;
+import com.gabriel.prodmsv.model.Group;
+import com.gabriel.prodmsv.ServiceImpl.GroupService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class CreateProductController implements Initializable {
     @FXML
     public TextField tfDesc;
     @FXML
-    private ComboBox<Uom> cbUom;
+    private ComboBox<Group> cbGroup;
     public Button btnSubmit;
     public Button btnNext;
 
@@ -40,16 +40,16 @@ public class CreateProductController implements Initializable {
     @Setter
     PhoneService phoneService;
     @Setter
-    UomService  uomService;
+    GroupService groupService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         System.out.println("CreateProductController: initialize");
 
         try{
-        Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
-        cbUom.getItems().clear();;
-        cbUom.getItems().addAll(uoms);
+        Group[] groups =  (Group[]) GroupService.getService().getGroups();
+        cbGroup.getItems().clear();;
+        cbGroup.getItems().addAll(groups);
 
         tfName.setText("");
         tfDesc.setText("");
@@ -61,7 +61,7 @@ public class CreateProductController implements Initializable {
     public void clearControlTexts(){
         tfName.setText("");
         tfDesc.setText("");
-        cbUom.getSelectionModel().clearSelection();
+        cbGroup.getSelectionModel().clearSelection();
     }
 
     public void onNext(ActionEvent actionEvent) {
@@ -78,9 +78,9 @@ public class CreateProductController implements Initializable {
         Phone phone = new Phone();
         phone.setName(tfName.getText());
         phone.setPhoneNumber(tfDesc.getText());
-        Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        phone.setGroupId(uom.getId());
-        phone.setGroupName(uom.getName());
+        Group group = cbGroup.getSelectionModel().getSelectedItem();
+        phone.setGroupId(group.getId());
+        phone.setGroupName(group.getName());
         try{
             phone = phoneService.create(phone);
             prodManController.refresh();

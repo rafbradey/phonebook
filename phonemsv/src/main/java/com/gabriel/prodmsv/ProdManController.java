@@ -121,14 +121,15 @@ public class ProdManController implements Initializable {
 
     public void onCreate(ActionEvent actionEvent) {
         System.out.println("ProdmanController:onNewProduct ");
-        Node node = ((Node) (actionEvent.getSource()));
-        Scene currentScene = node.getScene();
-        Window window = currentScene.getWindow();
-        window.hide();
         try {
-            if(createViewScene ==null) {
+            Node node = (Node) actionEvent.getSource();
+            Scene currentScene = node.getScene();
+            Window window = currentScene.getWindow();
+            window.hide();
+
+            if (createViewScene == null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("create-phone.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
+                Parent root = fxmlLoader.load();
                 createProductController = fxmlLoader.getController();
                 createProductController.setStage(this.stage);
                 createProductController.setParentScene(currentScene);
@@ -139,16 +140,16 @@ public class ProdManController implements Initializable {
                 stage.setTitle("Manage Phone");
                 stage.setScene(createViewScene);
                 stage.show();
-            }
-            else{
+            } else {
                 stage.setScene(createViewScene);
                 stage.show();
             }
+
             createProductController.clearControlTexts();
             clearControlTexts();
-        }
-        catch(Exception ex){
-            System.out.println("ProdmanController: "+ ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("ProdmanController: " + ex.getMessage());
+            ex.printStackTrace();  // Print the full stack trace for detailed error information
         }
     }
 
