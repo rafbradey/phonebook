@@ -1,11 +1,10 @@
 package com.gabriel.prodmsv;
 
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
-import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Group;
 import com.gabriel.prodmsv.ServiceImpl.GroupService;
-
+import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Social;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +33,8 @@ public class CreateProductController implements Initializable {
     @FXML
     private ComboBox<Group> cbGroup;
     @FXML
+    private ComboBox<Social> cbSocial;
+    @FXML
     public Button btnSubmit;
     @FXML
     public Button btnNext;
@@ -48,26 +49,21 @@ public class CreateProductController implements Initializable {
     GroupService groupService;
     @Setter
     SocialService socialService;
+
     @FXML
     private Button btnBack;
-    @FXML
-    private ComboBox cbSocial;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         System.out.println("CreateProductController: initialize");
-
         try{
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
         cbGroup.getItems().clear();
         cbGroup.getItems().addAll(groups);
 
-
         Social[] socials =  (Social[]) SocialService.getService().getSocials();
         cbSocial.getItems().clear();
         cbSocial.getItems().addAll(socials);
-
-        //if may combobox yung socials add dito ^^ similar sa gawa ng Group (cb)
 
         tfName.setText("");
         tfDesc.setText("");
@@ -100,31 +96,37 @@ public class CreateProductController implements Initializable {
 
     //palitan mamaya yung tfDesc etc after mabago yung UI design --raf
     @FXML
-    public void onSubmit(ActionEvent actionEvent) throws Exception{
+    public void onSubmit(ActionEvent actionEvent) throws Exception {
         Phone phone = new Phone();
         phone.setName(tfName.getText());
         phone.setPhoneNumber(tfDesc.getText());
-        //  phone.setPhoneNumber(tfPhoneNumber.getText());
-        // phone.setEmail(tfEmail.getText());
 
-
-        //hindi applicable message dito, pero just in acase
-        // phone.setMessage(tfMessage.getText();
-
-        //combobox part -
         Group group = cbGroup.getSelectionModel().getSelectedItem();
+        if (group != null) {
+            phone.setGroupId(group.getId());
+            phone.setGroupName(group.getName());
+        }
 
-        phone.setGroupId(group.getId());
-        phone.setGroupName(group.getName());
-        try{
+        Social social = cbSocial.getSelectionModel().getSelectedItem();
+        if (social != null) {
+            phone.setSocialId(social.getId());
+            phone.setSocialName(social.getName());
+        } else {
+            System.out.println("No social selected or social is null.");
+            return;
+        }
+
+        System.out.println("Phone details before save: " + phone + " group: " + group + " social: " + social);
+
+        try {
             phone = phoneService.create(phone);
             prodManController.refresh();
             onBack(actionEvent);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("CreateProductController:onSubmit Error: " + ex.getMessage());
         }
     }
+
 
     @FXML
     public void onBack(ActionEvent actionEvent) {

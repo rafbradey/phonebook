@@ -52,6 +52,8 @@ public class SplashController implements Initializable {
             stage.show();
         } catch (Exception ex) {
             System.out.println("Error occured" + ex.getMessage());
+            //print stack
+            ex.printStackTrace();
         }
 
     }

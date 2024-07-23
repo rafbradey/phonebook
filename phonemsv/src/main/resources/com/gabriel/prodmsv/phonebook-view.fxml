@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 
-<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
    <children>
       <ScrollPane layoutX="36.0" layoutY="109.0" prefHeight="400.0" prefWidth="288.0">
         <content>
@@ -36,14 +42,14 @@
       </HBox>
       <HBox layoutX="413.0" layoutY="375.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <Label prefWidth="100.0" text="Description:" />
-            <TextField fx:id="tfDesc" prefHeight="25.0" prefWidth="175.0" />
+            <Label prefWidth="100.0" text="Phone Numbmer" />
+            <TextField fx:id="tfPhoneNumber" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
       <HBox layoutX="413.0" layoutY="417.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <Label prefWidth="100.0" text="Unit of Measure:" />
-            <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="175.0" />
+            <Label prefWidth="100.0" text="Group" />
+            <TextField fx:id="tfGroup" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
       <HBox alignment="CENTER" layoutX="8.0" layoutY="541.0" prefHeight="50.0" prefWidth="345.0" spacing="20.0">
@@ -69,6 +75,12 @@
          <children>
             <Button fx:id="settingsButton" mnemonicParsing="false" />
             <Button fx:id="closeButton" alignment="CENTER" onAction="#onClose" text="X" />
+         </children>
+      </HBox>
+      <HBox layoutX="413.0" layoutY="467.0" prefHeight="50.0" prefWidth="220.0">
+         <children>
+            <Label prefWidth="100.0" text="Social:" />
+            <TextField fx:id="tfSocial" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
    </children>

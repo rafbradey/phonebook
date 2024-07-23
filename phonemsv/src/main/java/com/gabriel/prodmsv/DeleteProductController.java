@@ -20,10 +20,6 @@ public class DeleteProductController implements Initializable {
     public TextField tfId;
     @javafx.fxml.FXML
     public TextField tfName;
-    @javafx.fxml.FXML
-    public TextField tfDesc;
-    @javafx.fxml.FXML
-    public TextField tfUom;
     @Setter
     Stage stage;
     @Setter
@@ -36,6 +32,12 @@ public class DeleteProductController implements Initializable {
     private Button btnBack;
     @javafx.fxml.FXML
     private Button btnSubmit;
+    @javafx.fxml.FXML
+    private TextField tfPhoneNumber;
+    @javafx.fxml.FXML
+    private TextField tfGroup;
+    @javafx.fxml.FXML
+    private TextField tfSocial;
 
     public void refresh(){
 
@@ -43,10 +45,9 @@ public class DeleteProductController implements Initializable {
         Phone phone = ProdManController.phone;
         tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
-        tfDesc.setText(phone.getPhoneNumber());
-        //tfPhoneNumber.setText(phone.getPhoneNumber());
-        tfUom.setText(phone.getEmail());
-        //tfEmail.setText(phone.getEmail());
+        tfPhoneNumber.setText(phone.getPhoneNumber());
+        tfGroup.setText(phone.getGroupName());
+        tfSocial.setText(phone.getSocialName());
 
     }
 
@@ -98,7 +99,7 @@ public class DeleteProductController implements Initializable {
             phone.setName(tfName.getText());
 
             //tfPhoneNumber talaga to dapat --raf
-            phone.setPhoneNumber(tfDesc.getText());
+            phone.setPhoneNumber(tfPhoneNumber.getText());
         }catch (Exception e){
             showErrorDialog("Error" ,e.getMessage());
         }

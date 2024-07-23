@@ -11,6 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +23,7 @@ import javafx.stage.Window;
 import lombok.Data;
 import lombok.Setter;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.*;
 @Data
@@ -33,12 +37,17 @@ public class ProdManController implements Initializable {
     @Setter
     Scene deleteViewScene;
 
+    @FXML
     public TextField tfId;
+    @FXML
     public TextField tfName;
-    public TextField tfDesc;
+    @FXML
+    public TextField tfPhoneNumber;
+    @FXML
     public ImageView productImage;
     public VBox prodman;
-    public TextField tfUom;
+    @FXML
+    public TextField tfGroup;
 
     Image puffy;
     Image wink;
@@ -66,6 +75,17 @@ public class ProdManController implements Initializable {
     DeleteProductController deleteProductController;
     CreateProductController createProductController;
     PhoneService phoneService;
+    @FXML
+    private TextField txsearch;
+    @FXML
+    private Button onSearch;
+    @FXML
+    private TextField tfSocial;
+    @FXML
+    private Label txtitle;
+    @FXML
+    private Rectangle cbGroup;
+    private Rectangle cbSocial;
 
     void refresh() throws Exception{
         phoneService = PhoneService.getService();
@@ -137,23 +157,27 @@ public class ProdManController implements Initializable {
     public  void disableControls(){
         tfId.editableProperty().set(false);
         tfName.editableProperty().set(false);
-        tfDesc.editableProperty().set(false);
-        tfUom.editableProperty().set(false);
+        tfPhoneNumber.editableProperty().set(false);
+        tfGroup.editableProperty().set(false);
+        tfSocial.editableProperty().set(false);
     }
 
     public void setControlTexts(Phone phone){
         tfName.setText(phone.getName());
-      //  tfDesc.setText(phone.getDescription());
-     //   tfUom.setText(phone.getUomName());
+       tfPhoneNumber.setText(phone.getPhoneNumber());
+     tfGroup.setText(phone.getGroupName());
+        tfSocial.setText(phone.getSocialName());
     }
 
     public void clearControlTexts(){
         tfId.setText("");
         tfName.setText("");
-        tfDesc.setText("");
-        tfUom.setText("");
+        tfPhoneNumber.setText("");
+        tfGroup.setText("");
+        tfSocial.setText("");
     }
 
+    @FXML
     public void onMouseClicked(MouseEvent mouseEvent) {
         phone = lvProducts.getSelectionModel().getSelectedItem();
         if(phone == null) {
@@ -162,8 +186,13 @@ public class ProdManController implements Initializable {
         tfId.setText(Integer.toString(phone.getId()));
         setControlTexts(phone);
         System.out.println("clicked on " + phone);
+        //show phone number social and group in soupln
+        System.out.println("clicked on " + phone.getPhoneNumber());
+        System.out.println("clicked on " + phone.getSocialName());
+        System.out.println("clicked on " + phone.getGroupName());
     }
 
+    @FXML
     public void onCreate(ActionEvent actionEvent) {
         System.out.println("ProdmanController:onNewProduct ");
         Node node = ((Node) (actionEvent.getSource()));
@@ -197,6 +226,7 @@ public class ProdManController implements Initializable {
         }
     }
 
+    @FXML
     public void onUpdate(ActionEvent actionEvent) {
         System.out.println("ProdmanController:onUpdate ");
         Node node = ((Node) (actionEvent.getSource()));
@@ -224,6 +254,7 @@ public class ProdManController implements Initializable {
             System.out.println("ProdmanController: "+ ex.getMessage());
         }
     }
+    @FXML
     public void onDelete(ActionEvent actionEvent) {
         System.out.println("ProdmanController:onDelete ");
         Node node = ((Node) (actionEvent.getSource()));
@@ -249,11 +280,12 @@ public class ProdManController implements Initializable {
         }
         catch(Exception ex){
             System.out.println("ProdmanController: "+ ex.getMessage());
-            ex.printStackTrace();  //print stack error;
+            ex.printStackTrace();  //print stack error; -raf
 
         }
     }
 
+    @FXML
     public void onClose(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();

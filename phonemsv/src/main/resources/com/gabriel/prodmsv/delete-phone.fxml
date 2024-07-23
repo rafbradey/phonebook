@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.DeleteProductController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.DeleteProductController">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
@@ -34,22 +38,22 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label prefWidth="100.0" text="Desscription">
+            <Label prefWidth="100.0" text="Phone Number">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfDesc" />
+            <TextField fx:id="tfPhoneNumber" />
          </children>
       </HBox>
       <HBox layoutX="10.0" layoutY="113.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label prefWidth="100.0" text="Unit of Measure">
+            <Label prefWidth="100.0" text="Group">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfUom" />
+            <TextField fx:id="tfGroup" />
          </children>
       </HBox>
       <HBox layoutX="10.0" layoutY="263.0" prefHeight="50.0" prefWidth="300.0">
@@ -63,6 +67,16 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="425.0" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Label prefWidth="100.0" text="Social Media:">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfSocial" />
          </children>
       </HBox>
    </children>
