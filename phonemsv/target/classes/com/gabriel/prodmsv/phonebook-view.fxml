@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
    <children>
       <ScrollPane layoutX="36.0" layoutY="109.0" prefHeight="400.0" prefWidth="288.0">
         <content>
@@ -52,11 +46,12 @@
             <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
-      <HBox alignment="CENTER" layoutX="43.0" layoutY="540.0" prefHeight="50.0" prefWidth="275.0" spacing="20.0">
+      <HBox alignment="CENTER" layoutX="8.0" layoutY="541.0" prefHeight="50.0" prefWidth="345.0" spacing="20.0">
          <children>
-            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="60.0" text="Edit" />
-            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="60.0" text="Delete" />
-            <Button fx:id="settings" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Settings" />
+            <Button fx:id="contactButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Contacts" />
+            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="75.0" text="Edit" />
+            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="75.0" text="Delete" />
+            <Button fx:id="favoriteButton" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Favorites" />
          </children>
       </HBox>
       <HBox layoutX="14.0" layoutY="6.0" prefHeight="34.0" prefWidth="200.0">
@@ -68,8 +63,13 @@
             <Label fx:id="txtitle" prefHeight="17.0" prefWidth="135.0" text="Contacts" />
          </children>
       </HBox>
-      <Button fx:id="closeButton" alignment="CENTER" layoutX="320.0" layoutY="14.0" onAction="#onClose" text="X" />
       <TextField fx:id="txsearch" layoutX="37.0" layoutY="73.0" prefHeight="25.0" prefWidth="228.0" text="Search..." />
       <Button fx:id="onSearch" layoutX="272.0" layoutY="73.0" mnemonicParsing="false" text="Search" />
+      <HBox layoutX="286.0" layoutY="9.0" prefHeight="34.0" prefWidth="45.0" spacing="12.0">
+         <children>
+            <Button fx:id="settingsButton" mnemonicParsing="false" />
+            <Button fx:id="closeButton" alignment="CENTER" onAction="#onClose" text="X" />
+         </children>
+      </HBox>
    </children>
 </Pane>

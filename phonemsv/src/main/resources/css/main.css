@@ -52,7 +52,7 @@
     -fx-cursor: hand;
 }
 
-#contactButton, #favoritesButton, #deleteButton, #updateButton {
+#contactButton, #updateButton, #deleteButton, #favoriteButton{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }

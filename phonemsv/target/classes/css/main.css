@@ -32,26 +32,27 @@
 }
 
 #imageButton:hover, #createButton:hover, #updateButton:hover, #deleteButton:hover,
-#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #settings:hover {
+#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #favoritesButton:hover {
     -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
     -fx-text-fill: White;
 }
 
-#closeButton {
-    -fx-font-size: 13px;
-}
-
-#closeButton:hover {
+#closeButton:hover, #settingsButton:hover {
     -fx-background-color: linear-gradient(to right, #e4d8f2, #9570bd);
     -fx-text-fill: White;
 }
 
 .button {
     -fx-text-fill: Black;
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
     -fx-font-family: "Century Gothic";
     -fx-font-weight: Bold;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-cursor: hand;
+}
+
+#contactButton, #updateButton, #deleteButton, #favoriteButton{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
