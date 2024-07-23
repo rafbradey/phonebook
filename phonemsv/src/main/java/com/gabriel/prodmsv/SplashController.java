@@ -40,7 +40,7 @@ public class SplashController implements Initializable {
         Window window = node.getScene().getWindow();
         window.hide();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("prodman-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("phonebook-view.fxml"));
             Parent root = (Parent)fxmlLoader.load();
             ProdManController prodManController  = fxmlLoader.getController();
             prodManController.setStage(stage);

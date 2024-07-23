@@ -10,35 +10,31 @@
 <Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.ProdManController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="85.0" layoutY="522.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="57.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
-      <HBox layoutX="28.0" layoutY="84.0" prefHeight="180.0" prefWidth="58.0">
+      <Rectangle fx:id="cbUom" arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="57.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
+      <ListView fx:id="lvProducts" layoutX="37.0" layoutY="86.0" onMouseClicked="#onMouseClicked" prefHeight="180.0" prefWidth="287.0" />
+      <HBox layoutX="70.0" layoutY="293.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="180.0" prefWidth="80.0" />
-         </children>
-      </HBox>
-      <HBox layoutX="20.0" layoutY="272.0" prefHeight="50.0" prefWidth="200.0">
-         <children>
-            <Label prefWidth="100.0" text="Id" />
+            <Label prefWidth="100.0" text="Id:" />
             <Group />
-            <TextField fx:id="tfId" prefHeight="25.0" prefWidth="220.0" />
+            <TextField fx:id="tfId" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="317.6000061035156" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="70.0" layoutY="343.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <Label prefWidth="100.0" text="Name" />
-            <TextField fx:id="tfName" prefHeight="25.0" prefWidth="200.0" />
+            <Label prefWidth="100.0" text="Name:" />
+            <TextField fx:id="tfName" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="363.20001220703125" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="70.0" layoutY="393.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <Label prefWidth="100.0" text="Description" />
-            <TextField fx:id="tfDesc" prefHeight="25.0" prefWidth="200.0" />
+            <Label prefWidth="100.0" text="Description:" />
+            <TextField fx:id="tfDesc" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="408.79998779296875" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="70.0" layoutY="443.0" prefHeight="50.0" prefWidth="220.0">
          <children>
-            <Label prefWidth="100.0" text="Unit of Measure" />
-            <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="200.0" />
+            <Label prefWidth="100.0" text="Unit of Measure:" />
+            <TextField fx:id="tfUom" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
       <HBox alignment="CENTER" layoutX="43.0" layoutY="536.0" prefHeight="50.0" prefWidth="275.0">
@@ -60,8 +56,12 @@
             </Button>
          </children>
       </HBox>
-      <ImageView fx:id="productImage" fitHeight="34.0" fitWidth="45.0" layoutX="6.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="txtitle" layoutX="36.0" layoutY="5.0" prefHeight="17.0" prefWidth="135.0" text="Contacts" />
       <Button fx:id="createButton" alignment="CENTER" layoutX="294.0" layoutY="476.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
+      <HBox layoutX="14.0" layoutY="11.0" prefHeight="34.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="productImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="txtitle" prefHeight="25.0" prefWidth="135.0" text="Contacts" />
+         </children>
+      </HBox>
    </children>
 </Pane>

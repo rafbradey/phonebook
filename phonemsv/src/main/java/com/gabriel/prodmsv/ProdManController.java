@@ -204,6 +204,8 @@ public class ProdManController implements Initializable {
         }
         catch(Exception ex){
             System.out.println("ProdmanController: "+ ex.getMessage());
+            ex.printStackTrace();  //print stack error;
+
         }
     }
 
