@@ -56,8 +56,6 @@ public class SplashController implements Initializable {
 
     }
 
-
-
 }
 
 

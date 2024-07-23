@@ -11,9 +11,9 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="85.0" layoutY="522.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="57.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
-      <HBox layoutX="28.0" layoutY="84.0" prefHeight="180.0" prefWidth="58.0">
+      <HBox layoutX="28.0" layoutY="84.0" prefHeight="180.0" prefWidth="193.0">
          <children>
-            <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="180.0" prefWidth="80.0" />
+            <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="180.0" prefWidth="199.0" />
          </children>
       </HBox>
       <HBox layoutX="20.0" layoutY="272.0" prefHeight="50.0" prefWidth="200.0">

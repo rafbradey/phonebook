@@ -225,4 +225,5 @@ public class ProdManController implements Initializable {
     public void addItem(Phone phone){
         lvProducts.getItems().add(phone);
     }
+
 }
