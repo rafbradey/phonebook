@@ -1,7 +1,7 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
-import com.gabriel.prodmsv.model.Product;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
+import com.gabriel.prodmsv.model.Phone;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Data;
@@ -53,20 +52,20 @@ public class ProdManController implements Initializable {
     @FXML
     public Button closeButton;
 
-    public static Product product;
+    public static Phone phone;
     @FXML
-    private ListView<Product> lvProducts;
+    private ListView<Phone> lvProducts;
 
     UpdateProductController updateProductController;
     DeleteProductController deleteProductController;
     CreateProductController createProductController;
-    ProductService productService;
+    PhoneService phoneService;
 
     void refresh() throws Exception{
-        productService = ProductService.getService();
-        Product[] products = productService.getProducts();
+        phoneService = PhoneService.getService();
+        Phone[] phones = phoneService.getProducts();
         lvProducts.getItems().clear();
-        lvProducts.getItems().addAll(products);
+        lvProducts.getItems().addAll(phones);
     }
 
     @Override
@@ -97,10 +96,10 @@ public class ProdManController implements Initializable {
         tfUom.editableProperty().set(false);
     }
 
-    public void setControlTexts(Product product){
-        tfName.setText(product.getName());
-        tfDesc.setText(product.getPhoneNumber());
-        tfUom.setText(product.getGroupName());
+    public void setControlTexts(Phone phone){
+        tfName.setText(phone.getName());
+        tfDesc.setText(phone.getPhoneNumber());
+        tfUom.setText(phone.getGroupName());
     }
 
     public void clearControlTexts(){
@@ -111,13 +110,13 @@ public class ProdManController implements Initializable {
     }
 
     public void onMouseClicked(MouseEvent mouseEvent) {
-        product = lvProducts.getSelectionModel().getSelectedItem();
-        if(product == null) {
+        phone = lvProducts.getSelectionModel().getSelectedItem();
+        if(phone == null) {
             return;
         }
-        tfId.setText(Integer.toString(product.getId()));
-        setControlTexts(product);
-        System.out.println("clicked on " + product);
+        tfId.setText(Integer.toString(phone.getId()));
+        setControlTexts(phone);
+        System.out.println("clicked on " + phone);
     }
 
     public void onCreate(ActionEvent actionEvent) {
@@ -128,16 +127,16 @@ public class ProdManController implements Initializable {
         window.hide();
         try {
             if(createViewScene ==null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("create-product.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("create-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 createProductController = fxmlLoader.getController();
                 createProductController.setStage(this.stage);
                 createProductController.setParentScene(currentScene);
-                createProductController.setProductService(productService);
+                createProductController.setPhoneService(phoneService);
                 createProductController.setProdManController(this);
                 createProductController.setParentScene(currentScene);
                 createViewScene = new Scene(root, 300, 600);
-                stage.setTitle("Manage Product");
+                stage.setTitle("Manage Phone");
                 stage.setScene(createViewScene);
                 stage.show();
             }
@@ -161,7 +160,7 @@ public class ProdManController implements Initializable {
         window.hide();
         try {
             if(updateViewScene ==null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("update-product.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("update-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 updateProductController = fxmlLoader.getController();
                 updateProductController.setController(this);
@@ -172,7 +171,7 @@ public class ProdManController implements Initializable {
             else{
                 updateProductController.refresh();
             }
-            stage.setTitle("Create Product");
+            stage.setTitle("Create Phone");
             stage.setScene(updateViewScene);
             stage.show();
         }
@@ -188,7 +187,7 @@ public class ProdManController implements Initializable {
         window.hide();
         try {
             if(deleteViewScene  ==null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("delete-product.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("delete-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 deleteProductController = fxmlLoader.getController();
                 deleteProductController.setController(this);
@@ -199,7 +198,7 @@ public class ProdManController implements Initializable {
             else{
                 deleteProductController.refresh();
             }
-            stage.setTitle("Delete Product");
+            stage.setTitle("Delete Phone");
             stage.setScene(deleteViewScene);
             stage.show();
         }
@@ -223,7 +222,7 @@ public class ProdManController implements Initializable {
         alert.showAndWait();
     }
 
-    public void addItem(Product product){
-        lvProducts.getItems().add(product);
+    public void addItem(Phone phone){
+        lvProducts.getItems().add(phone);
     }
 }

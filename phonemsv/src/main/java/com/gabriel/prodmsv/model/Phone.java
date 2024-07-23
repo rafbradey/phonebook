@@ -3,7 +3,7 @@ package com.gabriel.prodmsv.model;
 import lombok.Data;
 
 @Data
-public class Product {
+public class Phone {
     int id;
     String name;
     String phoneNumber;

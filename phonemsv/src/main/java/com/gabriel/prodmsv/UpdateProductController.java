@@ -1,8 +1,8 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.ServiceImpl.UomService;
-import com.gabriel.prodmsv.model.Product;
+import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Uom;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -40,14 +40,14 @@ public class UpdateProductController implements Initializable {
     private ComboBox<Uom> cbUom;
 
     public void refresh() throws Exception{
-        Product product=ProdManController.product;
-        tfId.setText(Integer.toString(product.getId()));
-        tfName.setText(product.getName());
-        tfDesc.setText(product.getPhoneNumber());
+        Phone phone =ProdManController.phone;
+        tfId.setText(Integer.toString(phone.getId()));
+        tfName.setText(phone.getName());
+        tfDesc.setText(phone.getPhoneNumber());
         cbUom.getItems().clear();
         Uom[] uoms =  (Uom[]) UomService.getService().getUoms();
         cbUom.getItems().addAll(uoms);
-        cbUom.getSelectionModel().select(UomService.getService().getUom(product.getGroupId()));
+        cbUom.getSelectionModel().select(UomService.getService().getUom(phone.getGroupId()));
     }
 
     @Override
@@ -63,18 +63,18 @@ public class UpdateProductController implements Initializable {
     }
 
     public void onSubmit(ActionEvent actionEvent) {
-        Product product = new Product();
-        product.setId(Integer.parseInt(tfId.getText()));
-        product.setName(tfName.getText());
-        product.setPhoneNumber(tfDesc.getText());
+        Phone phone = new Phone();
+        phone.setId(Integer.parseInt(tfId.getText()));
+        phone.setName(tfName.getText());
+        phone.setPhoneNumber(tfDesc.getText());
         Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setGroupId(uom.getId());
-        product.setGroupName(uom.getName());
+        phone.setGroupId(uom.getId());
+        phone.setGroupName(uom.getName());
 
         try{
-            product= ProductService.getService().update(product);
+            phone = PhoneService.getService().update(phone);
             controller.refresh();
-            controller.setControlTexts(product);
+            controller.setControlTexts(phone);
             onBack(actionEvent);
         }
         catch(Exception ex){

@@ -1,7 +1,7 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
-import com.gabriel.prodmsv.model.Product;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
+import com.gabriel.prodmsv.model.Phone;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -26,16 +26,16 @@ public class DeleteProductController implements Initializable {
     @Setter
     Scene parentScene;
     @Setter
-    ProductService productService;
+    PhoneService phoneService;
     @Setter
     ProdManController controller;
 
     public void refresh(){
-        Product product= ProdManController.product;
-        tfId.setText(Integer.toString(product.getId()));
-        tfName.setText(product.getName());
-        tfDesc.setText(product.getPhoneNumber());
-        tfUom.setText(product.getGroupName());
+        Phone phone = ProdManController.phone;
+        tfId.setText(Integer.toString(phone.getId()));
+        tfName.setText(phone.getName());
+        tfDesc.setText(phone.getPhoneNumber());
+        tfUom.setText(phone.getGroupName());
     }
 
     @Override
@@ -58,35 +58,35 @@ public class DeleteProductController implements Initializable {
 
     public void onSubmit(ActionEvent actionEvent) {
         try {
-            Product product = toObject(true);
-            ProductService.getService().delete(product.getId());
+            Phone phone = toObject(true);
+            PhoneService.getService().delete(phone.getId());
             controller.refresh();
             controller.clearControlTexts();
             Node node = ((Node) (actionEvent.getSource()));
             Window window = node.getScene().getWindow();
             window.hide();
-            stage.setTitle("Manage Product");
+            stage.setTitle("Manage Phone");
             stage.setScene(parentScene);
             stage.show();
         }
         catch (Exception e){
-            String message="Error encountered deleting product";
+            String message="Error encountered deleting phone";
             showErrorDialog(message,e.getMessage());
         }
     }
 
-    protected Product toObject(boolean isEdit){
-        Product product= new Product();
+    protected Phone toObject(boolean isEdit){
+        Phone phone = new Phone();
         try {
             if(isEdit) {
-                product.setId(Integer.parseInt(tfId.getText()));
+                phone.setId(Integer.parseInt(tfId.getText()));
             }
-            product.setName(tfName.getText());
-            product.setPhoneNumber(tfDesc.getText());
+            phone.setName(tfName.getText());
+            phone.setPhoneNumber(tfDesc.getText());
         }catch (Exception e){
             showErrorDialog("Error" ,e.getMessage());
         }
-        return product;
+        return phone;
     }
 
     public void showErrorDialog(String message,String addtlMessage){

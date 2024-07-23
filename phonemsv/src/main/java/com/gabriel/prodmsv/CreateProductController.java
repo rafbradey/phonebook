@@ -1,7 +1,7 @@
 package com.gabriel.prodmsv;
 
-import com.gabriel.prodmsv.ServiceImpl.ProductService;
-import com.gabriel.prodmsv.model.Product;
+import com.gabriel.prodmsv.ServiceImpl.PhoneService;
+import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Uom;
 import com.gabriel.prodmsv.ServiceImpl.UomService;
 
@@ -38,7 +38,7 @@ public class CreateProductController implements Initializable {
     @Setter
     Scene parentScene;
     @Setter
-    ProductService productService;
+    PhoneService phoneService;
     @Setter
     UomService  uomService;
 
@@ -75,14 +75,14 @@ public class CreateProductController implements Initializable {
     }
 
     public void onSubmit(ActionEvent actionEvent) throws Exception{
-        Product product = new Product();
-        product.setName(tfName.getText());
-        product.setPhoneNumber(tfDesc.getText());
+        Phone phone = new Phone();
+        phone.setName(tfName.getText());
+        phone.setPhoneNumber(tfDesc.getText());
         Uom uom = cbUom.getSelectionModel().getSelectedItem();
-        product.setGroupId(uom.getId());
-        product.setGroupName(uom.getName());
+        phone.setGroupId(uom.getId());
+        phone.setGroupName(uom.getName());
         try{
-            product=productService.create(product);
+            phone = phoneService.create(phone);
             prodManController.refresh();
             onBack(actionEvent);
         }

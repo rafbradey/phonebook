@@ -1,6 +1,6 @@
 package com.gabriel.prodmsv.ServiceImpl;
 
-import com.gabriel.prodmsv.model.Product;
+import com.gabriel.prodmsv.model.Phone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductService {
-    Logger logger = LoggerFactory.getLogger(ProductService.class);
-    static ProductService service=null;
+public class PhoneService {
+    Logger logger = LoggerFactory.getLogger(PhoneService.class);
+    static PhoneService service=null;
     @Value("${service.api.endpoint}")
-    private String endpointUrl = "http://localhost:8080/api/product";
+    private String endpointUrl = "http://localhost:8080/api/Phone";
     RestTemplate restTemplate = null;
 
-    public static ProductService getService(){
+    public static PhoneService getService(){
         if(service == null){
-            service=new ProductService();
+            service=new PhoneService();
         }
         return service;
     }
@@ -38,45 +38,45 @@ public class ProductService {
         return restTemplate;
     }
 
-    public Product getProduct(Integer id) {
+    public Phone getProduct(Integer id) {
         String url = endpointUrl + "/" + Integer.toString(id);
         logger.info("getProduct: " + url);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity<>(null, headers);
-        final ResponseEntity<Product> response =
-                getRestTemplate().exchange(url, HttpMethod.GET, request, Product.class);
+        final ResponseEntity<Phone> response =
+                getRestTemplate().exchange(url, HttpMethod.GET, request, Phone.class);
         return response.getBody();
     }
 
-    public Product[] getProducts() {
+    public Phone[] getProducts() {
         String url = endpointUrl;
         logger.info("getProducts: " + url);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity<>(null, headers);
-        final ResponseEntity<Product[]> response =
-                getRestTemplate().exchange(url, HttpMethod.GET, request, Product[].class);
-        Product[] products = response.getBody();
-        return products;
+        final ResponseEntity<Phone[]> response =
+                getRestTemplate().exchange(url, HttpMethod.GET, request, Phone[].class);
+        Phone[] phones = response.getBody();
+        return phones;
     }
 
-    public Product create(Product product) {
+    public Phone create(Phone phone) {
         String url = endpointUrl;
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Product> request = new HttpEntity<>(product, headers);
-        final ResponseEntity<Product> response =
-                getRestTemplate().exchange(url, HttpMethod.PUT, request, Product.class);
+        HttpEntity<Phone> request = new HttpEntity<>(phone, headers);
+        final ResponseEntity<Phone> response =
+                getRestTemplate().exchange(url, HttpMethod.PUT, request, Phone.class);
         return response.getBody();
     }
 
-    public Product update(Product product) {
-        logger.info("update: " + product.toString());
+    public Phone update(Phone phone) {
+        logger.info("update: " + phone.toString());
         String url = endpointUrl;
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Product> request = new HttpEntity<>(product, headers);
-        final ResponseEntity<Product> response =
-                getRestTemplate().exchange(url, HttpMethod.POST, request, Product.class);
+        HttpEntity<Phone> request = new HttpEntity<>(phone, headers);
+        final ResponseEntity<Phone> response =
+                getRestTemplate().exchange(url, HttpMethod.POST, request, Phone.class);
         return response.getBody();
     }
 
@@ -84,8 +84,8 @@ public class ProductService {
         logger.info("delete: " + Integer.toString(id));
         String url = endpointUrl + "/" + Integer.toString(id);
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Product> request = new HttpEntity<>(null, headers);
-        final ResponseEntity<Product> response =
-                getRestTemplate().exchange(url, HttpMethod.DELETE, request, Product.class);
+        HttpEntity<Phone> request = new HttpEntity<>(null, headers);
+        final ResponseEntity<Phone> response =
+                getRestTemplate().exchange(url, HttpMethod.DELETE, request, Phone.class);
     }
 }
