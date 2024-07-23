@@ -76,7 +76,7 @@ public class ProdManController implements Initializable {
         try {
             refresh();
             try {
-                puffy = new Image(getClass().getResourceAsStream("/images/puffy.gif"));
+                puffy = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
                 wink = new Image(getClass().getResourceAsStream("/images/wink.gif"));
                 productImage.setImage(puffy);
             }
