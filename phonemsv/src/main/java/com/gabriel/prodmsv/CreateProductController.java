@@ -33,7 +33,9 @@ public class CreateProductController implements Initializable {
     public TextField tfDesc;
     @FXML
     private ComboBox<Group> cbGroup;
+    @FXML
     public Button btnSubmit;
+    @FXML
     public Button btnNext;
 
     @Setter
@@ -46,6 +48,10 @@ public class CreateProductController implements Initializable {
     GroupService groupService;
     @Setter
     SocialService socialService;
+    @FXML
+    private Button btnBack;
+    @FXML
+    private ComboBox cbSocial;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -53,11 +59,14 @@ public class CreateProductController implements Initializable {
 
         try{
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
-        cbGroup.getItems().clear();;
+        cbGroup.getItems().clear();
         cbGroup.getItems().addAll(groups);
 
 
         Social[] socials =  (Social[]) SocialService.getService().getSocials();
+        cbSocial.getItems().clear();
+        cbSocial.getItems().addAll(socials);
+
         //if may combobox yung socials add dito ^^ similar sa gawa ng Group (cb)
 
         tfName.setText("");
@@ -75,8 +84,10 @@ public class CreateProductController implements Initializable {
         tfName.setText("");
         tfDesc.setText("");
         cbGroup.getSelectionModel().clearSelection();
+        cbSocial.getSelectionModel().clearSelection();
     }
 
+    @FXML
     public void onNext(ActionEvent actionEvent) {
         System.out.println("CreateProductController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
@@ -88,6 +99,7 @@ public class CreateProductController implements Initializable {
     }
 
     //palitan mamaya yung tfDesc etc after mabago yung UI design --raf
+    @FXML
     public void onSubmit(ActionEvent actionEvent) throws Exception{
         Phone phone = new Phone();
         phone.setName(tfName.getText());
@@ -101,6 +113,7 @@ public class CreateProductController implements Initializable {
 
         //combobox part -
         Group group = cbGroup.getSelectionModel().getSelectedItem();
+
         phone.setGroupId(group.getId());
         phone.setGroupName(group.getName());
         try{
@@ -113,6 +126,7 @@ public class CreateProductController implements Initializable {
         }
     }
 
+    @FXML
     public void onBack(ActionEvent actionEvent) {
         System.out.println("CreateProductController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
