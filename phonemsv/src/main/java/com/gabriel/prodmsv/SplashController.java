@@ -1,6 +1,5 @@
 package com.gabriel.prodmsv;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,12 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.util.Duration;
 import lombok.Data;
 import lombok.Setter;
 
@@ -42,8 +37,8 @@ public class SplashController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("phonebook-view.fxml"));
             Parent root = (Parent)fxmlLoader.load();
-            ProdManController prodManController  = fxmlLoader.getController();
-            prodManController.setStage(stage);
+            PhoneBookController phoneBookController = fxmlLoader.getController();
+            phoneBookController.setStage(stage);
             Scene scene = new Scene(root, 360, 600);
             String css=this.getClass().getResource("/css/main.css").toExternalForm();
             scene.getStylesheets().add(css);

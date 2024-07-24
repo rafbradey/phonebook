@@ -18,14 +18,13 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Setter
-public class CreateProductController implements Initializable {
+public class CreatePhoneController implements Initializable {
     @Setter
-    ProdManController prodManController;
+    PhoneBookController phoneBookController;
     @FXML
     public TextField tfName;
     @FXML
@@ -55,7 +54,7 @@ public class CreateProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        System.out.println("CreateProductController: initialize");
+        System.out.println("CreatePhoneController: initialize");
         try{
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
         cbGroup.getItems().clear();
@@ -85,7 +84,7 @@ public class CreateProductController implements Initializable {
 
     @FXML
     public void onNext(ActionEvent actionEvent) {
-        System.out.println("CreateProductController:onBack ");
+        System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
         window.hide();
@@ -120,17 +119,17 @@ public class CreateProductController implements Initializable {
 
         try {
             phone = phoneService.create(phone);
-            prodManController.refresh();
+            phoneBookController.refresh();
             onBack(actionEvent);
         } catch (Exception ex) {
-            System.out.println("CreateProductController:onSubmit Error: " + ex.getMessage());
+            System.out.println("CreatePhoneController:onSubmit Error: " + ex.getMessage());
         }
     }
 
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
-        System.out.println("CreateProductController:onBack ");
+        System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
         window.hide();

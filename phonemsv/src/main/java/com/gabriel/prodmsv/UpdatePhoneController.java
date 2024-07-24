@@ -19,13 +19,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Setter
-public class UpdateProductController implements Initializable {
+public class UpdatePhoneController implements Initializable {
     @Setter
     Stage stage;
     @Setter
     Scene parentScene;
     @Setter
-    ProdManController controller;
+    PhoneBookController controller;
 
     @FXML
     private TextField tfId;
@@ -40,7 +40,7 @@ public class UpdateProductController implements Initializable {
     private ComboBox<Group> cbUom;
 
     public void refresh() throws Exception{
-        Phone phone =ProdManController.phone;
+        Phone phone = PhoneBookController.phone;
         tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
         //tfPhoneNumber dapat to
@@ -54,13 +54,13 @@ public class UpdateProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("UpdateProductController: initialize");
+        System.out.println("UpdatePhoneController: initialize");
         tfId=new TextField();
         try {
             refresh();
         }
         catch(Exception ex){
-            System.out.println("UpdateProductController: " + ex.getMessage());
+            System.out.println("UpdatePhoneController: " + ex.getMessage());
         }
     }
 
@@ -81,12 +81,12 @@ public class UpdateProductController implements Initializable {
             onBack(actionEvent);
         }
         catch(Exception ex){
-            System.out.println("CreateProductController:onSubmit Error: " + ex.getMessage());
+            System.out.println("CreatePhoneController:onSubmit Error: " + ex.getMessage());
         }
     }
 
     public void onBack(ActionEvent actionEvent) {
-        System.out.println("CreateProductController:onBack ");
+        System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
         window.hide();

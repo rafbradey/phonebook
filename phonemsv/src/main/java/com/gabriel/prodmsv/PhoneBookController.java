@@ -27,7 +27,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.*;
 @Data
-public class ProdManController implements Initializable {
+public class PhoneBookController implements Initializable {
     @Setter
     Stage stage;
     @Setter
@@ -71,9 +71,9 @@ public class ProdManController implements Initializable {
     @FXML
     private ListView<Phone> lvProducts;
 
-    UpdateProductController updateProductController;
-    DeleteProductController deleteProductController;
-    CreateProductController createProductController;
+    UpdatePhoneController updatePhoneController;
+    DeletePhoneController deletePhoneController;
+    CreatePhoneController createPhoneController;
     PhoneService phoneService;
     @FXML
     private TextField txsearch;
@@ -96,7 +96,7 @@ public class ProdManController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("ProdManController: initialize");
+        System.out.println("PhoneBookController: initialize");
         disableControls();
 
         try {
@@ -203,12 +203,12 @@ public class ProdManController implements Initializable {
             if(createViewScene ==null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("create-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
-                createProductController = fxmlLoader.getController();
-                createProductController.setStage(this.stage);
-                createProductController.setParentScene(currentScene);
-                createProductController.setPhoneService(phoneService);
-                createProductController.setProdManController(this);
-                createProductController.setParentScene(currentScene);
+                createPhoneController = fxmlLoader.getController();
+                createPhoneController.setStage(this.stage);
+                createPhoneController.setParentScene(currentScene);
+                createPhoneController.setPhoneService(phoneService);
+                createPhoneController.setPhoneBookController(this);
+                createPhoneController.setParentScene(currentScene);
                 createViewScene = new Scene(root, 300, 600);
                 stage.setTitle("Manage Phone");
                 stage.setScene(createViewScene);
@@ -218,7 +218,7 @@ public class ProdManController implements Initializable {
                 stage.setScene(createViewScene);
                 stage.show();
             }
-            createProductController.clearControlTexts();
+            createPhoneController.clearControlTexts();
             clearControlTexts();
         }
         catch(Exception ex){
@@ -237,14 +237,14 @@ public class ProdManController implements Initializable {
             if(updateViewScene ==null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("update-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
-                updateProductController = fxmlLoader.getController();
-                updateProductController.setController(this);
-                updateProductController.setStage(this.stage);
-                updateProductController.setParentScene(currentScene);
+                updatePhoneController = fxmlLoader.getController();
+                updatePhoneController.setController(this);
+                updatePhoneController.setStage(this.stage);
+                updatePhoneController.setParentScene(currentScene);
                 updateViewScene = new Scene(root, 300, 600);
             }
             else{
-                updateProductController.refresh();
+                updatePhoneController.refresh();
             }
             stage.setTitle("Create Phone");
             stage.setScene(updateViewScene);
@@ -265,14 +265,14 @@ public class ProdManController implements Initializable {
             if(deleteViewScene  ==null) {
                 FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("delete-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
-                deleteProductController = fxmlLoader.getController();
-                deleteProductController.setController(this);
-                deleteProductController.setStage(this.stage);
-                deleteProductController.setParentScene(currentScene);
+                deletePhoneController = fxmlLoader.getController();
+                deletePhoneController.setController(this);
+                deletePhoneController.setStage(this.stage);
+                deletePhoneController.setParentScene(currentScene);
                 deleteViewScene = new Scene(root, 300, 600);
             }
             else{
-                deleteProductController.refresh();
+                deletePhoneController.refresh();
             }
             stage.setTitle("Delete Phone");
             stage.setScene(deleteViewScene);

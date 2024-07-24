@@ -96,7 +96,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>com.gabriel.prodmsv.ProdManApplication</mainClass>
+                    <mainClass>com.gabriel.prodmsv.PhoneBookApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Setter
-public class DeleteProductController implements Initializable {
+public class DeletePhoneController implements Initializable {
     public TextField tfId;
     @javafx.fxml.FXML
     public TextField tfName;
@@ -27,7 +27,7 @@ public class DeleteProductController implements Initializable {
     @Setter
     PhoneService phoneService;
     @Setter
-    ProdManController controller;
+    PhoneBookController controller;
     @javafx.fxml.FXML
     private Button btnBack;
     @javafx.fxml.FXML
@@ -42,7 +42,7 @@ public class DeleteProductController implements Initializable {
     public void refresh(){
 
         //kailangan pa to palitan pag natapos na yung frontend.. --raf
-        Phone phone = ProdManController.phone;
+        Phone phone = PhoneBookController.phone;
         tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
         tfPhoneNumber.setText(phone.getPhoneNumber());
@@ -53,14 +53,14 @@ public class DeleteProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("DeleteProductController: initialize");
+        System.out.println("DeletePhoneController: initialize");
         tfId=new TextField("");
         refresh();
     }
 
     @javafx.fxml.FXML
     public void onBack(ActionEvent actionEvent) {
-        System.out.println("CreateProductController:onBack ");
+        System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
         window.hide();
