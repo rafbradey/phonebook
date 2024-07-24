@@ -165,7 +165,8 @@ public class CreatePhoneController implements Initializable {
 
 
                 //AutoIncrement ID for the phone
-                phone.setId(phoneService.getPhones().length + 1);
+              phone.setImageId(phoneService.getPhones().length + 1);
+
                 //set URL same as the filename, (gagamitin ko to mamaya para sa contact images)
                 phone.setImageURL(newFilename.toString());
 
@@ -258,16 +259,16 @@ public class CreatePhoneController implements Initializable {
 
     @FXML
     public void clearTemp(){
-        File tempDir = new File("src/main/resources/com/gabriel/prodmsv/tempImages");
-        File[] files = tempDir.listFiles();
+        File tempDirs = new File("src/main/resources/com/gabriel/prodmsv/tempImages");
+        File[] files = tempDirs.listFiles();
         for (File file : files) {
             if (!file.delete()) {
                 System.out.println("Failed to delete " + file);
             }
         }
         //set image of contactImage to null every time the page is loaded
-        Image image = new Image(getClass().getResourceAsStream("images/Default.jpg"));
-        contactImage.setImage(image);
+       // Image image = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+        //contactImage.setImage(image);
         System.out.println("Temp files cleared." +"\n Image Reset to Default.jpg in creation page");
     }
 

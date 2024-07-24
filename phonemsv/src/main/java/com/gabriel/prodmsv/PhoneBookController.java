@@ -105,11 +105,27 @@ public class PhoneBookController implements Initializable {
     private Button btnSearch;
     @FXML
     private Button btnClear;
+    @FXML
+    private Button btnRefresh;
 
     @FXML
     public void onClear(ActionEvent actionEvent) {
         txsearch.setText("");
         onSearch();
+    }
+
+    @FXML
+    public void onRefresh(ActionEvent actionEvent) {
+        System.out.println("PhoneBookController: onRefresh Clicked");
+            try {
+                refresh(); // Refresh the phone list and ListView
+                lvContacts.setItems(null); // Clear the ListView items
+                lvContacts.setItems(phoneList); // Reset the items
+                lvContacts.refresh(); // Refresh the ListView
+            } catch (Exception e) {
+                showErrorDialog("Message: " + e.getMessage());
+            }
+
     }
 
 
