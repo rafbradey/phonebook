@@ -5,13 +5,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.CreatePhoneController">
+
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.CreatePhoneController">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
@@ -22,22 +25,18 @@
             </Label>
          </children>
       </HBox>
-      <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-         <Image url="@../../../images/g.gif" />
-      </ImageView>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0">
+      <ImageView fx:id="contactImage" fitHeight="148.0" fitWidth="171.0" layoutX="106.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox layoutY="295.20001220703125" prefHeight="50.0" prefWidth="200.0">
          <children>
             <Label prefWidth="100.0" text="Name">
                <HBox.margin>
                   <Insets left="10.0" />
-               </HBox.margin></Label>
+               </HBox.margin>
+            </Label>
             <TextField fx:id="tfName" />
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutY="345.6000061035156" prefHeight="50.0" prefWidth="200.0">
          <children>
             <Label prefWidth="100.0" text="Description">
                <HBox.margin>
@@ -47,38 +46,35 @@
             <TextField fx:id="tfDesc" />
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="113.0" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutY="396.0" prefHeight="50.0" prefWidth="200.0">
          <children>
             <Label prefWidth="100.0" text="Group">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="cbGroup" prefWidth="150.0" />
+            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="146.0" />
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="263.0" prefHeight="50.0" prefWidth="300.0">
+      <GridPane layoutX="26.0" layoutY="537.0">
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnSubmit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnNext" alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNext" prefWidth="80.0" text="Next &gt;&gt;">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
+            <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" GridPane.columnIndex="1" />
+            <Button fx:id="btnNext" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onNext" prefWidth="80.0" text="Next &gt;&gt;" GridPane.columnIndex="3" />
+            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" />
          </children>
-      </HBox>
-      <HBox layoutX="10.0" layoutY="406.0" prefHeight="50.0" prefWidth="200.0">
+      </GridPane>
+      <HBox layoutY="438.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label prefWidth="100.0" text="Social Media:">
+            <Label prefHeight="18.0" prefWidth="144.0" text="Social Media:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -86,5 +82,6 @@
             <ComboBox fx:id="cbSocial" prefWidth="150.0" />
          </children>
       </HBox>
+      <Button fx:id="btnUpload" layoutX="135.0" layoutY="204.0" mnemonicParsing="false" onAction="#onUpload" text="Upload Image" />
    </children>
-</VBox>
+</Pane>

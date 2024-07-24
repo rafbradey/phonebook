@@ -1,7 +1,10 @@
 package com.gabriel.prodmsv;
 
+import com.gabriel.prodmsv.ServiceImpl.ImageService;
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.model.Phone;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import lombok.Data;
 import lombok.Setter;
 
@@ -42,8 +46,11 @@ public class PhoneBookController implements Initializable {
     @Setter
     Scene deleteViewScene;
     Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
+
+
     Image uploadedImage = null;
     Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+
 
     @FXML
     public TextField tfId;
@@ -81,6 +88,10 @@ public class PhoneBookController implements Initializable {
     DeletePhoneController deletePhoneController;
     CreatePhoneController createPhoneController;
     PhoneService phoneService;
+    ImageService imageService;
+
+    String uploadedDir = "src/main/resources/com/gabriel/prodmsv/uploadedImages";
+
     @FXML
     private TextField txsearch;
     @FXML
@@ -107,19 +118,47 @@ public class PhoneBookController implements Initializable {
         @Override
         protected void updateItem(Phone phone, boolean empty) {
             super.updateItem(phone, empty);
+
             if (empty || phone == null) {
                 setText(null);
                 setGraphic(null);
             } else {
-                ImageView imageView = new ImageView(defaultImage);
-                imageView.setFitHeight(50);
-                imageView.setFitWidth(50);
-                imageView.setClip(new Circle(25, 25, 25));
-                setGraphic(imageView);
-                setText("  "+phone.getName() +"\n"+"  "+phone.getPhoneNumber());
+                setText("  " + phone.getName() + "\n" + "  " + phone.getPhoneNumber());
+                loadImage(phone);
             }
         }
 
+        private void loadImage(Phone phone) {
+            ImageView imageView = new ImageView();
+
+            if (phone.getImageURL() != null) {
+                try {
+                    String imagePath = "uploadedImages/" + phone.getImageURL();
+                    Image image = new Image(getClass().getResourceAsStream(imagePath));
+
+                    if (image.isError()) {
+                        throw new Exception("Image not found at path: " + imagePath);
+                    }
+
+                    imageView.setImage(image);
+                } catch (Exception e) {
+
+                    // Use a default image in case of an error
+                    Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+                    imageView.setImage(defaultImage);
+                }
+            } else {
+                // Use a default image if imageURL is null (NO IMAGE WAS SELECTED IN CREATION)
+                Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+                imageView.setImage(defaultImage);
+            }
+
+            // Set image view properties
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            imageView.setClip(new Circle(25, 25, 25));
+            setGraphic(imageView);
+        }
     }
 
 
@@ -215,8 +254,8 @@ public class PhoneBookController implements Initializable {
 
     public void setControlTexts(Phone phone){
         tfName.setText(phone.getName());
-       tfPhoneNumber.setText(phone.getPhoneNumber());
-     tfGroup.setText(phone.getGroupName());
+        tfPhoneNumber.setText(phone.getPhoneNumber());
+        tfGroup.setText(phone.getGroupName());
         tfSocial.setText(phone.getSocialName());
     }
 
