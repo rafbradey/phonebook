@@ -3,6 +3,10 @@ package com.gabriel.prodmsv;
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.model.Phone;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Data;
@@ -36,6 +41,9 @@ public class PhoneBookController implements Initializable {
     Scene updateViewScene;
     @Setter
     Scene deleteViewScene;
+    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
+    Image uploadedImage = null;
+    Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
 
     @FXML
     public TextField tfId;
@@ -43,14 +51,9 @@ public class PhoneBookController implements Initializable {
     public TextField tfName;
     @FXML
     public TextField tfPhoneNumber;
-    @FXML
-    public ImageView productImage;
     public VBox prodman;
     @FXML
     public TextField tfGroup;
-
-    Image puffy;
-    Image wink;
 
     @FXML
     public Button createButton;
@@ -69,7 +72,10 @@ public class PhoneBookController implements Initializable {
 
     public static Phone phone;
     @FXML
-    private ListView<Phone> lvProducts;
+    private ListView<Phone> lvContacts;
+    private FilteredList<Phone> filteredData;
+    private ObservableList<Phone> phoneList;
+
 
     UpdatePhoneController updatePhoneController;
     DeletePhoneController deletePhoneController;
@@ -78,20 +84,49 @@ public class PhoneBookController implements Initializable {
     @FXML
     private TextField txsearch;
     @FXML
-    private Button onSearch;
-    @FXML
     private TextField tfSocial;
     @FXML
     private Label txtitle;
-    @FXML
-    private Rectangle cbGroup;
     private Rectangle cbSocial;
+    @FXML
+    private ImageView phoneImage;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private Button btnClear;
 
-    void refresh() throws Exception{
+    @FXML
+    public void onClear(ActionEvent actionEvent) {
+        txsearch.setText("");
+        onSearch();
+    }
+
+
+    //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
+    public class PhoneListCell extends ListCell<Phone> {
+        @Override
+        protected void updateItem(Phone phone, boolean empty) {
+            super.updateItem(phone, empty);
+            if (empty || phone == null) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                ImageView imageView = new ImageView(defaultImage);
+                imageView.setFitHeight(50);
+                imageView.setFitWidth(50);
+                imageView.setClip(new Circle(25, 25, 25));
+                setGraphic(imageView);
+                setText("  "+phone.getName() +"\n"+"  "+phone.getPhoneNumber());
+            }
+        }
+
+    }
+
+
+    void refresh() throws Exception {
         phoneService = PhoneService.getService();
         Phone[] phones = phoneService.getPhones();
-        lvProducts.getItems().clear();
-        lvProducts.getItems().addAll(phones);
+        phoneList.setAll(phones); // Update the phone list
     }
 
     @Override
@@ -99,18 +134,31 @@ public class PhoneBookController implements Initializable {
         System.out.println("PhoneBookController: initialize");
         disableControls();
 
+        txsearch.setPromptText("Search...");
+
+        phoneList = FXCollections.observableArrayList(); // Initialize phoneList
+
+        // Create a filtered list
+        filteredData = new FilteredList<>(phoneList, p -> true);
+        SortedList<Phone> sortedData = new SortedList<>(filteredData);
+        lvContacts.setItems(sortedData);
+        lvContacts.setCellFactory(listView -> new PhoneListCell());
+
+        // Add an event handler for the search button
+        btnSearch.setOnAction(event -> onSearch());
+
+
         try {
             refresh();
             try {
-                puffy = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
-                wink = new Image(getClass().getResourceAsStream("/images/wink.gif"));
-                productImage.setImage(puffy);
+                phoneImage.setImage(PhoneIcon);
 
                 // Load the edit icon and set it to the update button
                 Image contactsIcon = new Image(getClass().getResourceAsStream("images/contacts.jpg"));
                 ImageView contactsIconView = new ImageView(contactsIcon);
                 contactsIconView.setFitWidth(18);
                 contactsIconView.setFitHeight(18);
+
                 contactButton.setGraphic(contactsIconView);
                 contactButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
 
@@ -144,6 +192,9 @@ public class PhoneBookController implements Initializable {
                 settingsIconView.setFitWidth(16);
                 settingsIconView.setFitHeight(16);
                 settingsButton.setGraphic(settingsIconView);
+
+
+
             }
             catch(Exception ex){
                 System.out.println("Error with image: " + ex.getMessage());
@@ -179,7 +230,7 @@ public class PhoneBookController implements Initializable {
 
     @FXML
     public void onMouseClicked(MouseEvent mouseEvent) {
-        phone = lvProducts.getSelectionModel().getSelectedItem();
+        phone = lvContacts.getSelectionModel().getSelectedItem();
         if(phone == null) {
             return;
         }
@@ -188,8 +239,8 @@ public class PhoneBookController implements Initializable {
         System.out.println("clicked on " + phone);
         //show phone number social and group in soupln
         System.out.println("clicked on " + phone.getPhoneNumber());
-        System.out.println("clicked on " + phone.getSocialName());
-        System.out.println("clicked on " + phone.getGroupName());
+        System.out.println(" " + phone.getSocialName());
+        System.out.println(" " + phone.getGroupName());
     }
 
     @FXML
@@ -283,7 +334,29 @@ public class PhoneBookController implements Initializable {
             ex.printStackTrace();  //print stack error; -raf
 
         }
+
     }
+
+    @FXML
+    public void onSearch() {
+        String searchText = txsearch.getText().toLowerCase();
+        filteredData.setPredicate(phone -> {
+            // If filter text is empty, display all phones.
+            if (searchText == null || searchText.isEmpty()) {
+                return true;
+            }
+            // Compare phone name with the search text.
+            String lowerCaseFilter = searchText.toLowerCase();
+
+            // Check if the name starts with the search text.
+            if (phone.getName().toLowerCase().startsWith(lowerCaseFilter) ||
+                    phone.getPhoneNumber().startsWith(lowerCaseFilter)) {
+                return true; // Filter matches name or phone number starting with the search text.
+            }
+            return false; // Does not match.
+        });
+    }
+
 
     @FXML
     public void onClose(ActionEvent actionEvent) {
@@ -302,7 +375,7 @@ public class PhoneBookController implements Initializable {
     }
 
     public void addItem(Phone phone){
-        lvProducts.getItems().add(phone);
+        lvContacts.getItems().add(phone);
     }
 
 }

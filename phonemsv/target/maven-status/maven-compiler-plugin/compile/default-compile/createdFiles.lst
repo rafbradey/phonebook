@@ -1,5 +1,6 @@
 com\gabriel\prodmsv\UpdatePhoneController.class
 com\gabriel\prodmsv\CreatePhoneController.class
 com\gabriel\prodmsv\DeletePhoneController.class
+com\gabriel\prodmsv\PhoneBookController$PhoneListCell.class
 com\gabriel\prodmsv\PhoneBookController.class
 com\gabriel\prodmsv\PhoneBookApplication.class

@@ -15,18 +15,18 @@
 
 <Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.PhoneBookController">
    <children>
-      <ScrollPane layoutX="36.0" layoutY="109.0" prefHeight="411.0" prefWidth="288.0">
+      <ScrollPane layoutX="-5.0" layoutY="109.0" prefHeight="429.0" prefWidth="366.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="407.0" prefWidth="286.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="358.0">
                <children>
-                  <ListView fx:id="lvProducts" onMouseClicked="#onMouseClicked" prefHeight="412.0" prefWidth="288.0" />
-                  <Button fx:id="createButton" alignment="CENTER" layoutX="208.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
+                  <ListView fx:id="lvContacts" onMouseClicked="#onMouseClicked" prefHeight="430.0" prefWidth="366.0" />
+                  <Button fx:id="createButton" alignment="CENTER" layoutX="276.0" layoutY="369.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b99dda" height="73.0" layoutY="535.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
-      <Rectangle fx:id="cbUom" arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="-5.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="73.0" layoutY="535.0" stroke="#a488c7" strokeType="INSIDE" width="360.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="-5.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
       <HBox layoutX="413.0" layoutY="275.0" prefHeight="50.0" prefWidth="220.0">
          <children>
             <Label prefWidth="100.0" text="Id:" />
@@ -62,15 +62,14 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="6.0" prefHeight="34.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="productImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="phoneImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin></ImageView>
             <Label fx:id="txtitle" prefHeight="17.0" prefWidth="135.0" text="Contacts" />
          </children>
       </HBox>
-      <TextField fx:id="txsearch" layoutX="37.0" layoutY="73.0" prefHeight="25.0" prefWidth="228.0" text="Search..." />
-      <Button fx:id="onSearch" layoutX="272.0" layoutY="73.0" mnemonicParsing="false" text="Search" />
+      <TextField fx:id="txsearch" layoutX="4.0" layoutY="73.0" prefHeight="25.0" prefWidth="229.0" />
       <HBox layoutX="286.0" layoutY="9.0" prefHeight="34.0" prefWidth="45.0" spacing="11.0">
          <children>
             <Button fx:id="settingsButton" mnemonicParsing="false" />
@@ -83,5 +82,7 @@
             <TextField fx:id="tfSocial" prefHeight="25.0" prefWidth="175.0" />
          </children>
       </HBox>
+      <Button fx:id="btnSearch" layoutX="242.0" layoutY="73.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
+      <Button fx:id="btnClear" layoutX="304.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClear" text="Clear" />
    </children>
 </Pane>
