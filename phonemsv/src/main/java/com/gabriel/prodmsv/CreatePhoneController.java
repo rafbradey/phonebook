@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -69,8 +70,10 @@ public class CreatePhoneController implements Initializable {
     @FXML
     private Button btnUpload;
 
-    String tempDir = "src/main/resources/com/gabriel/prodmsv/tempImages";
-    String finalDir = "src/main/resources/com/gabriel/prodmsv/uploadedImages";
+    private String imageUri;
+
+   // String tempDir = "src/main/resources/com/gabriel/prodmsv/tempImages";
+  //  String finalDir = "src/main/resources/com/gabriel/prodmsv/uploadedImages";
 
     String fileDir = null;
     @FXML
@@ -84,6 +87,7 @@ public class CreatePhoneController implements Initializable {
         Image icon = new Image(getClass().getResourceAsStream("images/Default.jpg"));
 
         contactImage.setImage(icon);
+
 
         try{
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
@@ -145,40 +149,13 @@ public class CreatePhoneController implements Initializable {
             return;
         }
 
-        try {
-
-            Path tempDirPath = Path.of(tempDir);
-            Path uploadedDirPath = Path.of(finalDir);
-            // Find the file in the temp directory (you might need a more specific way to identify the file)
-            File tempDirFile = new File(tempDir);
-            File[] files = tempDirFile.listFiles();
-            if (files != null && files.length > 0) {
-                File tempFile = files[0]; // Just taking the first file for simplicity
-                Path tempFilePath = tempFile.toPath();
-
-                // Generate the new file path in the uploaded directory
-                String newFilename = tempFile.getName();
-                Path uploadedFilePath = uploadedDirPath.resolve(newFilename);
-
-                // Move galing temp to uploaded directory
-                Files.move(tempFilePath, uploadedFilePath, StandardCopyOption.REPLACE_EXISTING);
 
 
                 //AutoIncrement ID for the phone
               phone.setImageId(phoneService.getPhones().length + 1);
-
                 //set URL same as the filename, (gagamitin ko to mamaya para sa contact images)
-                phone.setImageURL(newFilename.toString());
+                phone.setImageURL(imageUri);
 
-
-            } else {
-                System.out.println("No file found in temp directory. Saving phone contact using default image.");
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error moving file: " + e.getMessage());
-        }
         System.out.println("Phone details before save: " + phone + " group: " + group + " social: " + social + "imageURL: " + phone.getImageURL());
 
         phone = phoneService.create(phone);
@@ -194,7 +171,7 @@ public class CreatePhoneController implements Initializable {
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
         window.hide();
-        phoneBookController.refresh();
+        clearTemp();
 
         stage.setScene(parentScene);
         stage.show();
@@ -203,7 +180,7 @@ public class CreatePhoneController implements Initializable {
     @FXML
     public void onUpload(ActionEvent actionEvent) {
 
-       fileDir = tempDir;
+        //fileDir = finalDir;
         System.out.println("CreatePhoneController:onUpload ");
 
         // Create a FileChooser instance
@@ -212,7 +189,21 @@ public class CreatePhoneController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
         );
+        //Using the selected iamge, change the image of the contactImage
+        File file = fileChooser.showOpenDialog(null);
 
+        try {
+            imageUri = file.toURI().toString();
+            Image image = new Image(imageUri);
+            contactImage.setImage(image);
+            System.out.println("Selected file: " + file.getName());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+/* nasayng na code
         // Show the file chooser dialog and get the selected file
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
@@ -241,6 +232,9 @@ public class CreatePhoneController implements Initializable {
                 Files.copy(file.toPath(), targetFile, StandardCopyOption.REPLACE_EXISTING);
 
                 // Set the image view with current selected image --p.s alas natapos na rin after 3 hrs -raf
+
+
+
                 contactImage.setImage(new javafx.scene.image.Image(file.toURI().toString()));
                 System.out.println("Temp File saved to: " + targetFile.toAbsolutePath());
                 System.out.println("File Name with UUID is : " + newFilename);
@@ -253,12 +247,16 @@ public class CreatePhoneController implements Initializable {
         } else {
             System.out.println("No file selected.");
         }
-
+*/
     }
 
+    public String getImageUri() {
+        return imageUri;
+    }
 
     @FXML
     public void clearTemp(){
+        /*
         File tempDirs = new File("src/main/resources/com/gabriel/prodmsv/tempImages");
         File[] files = tempDirs.listFiles();
         for (File file : files) {
@@ -266,9 +264,11 @@ public class CreatePhoneController implements Initializable {
                 System.out.println("Failed to delete " + file);
             }
         }
+        */
+
         //set image of contactImage to null every time the page is loaded
-       // Image image = new Image(getClass().getResourceAsStream("images/Default.jpg"));
-        //contactImage.setImage(image);
+       Image image = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+        contactImage.setImage(image);
         System.out.println("Temp files cleared." +"\n Image Reset to Default.jpg in creation page");
     }
 

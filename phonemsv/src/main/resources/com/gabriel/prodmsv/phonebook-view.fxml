@@ -21,7 +21,6 @@
                <children>
                   <ListView fx:id="lvContacts" onMouseClicked="#onMouseClicked" prefHeight="430.0" prefWidth="366.0" />
                   <Button fx:id="createButton" alignment="CENTER" layoutX="276.0" layoutY="369.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
-                  <Button fx:id="btnRefresh" layoutX="288.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRefresh" text="Refresh" />
                </children>
             </AnchorPane>
         </content>
@@ -85,5 +84,6 @@
       </HBox>
       <Button fx:id="btnSearch" layoutX="242.0" layoutY="73.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
       <Button fx:id="btnClear" layoutX="304.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClear" text="Clear" />
+      <Button fx:id="btnRefresh" layoutX="448.0" layoutY="118.0" mnemonicParsing="false" onAction="#onRefresh" text="Refresh" />
    </children>
 </Pane>

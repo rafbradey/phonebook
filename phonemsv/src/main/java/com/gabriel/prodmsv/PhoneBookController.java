@@ -33,6 +33,7 @@ import lombok.Data;
 import lombok.Setter;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 @Data
@@ -116,17 +117,14 @@ public class PhoneBookController implements Initializable {
 
     @FXML
     public void onRefresh(ActionEvent actionEvent) {
-        System.out.println("PhoneBookController: onRefresh Clicked");
-            try {
-                refresh(); // Refresh the phone list and ListView
-                lvContacts.setItems(null); // Clear the ListView items
-                lvContacts.setItems(phoneList); // Reset the items
-                lvContacts.refresh(); // Refresh the ListView
-            } catch (Exception e) {
-                showErrorDialog("Message: " + e.getMessage());
-            }
-
+        try {
+            refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showErrorDialog("Failed to reload the scene: " + e.getMessage());
+        }
     }
+
 
 
     //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
@@ -147,26 +145,28 @@ public class PhoneBookController implements Initializable {
         private void loadImage(Phone phone) {
             ImageView imageView = new ImageView();
 
-            if (phone.getImageURL() != null) {
+            String imageUri = phone.getImageURL();
+
+            if (imageUri != null && !imageUri.isEmpty()) {
                 try {
-                    String imagePath = "uploadedImages/" + phone.getImageURL();
-                    Image image = new Image(getClass().getResourceAsStream(imagePath));
+                    Image image = new Image(imageUri);
 
                     if (image.isError()) {
-                        throw new Exception("Image not found at path: " + imagePath);
+                        throw new Exception("Image not found at URI: " + imageUri);
                     }
-
                     imageView.setImage(image);
+                    System.out.println("Image found for phone: " + phone.getName());
                 } catch (Exception e) {
-
                     // Use a default image in case of an error
                     Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
                     imageView.setImage(defaultImage);
+                    System.out.println("No image found for phone: " + phone.getName() + ", reverting to DEFAULT IMAGE.");
                 }
             } else {
-                // Use a default image if imageURL is null (NO IMAGE WAS SELECTED IN CREATION)
+                // Use a default image if imageUri is null or empty
                 Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
                 imageView.setImage(defaultImage);
+                System.out.println("No image was set for phone: " + phone.getName() + ", reverting to DEFAULT IMAGE.");
             }
 
             // Set image view properties
@@ -176,6 +176,7 @@ public class PhoneBookController implements Initializable {
             setGraphic(imageView);
         }
     }
+
 
 
     void refresh() throws Exception {
@@ -296,6 +297,7 @@ public class PhoneBookController implements Initializable {
         System.out.println("clicked on " + phone.getPhoneNumber());
         System.out.println(" " + phone.getSocialName());
         System.out.println(" " + phone.getGroupName());
+        System.out.println(" " + phone.getImageURL());
     }
 
     @FXML
