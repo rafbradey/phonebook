@@ -9,6 +9,8 @@ public class Phone {
     String phoneNumber;
     String email;
     String message;
+    byte[] contactImage;
+
 
     //support table
     int groupId;
@@ -16,6 +18,9 @@ public class Phone {
 
     int socialId;
     String socialName;
+
+    int imageId;
+    String imageURL;
 
     @Override
     public String toString(){

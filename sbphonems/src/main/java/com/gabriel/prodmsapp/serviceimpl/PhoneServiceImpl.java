@@ -39,6 +39,8 @@ public class PhoneServiceImpl implements PhoneService {
             phone.setGroupName(phoneData.getGroupName());
             phone.setSocialId(phoneData.getSocialId());
             phone.setSocialName(phoneData.getSocialName());
+            phone.setImageId(phoneData.getImageId());
+            phone.setImageURL(phoneData.getImageURL());//
 
             phones.add(phone);
         }
@@ -65,6 +67,8 @@ public class PhoneServiceImpl implements PhoneService {
         phoneData.setGroupName(phone.getGroupName());
         phoneData.setSocialId(phone.getSocialId());
         phoneData.setSocialName(phone.getSocialName());
+        phoneData.setImageId(phone.getImageId());
+        phoneData.setImageURL(phone.getImageURL());
 
         phoneData = phoneDataRepository.save(phoneData);
         logger.info("add: Input"+ phoneData.toString());
@@ -81,6 +85,8 @@ public class PhoneServiceImpl implements PhoneService {
         newPhone.setGroupName(phoneData.getGroupName());
         newPhone.setSocialId(phoneData.getSocialId());
         newPhone.setSocialName(phoneData.getSocialName());
+        newPhone.setImageId(phoneData.getImageId());
+        newPhone.setImageURL(phoneData.getImageURL());
         return newPhone;
     }
 
@@ -98,6 +104,8 @@ public class PhoneServiceImpl implements PhoneService {
         phoneData.setGroupName(phone.getGroupName());
         phoneData.setSocialId(phone.getSocialId());
         phoneData.setSocialName(phone.getSocialName());
+        phoneData.setImageId(phone.getImageId());
+        phoneData.setImageURL(phone.getImageURL());
 
         phoneData = phoneDataRepository.save(phoneData);
 
@@ -113,6 +121,9 @@ public class PhoneServiceImpl implements PhoneService {
         newPhone.setGroupName(phoneData.getGroupName());
         newPhone.setSocialId(phoneData.getSocialId());
         newPhone.setSocialName(phoneData.getSocialName());
+        newPhone.setImageId(phoneData.getImageId());
+        newPhone.setImageURL(phoneData.getImageURL());
+
         return newPhone;
     }
 
@@ -135,6 +146,8 @@ public class PhoneServiceImpl implements PhoneService {
             phone.setGroupName(phoneDatum.getGroupName());
             phone.setSocialId(phoneDatum.getSocialId());
             phone.setSocialName(phoneDatum.getSocialName());
+            phone.setImageId(phoneDatum.getImageId());
+            phone.setImageURL(phoneDatum.getImageURL());
 
             return phone;
         }
@@ -163,9 +176,12 @@ public class PhoneServiceImpl implements PhoneService {
              phone.setGroupName(optional.get().getGroupName());
              phone.setSocialId(optional.get().getSocialId());
              phone.setSocialName(optional.get().getSocialName());
+             phone.setImageId(optional.get().getImageId());
+             phone.setImageURL(optional.get().getImageURL());
          }
          else {
              logger.info("Failed  >> unable to locate phone id: " +  Integer.toString(id));
          }
     }
+
 }

@@ -27,6 +27,9 @@ public class PhoneData {
     int socialId;
     String socialName;
 
+    int imageId;
+    String imageURL;
+
 
 
     @UpdateTimestamp

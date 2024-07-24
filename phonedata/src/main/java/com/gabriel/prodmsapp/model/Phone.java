@@ -17,6 +17,9 @@ public class Phone {
     int socialId;
     String socialName;
 
+    int imageId;
+    String imageURL;
+
 
     @Override
     public String toString(){
