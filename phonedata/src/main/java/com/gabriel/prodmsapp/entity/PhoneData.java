@@ -19,6 +19,9 @@ public class PhoneData {
     String phoneNumber;
     String email;
     String message;
+    String company;
+    String account;
+    Date birthday;
 
     //support table
     int groupId;

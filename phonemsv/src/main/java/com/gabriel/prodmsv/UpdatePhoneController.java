@@ -2,19 +2,22 @@ package com.gabriel.prodmsv;
 
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.ServiceImpl.GroupService;
+import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Group;
+import com.gabriel.prodmsv.model.Social;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,35 +30,59 @@ public class UpdatePhoneController implements Initializable {
     @Setter
     PhoneBookController controller;
 
-    @FXML
-    private TextField tfId;
     int id;
     @FXML
     private TextField tfName;
     @FXML
-    private TextField tfDesc;
+    private TextField tfPhoneNumber;
     @FXML
-    private TextField tfUom;
+    private ComboBox cbGroup;
     @FXML
-    private ComboBox<Group> cbUom;
+    private Button btnBack;
+    @FXML
+    private ComboBox cbSocial;
+    @FXML
+    private TextField tfAccountName;
+    @FXML
+    private Button btnSubmit;
+    @FXML
+    private DatePicker dpBirthDate;
+    @FXML
+    private TextField tfEmail;
 
     public void refresh() throws Exception{
         Phone phone = PhoneBookController.phone;
-        tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
         //tfPhoneNumber dapat to
-        tfDesc.setText(phone.getPhoneNumber());
-        cbUom.getItems().clear();
+        tfPhoneNumber.setText(phone.getPhoneNumber());
+        tfAccountName.setText(phone.getAccount());
+        tfEmail.setText(phone.getEmail());
+      //  dpBirthDate.setValue(phone.getBirthday().toLocalDate());
+    //get the group and social from the database and display on the combobox
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
-        cbUom.getItems().addAll(groups);
-        cbUom.getSelectionModel().select(GroupService.getService().getGroup(phone.getGroupId()));
-        // if may combo box yung social,, add dito -- raf
+        cbGroup.getItems().addAll(groups);
+        for(Group group: groups){
+            if(group.getId() == phone.getGroupId()){
+                cbGroup.getSelectionModel().select(group);
+                break;
+            }
+        }
+        Social[] socials = (Social[]) SocialService.getService().getSocials();
+        cbSocial.getItems().addAll(socials);
+        for(Social social: socials){
+            if(social.getId() == phone.getSocialId()){
+                cbSocial.getSelectionModel().select(social);
+                break;
+            }
+        }
+
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("UpdatePhoneController: initialize");
-        tfId=new TextField();
+      //  tfId=new TextField();
         try {
             refresh();
         }
@@ -64,15 +91,31 @@ public class UpdatePhoneController implements Initializable {
         }
     }
 
+    @FXML
     public void onSubmit(ActionEvent actionEvent) {
         Phone phone = new Phone();
-        phone.setId(Integer.parseInt(tfId.getText()));
+      //  phone.setId(Integer.parseInt(tfId.getText()));
         phone.setName(tfName.getText());
         //tfPhoneNumber dapat to
-        phone.setPhoneNumber(tfDesc.getText());
-        Group group = cbUom.getSelectionModel().getSelectedItem();
-        phone.setGroupId(group.getId());
-        phone.setGroupName(group.getName());
+        phone.setPhoneNumber(tfPhoneNumber.getText());
+        phone.setAccount(tfAccountName.getText());
+        phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
+        phone.setEmail(tfEmail.getText());
+
+        //might cAUSE PROBLEM
+        Group group = (Group) cbGroup.getSelectionModel().getSelectedItem();
+        if (group != null) {
+            phone.setGroupName(group.getName());
+        }
+
+        Social social = (Social) cbSocial.getSelectionModel().getSelectedItem();
+        if (social != null) {
+            phone.setSocialName(social.getName());
+        } else {
+            System.out.println("No social selected or social is null.");
+            return;
+        }
+
 
         try{
             phone = PhoneService.getService().update(phone);
@@ -85,6 +128,7 @@ public class UpdatePhoneController implements Initializable {
         }
     }
 
+    @FXML
     public void onBack(ActionEvent actionEvent) {
         System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));

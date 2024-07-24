@@ -33,6 +33,8 @@ public class PhoneServiceImpl implements PhoneService {
             phone.setPhoneNumber(phoneData.getPhoneNumber());
             phone.setEmail(phoneData.getEmail());
             phone.setMessage(phoneData.getMessage());
+            phone.setAccount(phoneData.getAccount());
+            phone.setBirthday(phoneData.getBirthday());
 
             //support tables
             phone.setGroupId(phoneData.getGroupId());
@@ -61,6 +63,9 @@ public class PhoneServiceImpl implements PhoneService {
         phoneData.setPhoneNumber(phone.getPhoneNumber());
         phoneData.setEmail(phone.getEmail());
         phoneData.setMessage(phone.getMessage());
+        phoneData.setAccount(phone.getAccount());
+        phoneData.setBirthday(phone.getBirthday());
+
 
         //support tables
         phoneData.setGroupId(phone.getGroupId());
@@ -79,6 +84,8 @@ public class PhoneServiceImpl implements PhoneService {
         newPhone.setPhoneNumber(phoneData.getPhoneNumber());
         newPhone.setEmail(phoneData.getEmail());
         newPhone.setMessage(phoneData.getMessage());
+        newPhone.setAccount(phoneData.getAccount());
+        newPhone.setBirthday(phoneData.getBirthday());
 
         //support tables
         newPhone.setGroupId(phoneData.getGroupId());
@@ -98,6 +105,8 @@ public class PhoneServiceImpl implements PhoneService {
         phoneData.setPhoneNumber(phone.getPhoneNumber());
         phoneData.setEmail(phone.getEmail());
         phoneData.setMessage(phone.getMessage());
+        phoneData.setAccount(phone.getAccount());
+        phoneData.setBirthday(phone.getBirthday());
 
         //support tables
         phoneData.setGroupId(phone.getGroupId());
@@ -115,6 +124,8 @@ public class PhoneServiceImpl implements PhoneService {
         newPhone.setPhoneNumber(phoneData.getPhoneNumber());
         newPhone.setEmail(phoneData.getEmail());
         newPhone.setMessage(phoneData.getMessage());
+        newPhone.setAccount(phoneData.getAccount());
+        newPhone.setBirthday(phoneData.getBirthday());
 
         //support tables
         newPhone.setGroupId(phoneData.getGroupId());
@@ -140,6 +151,8 @@ public class PhoneServiceImpl implements PhoneService {
             phone.setPhoneNumber(phoneDatum.getPhoneNumber());
             phone.setEmail(phoneDatum.getEmail());
             phone.setMessage(phoneDatum.getMessage());
+            phone.setAccount(phoneDatum.getAccount());
+            phone.setBirthday(phoneDatum.getBirthday());
 
             //support tables
             phone.setGroupId(phoneDatum.getGroupId());
@@ -170,6 +183,8 @@ public class PhoneServiceImpl implements PhoneService {
              phone.setPhoneNumber(optional.get().getPhoneNumber());
              phone.setEmail(optional.get().getEmail());
              phone.setMessage(optional.get().getMessage());
+             phone.setAccount(optional.get().getAccount());
+             phone.setBirthday(optional.get().getBirthday());
 
              //support tables
              phone.setGroupId(optional.get().getGroupId());

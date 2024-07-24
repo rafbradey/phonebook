@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.UpdatePhoneController">
+
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.UpdatePhoneController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" layoutY="14.0" prefHeight="50.0" prefWidth="200.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Update Product" textAlignment="CENTER" textFill="#e12323">
                <font>
@@ -17,57 +27,92 @@
             </Label>
          </children>
       </HBox>
-      <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
+      <ImageView fitHeight="148.0" fitWidth="177.0" layoutX="92.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../../../images/wink.gif" />
       </ImageView>
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="4.0" layoutY="275.0" prefHeight="35.0" prefWidth="261.0">
          <children>
             <Label prefWidth="100.0" text="Name">
                <HBox.margin>
                   <Insets left="10.0" />
-               </HBox.margin></Label>
+               </HBox.margin>
+            </Label>
             <TextField fx:id="tfName" />
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="63.0" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="5.0" layoutY="305.0" prefHeight="26.0" prefWidth="261.0">
          <children>
-            <Label prefWidth="100.0" text="Desscription">
+            <Label prefWidth="100.0" text="Phone Number">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfDesc" />
+            <TextField fx:id="tfPhoneNumber" />
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="113.0" prefHeight="50.0" prefWidth="200.0">
+      <HBox layoutX="6.0" layoutY="444.0" prefHeight="35.0" prefWidth="261.0">
          <children>
-            <Label prefWidth="100.0" text="Uom">
+            <Label prefWidth="100.0" text="Group">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="cbUom">
+            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="153.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </ComboBox>
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="263.0" prefHeight="50.0" prefWidth="300.0">
+      <GridPane layoutX="80.0" layoutY="532.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin></Button>
-            <Button fx:id="btnSubmit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit">
+            <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" />
+            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Button layoutX="134.0" layoutY="220.0" mnemonicParsing="false" text="Change Image" />
+      <HBox layoutX="5.0" layoutY="374.0" prefHeight="35.0" prefWidth="261.0">
+         <children>
+            <Label prefWidth="100.0" text="Social Media:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
-            </Button>
+            </Label>
+            <ComboBox fx:id="cbSocial" prefHeight="26.0" prefWidth="152.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+      </HBox>
+      <HBox layoutX="6.0" layoutY="409.0" prefHeight="35.0" prefWidth="261.0">
+         <children>
+            <Label prefWidth="100.0" text="Account Name:">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfAccountName" />
+         </children>
+      </HBox>
+      <DatePicker fx:id="dpBirthDate" layoutX="107.0" layoutY="485.0" prefHeight="25.0" prefWidth="152.0" />
+      <Label layoutX="13.0" layoutY="489.0" text="Birthday:" />
+      <HBox layoutX="6.0" layoutY="338.0" prefHeight="30.0" prefWidth="261.0">
+         <children>
+            <Label prefWidth="100.0" text="Email">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfEmail" />
          </children>
       </HBox>
    </children>
-</VBox>
+</Pane>

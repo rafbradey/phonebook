@@ -2,6 +2,8 @@ package com.gabriel.prodmsv.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Phone {
     int id;
@@ -9,7 +11,9 @@ public class Phone {
     String phoneNumber;
     String email;
     String message;
-    byte[] contactImage;
+    String company;
+    String account;
+    Date birthday;
 
 
     //support table

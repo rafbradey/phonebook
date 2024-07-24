@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
@@ -40,8 +41,6 @@ public class CreatePhoneController implements Initializable {
     PhoneBookController phoneBookController;
     @FXML
     public TextField tfName;
-    @FXML
-    public TextField tfDesc;
     @FXML
     private ComboBox<Group> cbGroup;
     @FXML
@@ -78,6 +77,14 @@ public class CreatePhoneController implements Initializable {
     String fileDir = null;
     @FXML
     private ImageView contactImage;
+    @FXML
+    private TextField tfPhoneNumber;
+    @FXML
+    private DatePicker dpBirthDate;
+    @FXML
+    private TextField tfAccount;
+    @FXML
+    private TextField tfEmail;
 
 
     @Override
@@ -99,7 +106,13 @@ public class CreatePhoneController implements Initializable {
         cbSocial.getItems().addAll(socials);
 
         tfName.setText("");
-        tfDesc.setText("");
+        tfPhoneNumber.setText("");
+        cbGroup.getSelectionModel().clearSelection();
+        cbSocial.getSelectionModel().clearSelection();
+        tfAccount.setText("");
+        dpBirthDate.setValue(null);
+        tfEmail.setText("");
+
         } catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -111,7 +124,10 @@ public class CreatePhoneController implements Initializable {
 
     public void clearControlTexts(){
         tfName.setText("");
-        tfDesc.setText("");
+        tfPhoneNumber.setText("");
+        tfAccount.setText("");
+        dpBirthDate.setValue(null);
+        tfEmail.setText("");
         cbGroup.getSelectionModel().clearSelection();
         cbSocial.getSelectionModel().clearSelection();
     }
@@ -127,12 +143,15 @@ public class CreatePhoneController implements Initializable {
         stage.show();
     }
 
-    //palitan mamaya yung tfDesc etc after mabago yung UI design --raf
+    //palitan mamaya yung tfPhoneNumber etc after mabago yung UI design --raf
     @FXML
     public void onSubmit(ActionEvent actionEvent) throws Exception {
         Phone phone = new Phone();
         phone.setName(tfName.getText());
-        phone.setPhoneNumber(tfDesc.getText());
+        phone.setPhoneNumber(tfPhoneNumber.getText());
+        phone.setAccount(tfAccount.getText());
+        phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
+        phone.setEmail(tfEmail.getText());
 
         Group group = cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
@@ -148,9 +167,6 @@ public class CreatePhoneController implements Initializable {
             System.out.println("No social selected or social is null.");
             return;
         }
-
-
-
                 //AutoIncrement ID for the phone
               phone.setImageId(phoneService.getPhones().length + 1);
                 //set URL same as the filename, (gagamitin ko to mamaya para sa contact images)
