@@ -11,21 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
-
 import javafx.scene.image.ImageView;
-
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -40,6 +38,10 @@ public class UpdatePhoneController implements Initializable {
     PhoneBookController controller;
 
     String newImageUri;
+    String currentImageUri;
+
+    String currentSocial;
+    String currentGroup;
 
     int id;
     @FXML
@@ -47,11 +49,11 @@ public class UpdatePhoneController implements Initializable {
     @FXML
     private TextField tfPhoneNumber;
     @FXML
-    private ComboBox cbGroup;
+    private ComboBox<Group> cbGroup;
     @FXML
     private Button btnBack;
     @FXML
-    private ComboBox cbSocial;
+    private ComboBox<Social> cbSocial;
     @FXML
     private TextField tfAccountName;
     @FXML
@@ -69,9 +71,15 @@ public class UpdatePhoneController implements Initializable {
     @FXML
     private Button btnUpload;
 
-    public void refresh() throws Exception{
-
+    public void refresh() throws Exception {
         Phone phone = PhoneBookController.phone;
+
+        currentImageUri = phone.getImageURL();
+        System.out.println("Current image URI: " + currentImageUri);
+
+        currentSocial = phone.getSocialName();
+        currentGroup = phone.getGroupName();
+
         System.out.println("Current id: " + id);
         id = phone.getId();
 
@@ -88,24 +96,29 @@ public class UpdatePhoneController implements Initializable {
         tfAccountName.setText(phone.getAccount());
         tfEmail.setText(phone.getEmail());
 
-        cbGroup.getSelectionModel().clearSelection();
-        cbGroup.getItems().clear();
-        cbSocial.getSelectionModel().clearSelection();
-        cbSocial.getItems().clear();
+        if (phone.getBirthday() != null) {
+            LocalDate localDate = phone.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            dpBirthDate.setValue(localDate);
+        } else {
+            dpBirthDate.setValue(null);
+        }
+
+
 
         try {
-            // Initialize groups
-            Group[] groups = GroupService.getService().getGroups();
+
+            cbGroup.getItems().clear();
+            cbSocial.getItems().clear();
+            Group groups[] = GroupService.getService().getGroups();
             System.out.println("Fetched groups: " + Arrays.toString(groups));
             cbGroup.getItems().addAll(groups);
 
-            // Initialize socials
-            Social[] socials = SocialService.getService().getSocials();
+            Social socials[] = SocialService.getService().getSocials();
             System.out.println("Fetched socials: " + Arrays.toString(socials));
             cbSocial.getItems().addAll(socials);
 
-            cbGroup.setValue(phone.getGroupName());
-            cbSocial.setValue(phone.getSocialName());
+
+
             if (phone.getGroupName() != null || phone.getSocialName() != null) {
                 System.out.println("Group ID is NOT null.");
 
@@ -121,34 +134,23 @@ public class UpdatePhoneController implements Initializable {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("Group ID and Social ID is null.");
                 cbGroup.getSelectionModel().clearSelection();
                 cbSocial.getSelectionModel().clearSelection();
             }
         } catch (Exception ex) {
-            System.out.println("UpdatePhoneController: " + ex.getMessage());
             ex.printStackTrace();
         }
-
-
-
-
-        }
-
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("UpdatePhoneController: initialize");
-      //  tfId=new TextField();
         try {
             refresh();
-
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("UpdatePhoneController: " + ex.getMessage());
-            //print stack error
             ex.printStackTrace();
         }
     }
@@ -156,39 +158,57 @@ public class UpdatePhoneController implements Initializable {
     @FXML
     public void onSubmit(ActionEvent actionEvent) {
         Phone phone = new Phone();
-        //get current id but its not in text, but in the phone object
         phone.setId(id);
         System.out.println("UpdatePhoneController:onSubmit id: " + id);
         phone.setName(tfName.getText());
         phone.setPhoneNumber(tfPhoneNumber.getText());
         phone.setAccount(tfAccountName.getText());
-       // phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
+        phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
         phone.setEmail(tfEmail.getText());
-        phone.setImageURL(newImageUri);
 
+        if (phone.getImageURL() != null) {
+            System.out.println("Phone has image URL: " + phone.getImageURL());
+            System.out.println("Submitting will not change the image.");
+        } else if (newImageUri != phone.getImageURL() && newImageUri != null) {
+            phone.setImageURL(newImageUri);
+            contactImage.setImage(new Image(newImageUri));
+            System.out.println("NEW IMAGE DETECTED! switching to the new image------00000----" +
+                    "-------------." + ":" + phone.getImageURL());
+        } else if (newImageUri == null) {
+            System.out.println("No new image detected. Using the old image ------" +
+                    "------------------. " + ":" + phone.getImageURL());
+            phone.setImageURL(currentImageUri);
+        } else {
+            System.out.println("No new image detected?. <<!@<!<!<!<!<.");
+            phone.setImageURL(phone.getImageURL());
+        }
 
-        //might CAUSE PROBLEM
-        Group group = (Group) cbGroup.getSelectionModel().getSelectedItem();
+        LocalDate birthDate = dpBirthDate.getValue();
+        if (birthDate != null) {
+            phone.setBirthday(java.sql.Date.valueOf(birthDate));
+        } else {
+            phone.setBirthday(null);
+        }
+
+        Group group = cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
+            phone.setGroupId(group.getId());
             phone.setGroupName(group.getName());
         }
 
-        Social social = (Social) cbSocial.getSelectionModel().getSelectedItem();
+        Social social = cbSocial.getSelectionModel().getSelectedItem();
         if (social != null) {
+            phone.setSocialId(social.getId());
             phone.setSocialName(social.getName());
-        } else {
-            System.out.println("No social selected or social is null.");
-            return;
         }
 
-
-        try{
+        try {
             phone = PhoneService.getService().update(phone);
             controller.refresh();
             controller.setControlTexts(phone);
             onBack(actionEvent);
-        }
-        catch(Exception ex){
+            newImageUri = null;
+        } catch (Exception ex) {
             System.out.println("CreatePhoneController:onSubmit Error: " + ex.getMessage());
         }
     }
@@ -203,7 +223,6 @@ public class UpdatePhoneController implements Initializable {
         stage.setScene(parentScene);
         stage.show();
     }
-
 
     @FXML
     public void onUpload(ActionEvent actionEvent) {

@@ -4,6 +4,7 @@ import com.gabriel.prodmsv.ServiceImpl.ImageService;
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Group;
+import com.gabriel.prodmsv.model.Social;
 import com.gabriel.prodmsv.ServiceImpl.GroupService;
 import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Social;
@@ -152,6 +153,7 @@ public class CreatePhoneController implements Initializable {
         phone.setAccount(tfAccount.getText());
         phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
         phone.setEmail(tfEmail.getText());
+        phone.setImageURL(imageUri);
 
         Group group = cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
@@ -167,10 +169,8 @@ public class CreatePhoneController implements Initializable {
             System.out.println("No social selected or social is null.");
             return;
         }
-                //AutoIncrement ID for the phone
-              phone.setImageId(phoneService.getPhones().length + 1);
-                //set URL same as the filename, (gagamitin ko to mamaya para sa contact images)
-                phone.setImageURL(imageUri);
+
+
 
         System.out.println("Phone details before save: " + phone + " group: " + group + " social: " + social + "imageURL: " + phone.getImageURL());
 
