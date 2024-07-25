@@ -26,6 +26,8 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Setter
@@ -86,30 +88,44 @@ public class UpdatePhoneController implements Initializable {
         tfAccountName.setText(phone.getAccount());
         tfEmail.setText(phone.getEmail());
 
+        cbGroup.getSelectionModel().clearSelection();
+        cbGroup.getItems().clear();
+        cbSocial.getSelectionModel().clearSelection();
+        cbSocial.getItems().clear();
+
         try {
             // Initialize groups
             Group[] groups = GroupService.getService().getGroups();
-            cbGroup.getItems().clear();
+            System.out.println("Fetched groups: " + Arrays.toString(groups));
             cbGroup.getItems().addAll(groups);
 
             // Initialize socials
             Social[] socials = SocialService.getService().getSocials();
-            cbSocial.getItems().clear();
+            System.out.println("Fetched socials: " + Arrays.toString(socials));
             cbSocial.getItems().addAll(socials);
 
-            for (Group group : groups) {
-                if (group.getId() == phone.getGroupId()) {
-                    cbGroup.getSelectionModel().select(group);
-                    break;
+            cbGroup.setValue(phone.getGroupName());
+            cbSocial.setValue(phone.getSocialName());
+            if (phone.getGroupName() != null || phone.getSocialName() != null) {
+                System.out.println("Group ID is NOT null.");
+
+                for (Group group : groups) {
+                    if (group.getId() == phone.getGroupId()) {
+                        cbGroup.getSelectionModel().select(group);
+                        break;
+                    }
+                }
+                for (Social social : socials) {
+                    if (social.getId() == phone.getSocialId()) {
+                        cbSocial.getSelectionModel().select(social);
+                        break;
+                    }
                 }
             }
-
-            // Select the appropriate social
-            for (Social social : socials) {
-                if (social.getId() == phone.getSocialId()) {
-                    cbSocial.getSelectionModel().select(social);
-                    break;
-                }
+            else {
+                System.out.println("Group ID and Social ID is null.");
+                cbGroup.getSelectionModel().clearSelection();
+                cbSocial.getSelectionModel().clearSelection();
             }
         } catch (Exception ex) {
             System.out.println("UpdatePhoneController: " + ex.getMessage());
@@ -151,7 +167,7 @@ public class UpdatePhoneController implements Initializable {
         phone.setImageURL(newImageUri);
 
 
-        //might cAUSE PROBLEM
+        //might CAUSE PROBLEM
         Group group = (Group) cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
             phone.setGroupName(group.getName());
@@ -187,6 +203,7 @@ public class UpdatePhoneController implements Initializable {
         stage.setScene(parentScene);
         stage.show();
     }
+
 
     @FXML
     public void onUpload(ActionEvent actionEvent) {
