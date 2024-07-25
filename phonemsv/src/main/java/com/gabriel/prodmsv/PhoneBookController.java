@@ -137,9 +137,12 @@ public class PhoneBookController implements Initializable {
                 setText(null);
                 setGraphic(null);
             } else {
+                // Set the text and image for each cell
                 setText("  " + phone.getName() + "\n" + "  " + phone.getPhoneNumber());
                 loadImage(phone);
+
             }
+
         }
 
         private void loadImage(Phone phone) {
@@ -287,13 +290,41 @@ public class PhoneBookController implements Initializable {
     @FXML
     public void onMouseClicked(MouseEvent mouseEvent) {
         phone = lvContacts.getSelectionModel().getSelectedItem();
-        if(phone == null) {
+        if (phone == null) {
             return;
         }
         tfId.setText(Integer.toString(phone.getId()));
         setControlTexts(phone);
         System.out.println("clicked on " + phone);
+        // GO to update-phone.fxml when clicked
+/*
+        Scene currentScene = lvContacts.getScene();
+        Window window = currentScene.getWindow();
+        window.hide();
+        try {
+            if(updateViewScene ==null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("update-phone.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                updatePhoneController = fxmlLoader.getController();
+                updatePhoneController.setController(this);
+                updatePhoneController.setStage(this.stage);
+                updatePhoneController.setParentScene(currentScene);
+                updateViewScene = new Scene(root, 360, 600);
+            }
+            else{
+                updatePhoneController.refresh();
+            }
+            stage.setTitle("Create Phone");
+            stage.setScene(updateViewScene);
+            stage.show();
+
+        }catch (Exception ex){
+            System.out.println("PhoneBook: : "+ ex.getMessage());
+        }
+*/
+
     }
+
 
     @FXML
     public void onCreate(ActionEvent actionEvent) {
