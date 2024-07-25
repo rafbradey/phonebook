@@ -8,11 +8,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 @Setter
@@ -38,16 +44,46 @@ public class DeletePhoneController implements Initializable {
     private TextField tfGroup;
     @javafx.fxml.FXML
     private TextField tfSocial;
+    @javafx.fxml.FXML
+    private ImageView contactImage;
+    @javafx.fxml.FXML
+    private TextField tfEmail;
+    @javafx.fxml.FXML
+    private TextField tfBirthDate;
+    @javafx.fxml.FXML
+    private TextField tfAccount;
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public void refresh(){
 
-        //kailangan pa to palitan pag natapos na yung frontend.. --raf
         Phone phone = PhoneBookController.phone;
         tfId.setText(Integer.toString(phone.getId()));
         tfName.setText(phone.getName());
         tfPhoneNumber.setText(phone.getPhoneNumber());
         tfGroup.setText(phone.getGroupName());
         tfSocial.setText(phone.getSocialName());
+        tfEmail.setText(phone.getEmail());
+
+        if (phone.getBirthday() != null){
+            Date birthday = phone.getBirthday(); // Get the Date object
+            LocalDate localDate = birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // Convert to LocalDate
+            tfBirthDate.setText(localDate.format(formatter)); // Format and set the text
+        }
+        else {
+            tfBirthDate.setText("");
+        }
+
+        tfAccount.setText(phone.getAccount());
+        String ImageUri = phone.getImageURL();
+
+        if(ImageUri!=null){
+            contactImage.setImage(new ImageView(ImageUri).getImage());
+        }
+        else{
+            Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+            contactImage.setImage(defaultImage);
+        }
+
 
     }
 

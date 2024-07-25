@@ -293,16 +293,11 @@ public class PhoneBookController implements Initializable {
         tfId.setText(Integer.toString(phone.getId()));
         setControlTexts(phone);
         System.out.println("clicked on " + phone);
-        //show phone number social and group in soupln
-        System.out.println("clicked on " + phone.getPhoneNumber());
-        System.out.println(" " + phone.getSocialName());
-        System.out.println(" " + phone.getGroupName());
-        System.out.println(" " + phone.getImageURL());
     }
 
     @FXML
     public void onCreate(ActionEvent actionEvent) {
-        System.out.println("ProdmanController:onNewProduct ");
+        System.out.println("PhoneBook: :onNewProduct ");
         Node node = ((Node) (actionEvent.getSource()));
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
@@ -317,7 +312,7 @@ public class PhoneBookController implements Initializable {
                 createPhoneController.setPhoneService(phoneService);
                 createPhoneController.setPhoneBookController(this);
                 createPhoneController.setParentScene(currentScene);
-                createViewScene = new Scene(root, 300, 600);
+                createViewScene = new Scene(root, 360, 600);
                 stage.setTitle("Manage Phone");
                 stage.setScene(createViewScene);
                 stage.show();
@@ -330,13 +325,13 @@ public class PhoneBookController implements Initializable {
             clearControlTexts();
         }
         catch(Exception ex){
-            System.out.println("ProdmanController: "+ ex.getMessage());
+            System.out.println("PhoneBook: : "+ ex.getMessage());
         }
     }
 
     @FXML
     public void onUpdate(ActionEvent actionEvent) {
-        System.out.println("ProdmanController:onUpdate ");
+        System.out.println("PhoneBook: :onUpdate ");
         Node node = ((Node) (actionEvent.getSource()));
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
@@ -349,7 +344,7 @@ public class PhoneBookController implements Initializable {
                 updatePhoneController.setController(this);
                 updatePhoneController.setStage(this.stage);
                 updatePhoneController.setParentScene(currentScene);
-                updateViewScene = new Scene(root, 300, 600);
+                updateViewScene = new Scene(root, 360, 600);
             }
             else{
                 updatePhoneController.refresh();
@@ -359,13 +354,13 @@ public class PhoneBookController implements Initializable {
             stage.show();
         }
         catch(Exception ex){
-            System.out.println("ProdmanController: "+ ex.getMessage());
+            System.out.println("PhoneBook: : "+ ex.getMessage());
             ex.printStackTrace();  //print stack error; -raf
         }
     }
     @FXML
     public void onDelete(ActionEvent actionEvent) {
-        System.out.println("ProdmanController:onDelete ");
+        System.out.println("PhoneBook: :onDelete ");
         Node node = ((Node) (actionEvent.getSource()));
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
@@ -378,7 +373,7 @@ public class PhoneBookController implements Initializable {
                 deletePhoneController.setController(this);
                 deletePhoneController.setStage(this.stage);
                 deletePhoneController.setParentScene(currentScene);
-                deleteViewScene = new Scene(root, 300, 600);
+                deleteViewScene = new Scene(root, 360, 600);
             }
             else{
                 deletePhoneController.refresh();
@@ -388,7 +383,7 @@ public class PhoneBookController implements Initializable {
             stage.show();
         }
         catch(Exception ex){
-            System.out.println("ProdmanController: "+ ex.getMessage());
+            System.out.println("PhoneBook: : "+ ex.getMessage());
             ex.printStackTrace();  //print stack error; -raf
 
         }
