@@ -17,11 +17,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Setter;
 
 import javafx.scene.image.ImageView;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +36,8 @@ public class UpdatePhoneController implements Initializable {
     Scene parentScene;
     @Setter
     PhoneBookController controller;
+
+    String newImageUri;
 
     int id;
     @FXML
@@ -59,44 +64,63 @@ public class UpdatePhoneController implements Initializable {
     Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
 
     public static Phone phone;
+    @FXML
+    private Button btnUpload;
 
     public void refresh() throws Exception{
-
 
         Phone phone = PhoneBookController.phone;
         System.out.println("Current id: " + id);
         id = phone.getId();
+
+        String imageURI = phone.getImageURL();
+        try {
+            Image image = new Image(imageURI);
+            contactImage.setImage(image);
+        } catch (Exception e) {
+            contactImage.setImage(defaultImage);
+        }
+
         tfName.setText(phone.getName());
-        //tfPhoneNumber dapat to
         tfPhoneNumber.setText(phone.getPhoneNumber());
         tfAccountName.setText(phone.getAccount());
         tfEmail.setText(phone.getEmail());
-        String imageURI = phone.getImageURL();
-           try {
-               Image image = new Image(imageURI);
-               contactImage.setImage(image);
-           } catch (Exception e) {
-               contactImage.setImage(defaultImage);
-           }
 
-        Group[] groups =  (Group[]) GroupService.getService().getGroups();
-        cbGroup.getItems().addAll(groups);
-        for(Group group: groups){
-            if(group.getId() == phone.getGroupId()){
-                cbGroup.getSelectionModel().select(group);
-                break;
+        try {
+            // Initialize groups
+            Group[] groups = GroupService.getService().getGroups();
+            cbGroup.getItems().clear();
+            cbGroup.getItems().addAll(groups);
+
+            // Initialize socials
+            Social[] socials = SocialService.getService().getSocials();
+            cbSocial.getItems().clear();
+            cbSocial.getItems().addAll(socials);
+
+            for (Group group : groups) {
+                if (group.getId() == phone.getGroupId()) {
+                    cbGroup.getSelectionModel().select(group);
+                    break;
+                }
             }
+
+            // Select the appropriate social
+            for (Social social : socials) {
+                if (social.getId() == phone.getSocialId()) {
+                    cbSocial.getSelectionModel().select(social);
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("UpdatePhoneController: " + ex.getMessage());
+            ex.printStackTrace();
         }
 
-        Social[] socials = (Social[]) SocialService.getService().getSocials();
-        cbSocial.getItems().addAll(socials);
-        for(Social social: socials){
-            if(social.getId() == phone.getSocialId()){
-                cbSocial.getSelectionModel().select(social);
-                break;
-            }
+
+
+
         }
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -104,6 +128,7 @@ public class UpdatePhoneController implements Initializable {
       //  tfId=new TextField();
         try {
             refresh();
+
         }
         catch(Exception ex){
             System.out.println("UpdatePhoneController: " + ex.getMessage());
@@ -123,6 +148,8 @@ public class UpdatePhoneController implements Initializable {
         phone.setAccount(tfAccountName.getText());
        // phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
         phone.setEmail(tfEmail.getText());
+        phone.setImageURL(newImageUri);
+
 
         //might cAUSE PROBLEM
         Group group = (Group) cbGroup.getSelectionModel().getSelectedItem();
@@ -159,5 +186,19 @@ public class UpdatePhoneController implements Initializable {
 
         stage.setScene(parentScene);
         stage.show();
+    }
+
+    @FXML
+    public void onUpload(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            contactImage.setImage(image);
+            newImageUri = file.toURI().toString();
+        }
     }
 }

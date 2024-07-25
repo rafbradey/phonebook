@@ -73,7 +73,7 @@
             <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="134.0" layoutY="220.0" mnemonicParsing="false" text="Change Image" />
+      <Button fx:id="btnUpload" layoutX="134.0" layoutY="220.0" mnemonicParsing="false" onAction="#onUpload" text="Change Image" />
       <HBox layoutX="5.0" layoutY="374.0" prefHeight="35.0" prefWidth="261.0">
          <children>
             <Label prefWidth="100.0" text="Social Media:">
