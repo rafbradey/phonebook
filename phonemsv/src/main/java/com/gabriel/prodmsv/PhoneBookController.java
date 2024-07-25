@@ -364,6 +364,15 @@ public class PhoneBookController implements Initializable {
     public void onUpdate(ActionEvent actionEvent) {
         System.out.println("PhoneBook: :onUpdate ");
         Node node = ((Node) (actionEvent.getSource()));
+        //Alert if no contact is selected
+        if (lvContacts.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No contact selected");
+            alert.setContentText("Please select a contact to update");
+            alert.showAndWait();
+            return;
+        }
+
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
         window.hide();
@@ -393,6 +402,14 @@ public class PhoneBookController implements Initializable {
     public void onDelete(ActionEvent actionEvent) {
         System.out.println("PhoneBook: :onDelete ");
         Node node = ((Node) (actionEvent.getSource()));
+        //Alert if no contact is selected
+        if(lvContacts.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No contact selected");
+            alert.setContentText("Please select a contact to delete");
+            alert.showAndWait();
+            return;
+        }
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
         window.hide();

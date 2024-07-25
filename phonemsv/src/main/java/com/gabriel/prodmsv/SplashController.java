@@ -1,5 +1,6 @@
 package com.gabriel.prodmsv;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,34 +26,50 @@ public class SplashController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        start();
     }
 
-   @javafx.fxml.FXML
+    // Automatically press onProceed in 5 seconds
+    public void start() {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.runLater(() -> onProceed());
+                    }
+                },
+                3000
+        );
+    }
+
+    @javafx.fxml.FXML
     public void onProceed(ActionEvent actionEvent) {
+        proceed();
+    }
+
+    // Overloaded method without ActionEvent parameter
+    public void onProceed() {
+        proceed();
+    }
+
+    // Common method for both onProceed methods
+    private void proceed() {
         System.out.println("SplashApp:onClose ");
-        Node node = ((Node) (actionEvent.getSource()));
-        Window window = node.getScene().getWindow();
-        window.hide();
+        stage.hide();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("phonebook-view.fxml"));
-            Parent root = (Parent)fxmlLoader.load();
+            Parent root = fxmlLoader.load();
             PhoneBookController phoneBookController = fxmlLoader.getController();
             phoneBookController.setStage(stage);
             Scene scene = new Scene(root, 360, 600);
-            String css=this.getClass().getResource("/css/main.css").toExternalForm();
+            String css = this.getClass().getResource("/css/main.css").toExternalForm();
             scene.getStylesheets().add(css);
             stage.setTitle("Phone Management");
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {
-            System.out.println("Error occured" + ex.getMessage());
-            //print stack
+            System.out.println("Error occurred: " + ex.getMessage());
             ex.printStackTrace();
         }
-
     }
-
 }
-
-

@@ -1,4 +1,5 @@
 com\gabriel\prodmsv\model\Social.class
+com\gabriel\prodmsv\SplashController$1.class
 com\gabriel\prodmsv\util\ApplicationUtil.class
 com\gabriel\prodmsv\model\Phone.class
 com\gabriel\prodmsv\UpdatePhoneController.class

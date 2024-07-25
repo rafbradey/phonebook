@@ -108,6 +108,18 @@ public class DeletePhoneController implements Initializable {
 
     @javafx.fxml.FXML
     public void onSubmit(ActionEvent actionEvent) {
+        //Show alert
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are you sure you want to delete this phone?");
+            alert.setContentText("This action cannot be undone.");
+
+            if(alert.showAndWait().get() == ButtonType.CANCEL){
+                return;
+            }
+
+
         try {
             Phone phone = toObject(true);
             PhoneService.getService().delete(phone.getId());
