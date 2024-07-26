@@ -243,9 +243,6 @@ public class PhoneBookController implements Initializable {
                 settingsIconView.setFitWidth(16);
                 settingsIconView.setFitHeight(16);
                 settingsButton.setGraphic(settingsIconView);
-
-
-
             }
             catch(Exception ex){
                 System.out.println("Error with image: " + ex.getMessage());

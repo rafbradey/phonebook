@@ -10,14 +10,14 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="538.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
-      <HBox layoutX="-3.0" prefHeight="34.0" prefWidth="200.0">
+      <HBox layoutX="8.0" layoutY="13.0" prefHeight="34.0" prefWidth="265.0">
          <children>
             <ImageView fx:id="phoneImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="txtitle" prefHeight="18.0" prefWidth="158.0" text="Add Contacts" />
+            <Label fx:id="txtitle" prefHeight="18.0" prefWidth="220.0" text="Add Contacts" />
          </children>
       </HBox>
-      <ImageView fx:id="contactImage" fitHeight="148.0" fitWidth="171.0" layoutX="100.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox layoutY="265.0" prefHeight="35.0" prefWidth="234.0">
+      <ImageView fx:id="contactImage" fitHeight="119.0" fitWidth="149.0" layoutX="132.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox layoutX="15.0" layoutY="258.0" prefHeight="35.0" prefWidth="234.0">
          <children>
             <Label prefWidth="100.0" text="Name:">
                <HBox.margin>
@@ -27,7 +27,7 @@
             <TextField fx:id="tfName" />
          </children>
       </HBox>
-      <HBox layoutY="300.0" prefHeight="35.0" prefWidth="234.0">
+      <HBox layoutX="15.0" layoutY="293.0" prefHeight="35.0" prefWidth="234.0">
          <children>
             <Label prefWidth="100.0" text="Phone:">
                <HBox.margin>
@@ -37,33 +37,33 @@
             <TextField fx:id="tfPhoneNumber" />
          </children>
       </HBox>
-      <HBox layoutY="438.0" prefHeight="35.0" prefWidth="234.0">
+      <HBox layoutX="15.0" layoutY="443.0" prefHeight="35.0" prefWidth="234.0">
          <children>
             <Label prefWidth="100.0" text="Group:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="146.0" />
+            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="170.0" />
          </children>
       </HBox>
-      <GridPane alignment="CENTER" hgap="2.0" layoutX="35.0" layoutY="556.0">
+      <GridPane alignment="CENTER" hgap="2.0" layoutX="372.0" layoutY="556.0">
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.4" minWidth="10.0" prefWidth="96.4" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="94.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="94.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" GridPane.columnIndex="1" />
+            <Button fx:id="btnBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" GridPane.columnIndex="1" />
             <Button fx:id="btnNext" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onNext" prefWidth="80.0" text="Next &gt;&gt;" GridPane.columnIndex="3" />
-            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" />
+            <Button fx:id="btnSubmit" alignment="CENTER" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <HBox layoutY="368.0" prefHeight="35.0" prefWidth="234.0">
+      <HBox layoutX="15.0" layoutY="373.0" prefHeight="35.0" prefWidth="280.0">
          <children>
             <Label prefHeight="18.0" prefWidth="144.0" text="Media Platform:">
                <HBox.margin>
@@ -73,20 +73,18 @@
             <ComboBox fx:id="cbSocial" prefHeight="26.0" prefWidth="192.0" />
          </children>
       </HBox>
-      <Button fx:id="btnUpload" layoutX="140.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUpload" text="Upload Image" />
-      <HBox layoutY="403.0" prefHeight="35.0" prefWidth="234.0">
+      <Button fx:id="btnUpload" layoutX="140.0" layoutY="200.0" mnemonicParsing="false" onAction="#onUpload" text="Upload Image" />
+      <HBox layoutX="15.0" layoutY="408.0" prefHeight="35.0" prefWidth="280.0">
          <children>
-            <Label prefWidth="100.0" text="Account Name:">
+            <Label prefHeight="18.0" prefWidth="144.0" text="Account Name:">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="tfAccount" />
+            <TextField fx:id="tfAccount" prefHeight="26.0" prefWidth="192.0" />
          </children>
       </HBox>
-      <Label layoutX="14.0" layoutY="485.0" text="Birthday:" />
-      <DatePicker fx:id="dpBirthDate" layoutX="97.0" layoutY="481.0" prefHeight="25.0" prefWidth="149.0" />
-      <HBox layoutY="335.0" prefHeight="35.0" prefWidth="234.0">
+      <HBox layoutX="15.0" layoutY="331.0" prefHeight="35.0" prefWidth="234.0">
          <children>
             <Label prefWidth="100.0" text="Email:">
                <HBox.margin>
@@ -96,5 +94,13 @@
             <TextField fx:id="tfEmail" />
          </children>
       </HBox>
+      <HBox layoutX="24.0" layoutY="478.0" prefHeight="35.0" prefWidth="234.0" spacing="10.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="68.0" text="Birthday:" />
+            <DatePicker fx:id="dpBirthDate" prefHeight="25.0" prefWidth="149.0" />
+         </children>
+      </HBox>
+      <Separator fx:id="sep" layoutX="13.0" layoutY="237.0" prefHeight="4.0" prefWidth="345.0" />
+      <Circle fill="DODGERBLUE" layoutX="8.0" layoutY="592.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </Pane>
