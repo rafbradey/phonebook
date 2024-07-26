@@ -11,10 +11,23 @@
     -fx-text-alignment: center;
 }
 
-#createButton {
+#createButton{
     -fx-background-color: linear-gradient(to bottom, #8a5cc1, #a17dcd);
     -fx-text-fill: white;
     -fx-font-size: 20px;
+    -fx-padding: 2px 6px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 4, 0, 0, 2);
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f4f4f5;
+}
+
+#btnUpload {
+    -fx-background-color: linear-gradient(to bottom, #8a5cc1, #a17dcd);
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
     -fx-padding: 2px 6px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
@@ -32,13 +45,17 @@
 }
 
 #imageButton:hover, #createButton:hover, #updateButton:hover, #deleteButton:hover,
-#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #favoriteButton:hover, #btnSearch:hover, #btnClear:hover {
+#btnSearch:hover, #btnClear:hover, #btnUpload:hover {
     -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
     -fx-text-fill: White;
 }
 
 #closeButton:hover, #settingsButton:hover {
     -fx-background-color: linear-gradient(to right, #e4d8f2, #9570bd);
+    -fx-text-fill: White;
+}
+
+#contactButton, #updateButton, #deleteButton {
     -fx-text-fill: White;
 }
 
@@ -52,12 +69,23 @@
     -fx-cursor: hand;
 }
 
-#contactButton, #updateButton, #deleteButton, #favoriteButton{
+#contactButton, #updateButton, #deleteButton{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-#lvContacts {
-    -fx-font-size: 12px;
+#btnBack, #btnSubmit, #btnNext {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: White;
 }
 
+#btnBack:hover, #btnSubmit:hover, #btnNext:hover {
+    -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
+    -fx-text-fill: White;
+}
+
+#lvContacts {
+    -fx-font-size: 13px;
+}

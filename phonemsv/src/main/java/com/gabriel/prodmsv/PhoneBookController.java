@@ -213,7 +213,7 @@ public class PhoneBookController implements Initializable {
                 phoneImage.setImage(PhoneIcon);
 
                 // Load the edit icon and set it to the update button
-                Image contactsIcon = new Image(getClass().getResourceAsStream("images/contacts.jpg"));
+                Image contactsIcon = new Image(getClass().getResourceAsStream("images/contactW.png"));
                 ImageView contactsIconView = new ImageView(contactsIcon);
                 contactsIconView.setFitWidth(18);
                 contactsIconView.setFitHeight(18);
@@ -222,7 +222,7 @@ public class PhoneBookController implements Initializable {
                 contactButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
 
                 // Load the edit icon and set it to the update button
-                Image updateIcon = new Image(getClass().getResourceAsStream("images/edit.jpg"));
+                Image updateIcon = new Image(getClass().getResourceAsStream("images/editW.png"));
                 ImageView updateIconView = new ImageView(updateIcon);
                 updateIconView.setFitWidth(18);
                 updateIconView.setFitHeight(18);
@@ -230,7 +230,7 @@ public class PhoneBookController implements Initializable {
                 updateButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
 
                 // Load the edit icon and set it to the update button
-                Image deleteIcon = new Image(getClass().getResourceAsStream("images/delete.png"));
+                Image deleteIcon = new Image(getClass().getResourceAsStream("images/deleteW.png"));
                 ImageView deleteIconView = new ImageView(deleteIcon);
                 deleteIconView.setFitWidth(18);
                 deleteIconView.setFitHeight(18);
@@ -335,7 +335,7 @@ public class PhoneBookController implements Initializable {
                 createViewScene = new Scene(root, 360, 600);
                 String css = this.getClass().getResource("/css/main.css").toExternalForm();
                 createViewScene.getStylesheets().add(css);
-                stage.setTitle("Manage Phone");
+                stage.setTitle("PhoneBook");
                 stage.setScene(createViewScene);
                 stage.show();
             }
@@ -376,11 +376,13 @@ public class PhoneBookController implements Initializable {
                 updatePhoneController.setStage(this.stage);
                 updatePhoneController.setParentScene(currentScene);
                 updateViewScene = new Scene(root, 360, 600);
+                String css = this.getClass().getResource("/css/main.css").toExternalForm();
+                updateViewScene.getStylesheets().add(css);
             }
             else{
                 updatePhoneController.refresh();
             }
-            stage.setTitle("Create Phone");
+            stage.setTitle("PhoneBook");
             stage.setScene(updateViewScene);
             stage.show();
         }
@@ -417,7 +419,7 @@ public class PhoneBookController implements Initializable {
             else{
                 deletePhoneController.refresh();
             }
-            stage.setTitle("Delete Phone");
+            stage.setTitle("PhoneBook");
             stage.setScene(deleteViewScene);
             stage.show();
         }

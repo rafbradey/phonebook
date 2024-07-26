@@ -21,7 +21,7 @@ public class SplashApp extends Application {
         Scene scene = new Scene(root, 360, 600);
         String css=this.getClass().getResource("/css/splash.css").toExternalForm();
         scene.getStylesheets().add(css);
-        stage.setTitle("Production Management!");
+        stage.setTitle("PhoneBook");
         stage.setScene(scene);
         stage.show();
 

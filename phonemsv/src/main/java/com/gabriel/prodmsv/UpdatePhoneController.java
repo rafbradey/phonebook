@@ -6,6 +6,7 @@ import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Phone;
 import com.gabriel.prodmsv.model.Group;
 import com.gabriel.prodmsv.model.Social;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -64,6 +65,12 @@ public class UpdatePhoneController implements Initializable {
     private TextField tfEmail;
     @FXML
     private ImageView contactImage;
+    @FXML
+    public Button closeButton;
+    @FXML
+    private ImageView phoneImage;
+
+    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
 
     Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
 
@@ -146,9 +153,12 @@ public class UpdatePhoneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        phoneImage.setImage(PhoneIcon);
         System.out.println("UpdatePhoneController: initialize");
         try {
             refresh();
+            // Disable typing in the dpBirthDate DatePicker
+            disableDatePickerTextField(dpBirthDate);
         } catch (Exception ex) {
             System.out.println("UpdatePhoneController: " + ex.getMessage());
             ex.printStackTrace();
@@ -236,5 +246,19 @@ public class UpdatePhoneController implements Initializable {
             contactImage.setImage(image);
             newImageUri = file.toURI().toString();
         }
+    }
+
+    @FXML
+    public void onClose(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
+    }
+
+    private void disableDatePickerTextField(DatePicker datePicker) {
+        datePicker.getEditor().setDisable(true);
+        datePicker.getEditor().setStyle("-fx-opacity: 1;"); // Maintain the default appearance
     }
 }

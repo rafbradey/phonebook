@@ -38,7 +38,7 @@ public class SplashController implements Initializable {
                         Platform.runLater(() -> onProceed());
                     }
                 },
-                3800
+                3600
         );
     }
 
@@ -64,7 +64,7 @@ public class SplashController implements Initializable {
             Scene scene = new Scene(root, 360, 600);
             String css = this.getClass().getResource("/css/main.css").toExternalForm();
             scene.getStylesheets().add(css);
-            stage.setTitle("Phone Management");
+            stage.setTitle("PhoneBook");
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {

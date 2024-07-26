@@ -45,14 +45,17 @@
 }
 
 #imageButton:hover, #createButton:hover, #updateButton:hover, #deleteButton:hover,
-#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #btnSearch:hover, #btnClear:hover,
-#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #btnUpload:hover {
+#btnSearch:hover, #btnClear:hover, #btnUpload:hover {
     -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
     -fx-text-fill: White;
 }
 
 #closeButton:hover, #settingsButton:hover {
     -fx-background-color: linear-gradient(to right, #e4d8f2, #9570bd);
+    -fx-text-fill: White;
+}
+
+#contactButton, #updateButton, #deleteButton {
     -fx-text-fill: White;
 }
 
@@ -75,7 +78,12 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-font-size: 14px;
+    -fx-text-fill: White;
+}
 
+#btnBack:hover, #btnSubmit:hover, #btnNext:hover {
+    -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
+    -fx-text-fill: White;
 }
 
 #lvContacts {

@@ -8,15 +8,13 @@ import com.gabriel.prodmsv.model.Social;
 import com.gabriel.prodmsv.ServiceImpl.GroupService;
 import com.gabriel.prodmsv.ServiceImpl.SocialService;
 import com.gabriel.prodmsv.model.Social;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -48,6 +46,8 @@ public class CreatePhoneController implements Initializable {
     private ComboBox<Social> cbSocial;
     @FXML
     public Button btnSubmit;
+    @FXML
+    public Button closeButton;
     @FXML
     public Button btnNext;
     @FXML
@@ -118,6 +118,9 @@ public class CreatePhoneController implements Initializable {
         tfAccount.setText("");
         dpBirthDate.setValue(null);
         tfEmail.setText("");
+
+        // Disable typing in the dpBirthDate DatePicker
+        disableDatePickerTextField(dpBirthDate);
 
         } catch(Exception e){
             System.out.println(e.getMessage());
@@ -293,6 +296,19 @@ public class CreatePhoneController implements Initializable {
         System.out.println("Temp files cleared." +"\n Image Reset to Default.jpg in creation page");
     }
 
+    @FXML
+    public void onClose(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
+    }
+
+    private void disableDatePickerTextField(DatePicker datePicker) {
+        datePicker.getEditor().setDisable(true);
+        datePicker.getEditor().setStyle("-fx-opacity: 1;"); // Maintain the default appearance
+    }
 
 }
 
