@@ -1,5 +1,5 @@
 .root{
-        -fx-background-color: #E4D8F2;
+    -fx-background-color: #E4D8F2;
 }
 
 #txtitle {
@@ -32,7 +32,7 @@
 }
 
 #imageButton:hover, #createButton:hover, #updateButton:hover, #deleteButton:hover,
-#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #favoritesButton:hover {
+#btnBack:hover, #btnSubmit:hover, #btnNext:hover, #favoriteButton:hover, #btnSearch:hover, #btnClear:hover {
     -fx-background-color: linear-gradient(to right, #8a5cc1, #a17dcd);
     -fx-text-fill: White;
 }
@@ -55,5 +55,9 @@
 #contactButton, #updateButton, #deleteButton, #favoriteButton{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+}
+
+#lvContacts {
+    -fx-font-size: 12px;
 }
 

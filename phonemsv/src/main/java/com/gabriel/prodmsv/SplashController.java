@@ -29,7 +29,7 @@ public class SplashController implements Initializable {
         start();
     }
 
-    // Automatically press onProceed in 5 seconds
+    // Automatically press onProceed in # seconds
     public void start() {
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
@@ -38,7 +38,7 @@ public class SplashController implements Initializable {
                         Platform.runLater(() -> onProceed());
                     }
                 },
-                3000
+                3800
         );
     }
 

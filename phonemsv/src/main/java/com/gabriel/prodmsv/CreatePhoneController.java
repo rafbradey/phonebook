@@ -50,6 +50,8 @@ public class CreatePhoneController implements Initializable {
     public Button btnSubmit;
     @FXML
     public Button btnNext;
+    @FXML
+    private ImageView phoneImage;
 
     @Setter
     Stage stage;
@@ -87,6 +89,7 @@ public class CreatePhoneController implements Initializable {
     @FXML
     private TextField tfEmail;
 
+    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -98,6 +101,8 @@ public class CreatePhoneController implements Initializable {
 
 
         try{
+        phoneImage.setImage(PhoneIcon);
+
         Group[] groups =  (Group[]) GroupService.getService().getGroups();
         cbGroup.getItems().clear();
         cbGroup.getItems().addAll(groups);

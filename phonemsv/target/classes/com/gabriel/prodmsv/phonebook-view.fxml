@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.PhoneBookController">
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.PhoneBookController">
    <children>
       <ScrollPane layoutX="-5.0" layoutY="109.0" prefHeight="429.0" prefWidth="366.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="358.0">
                <children>
                   <ListView fx:id="lvContacts" onMouseClicked="#onMouseClicked" prefHeight="430.0" prefWidth="366.0" />
-                  <Button fx:id="createButton" alignment="CENTER" layoutX="276.0" layoutY="369.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
+                  <Button fx:id="createButton" alignment="CENTER" layoutX="306.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="34.0" prefWidth="52.0" text="+" />
                </children>
             </AnchorPane>
         </content>
@@ -52,14 +46,6 @@
             <TextField fx:id="tfGroup" prefHeight="25.0" prefWidth="175.0" />
          </children>
          </HBox>
-      <HBox alignment="CENTER" layoutX="8.0" layoutY="552.0" prefHeight="39.0" prefWidth="345.0" spacing="20.0">
-         <children>
-            <Button fx:id="contactButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Contacts" />
-            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="75.0" text="Delete" />
-            <Button fx:id="favoriteButton" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Favorites" />
-         </children>
-      </HBox>
       <HBox layoutX="14.0" layoutY="6.0" prefHeight="34.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="phoneImage" fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -70,7 +56,7 @@
          </children>
       </HBox>
       <TextField fx:id="txsearch" layoutX="4.0" layoutY="73.0" prefHeight="25.0" prefWidth="229.0" />
-      <HBox layoutX="286.0" layoutY="9.0" prefHeight="34.0" prefWidth="45.0" spacing="11.0">
+      <HBox layoutX="285.0" layoutY="14.0" prefHeight="34.0" prefWidth="45.0" spacing="11.0">
          <children>
             <Button fx:id="settingsButton" mnemonicParsing="false" />
             <Button fx:id="closeButton" alignment="CENTER" onAction="#onClose" text="X" />
@@ -85,5 +71,28 @@
       <Button fx:id="btnSearch" layoutX="242.0" layoutY="73.0" mnemonicParsing="false" onAction="#onSearch" text="Search" />
       <Button fx:id="btnClear" layoutX="304.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClear" text="Clear" />
       <Button fx:id="btnRefresh" layoutX="448.0" layoutY="118.0" mnemonicParsing="false" onAction="#onRefresh" text="Refresh" />
+      <Circle fill="#d2beea" layoutX="352.0" layoutY="555.0" radius="17.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#d2beea" layoutX="8.0" layoutY="557.0" radius="17.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="4.0" layoutY="569.0" radius="12.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="16.0" layoutY="603.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="-1.0" layoutY="586.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="335.0" layoutY="600.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="352.0" layoutY="572.0" radius="12.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="42.0" layoutY="586.0" radius="17.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="360.0" layoutY="594.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="42.0" layoutY="600.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="25.0" layoutY="569.0" radius="12.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="25.0" layoutY="586.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="318.0" layoutY="583.0" radius="17.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="310.0" layoutY="603.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <Circle fill="#b99dda" layoutX="335.0" layoutY="569.0" radius="12.0" stroke="#b99dda" strokeType="INSIDE" />
+      <Circle fill="#a17dcd" layoutX="335.0" layoutY="586.0" radius="17.0" stroke="#a17dcd" strokeType="INSIDE" />
+      <HBox alignment="CENTER" layoutX="8.0" layoutY="550.0" prefHeight="39.0" prefWidth="345.0" spacing="20.0">
+         <children>
+            <Button fx:id="contactButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Contacts" />
+            <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onAction="#onUpdate" prefHeight="26.0" prefWidth="75.0" text="Edit" />
+            <Button fx:id="deleteButton" alignment="CENTER" onAction="#onDelete" prefHeight="26.0" prefWidth="75.0" text="Delete" />
+         </children>
+      </HBox>
    </children>
 </Pane>

@@ -46,8 +46,8 @@ public class PhoneBookController implements Initializable {
     Scene updateViewScene;
     @Setter
     Scene deleteViewScene;
-    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
 
+    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
 
     Image uploadedImage = null;
     Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
@@ -238,14 +238,6 @@ public class PhoneBookController implements Initializable {
                 deleteButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
 
                 // Load the edit icon and set it to the update button
-                Image favoriteIcon = new Image(getClass().getResourceAsStream("images/favorite.png"));
-                ImageView favoriteIconView = new ImageView(favoriteIcon);
-                favoriteIconView.setFitWidth(18);
-                favoriteIconView.setFitHeight(18);
-                favoriteButton.setGraphic(favoriteIconView);
-                favoriteButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
-
-                // Load the edit icon and set it to the update button
                 Image settingsIcon = new Image(getClass().getResourceAsStream("images/settings.jpg"));
                 ImageView settingsIconView = new ImageView(settingsIcon);
                 settingsIconView.setFitWidth(16);
@@ -344,6 +336,8 @@ public class PhoneBookController implements Initializable {
                 createPhoneController.setPhoneBookController(this);
                 createPhoneController.setParentScene(currentScene);
                 createViewScene = new Scene(root, 360, 600);
+                String css = this.getClass().getResource("/css/main.css").toExternalForm();
+                createViewScene.getStylesheets().add(css);
                 stage.setTitle("Manage Phone");
                 stage.setScene(createViewScene);
                 stage.show();
