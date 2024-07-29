@@ -403,6 +403,7 @@ public class PhoneBookController implements Initializable {
             alert.showAndWait();
             return;
         }
+
         Scene currentScene = node.getScene();
         Window window = currentScene.getWindow();
         window.hide();

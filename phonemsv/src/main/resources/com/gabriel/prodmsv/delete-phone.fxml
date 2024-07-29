@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 
-<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.DeletePhoneController">
+<Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.DeletePhoneController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" layoutY="538.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a5cc1" height="62.0" stroke="#7c53ae" strokeType="INSIDE" width="360.0" />
@@ -57,9 +65,9 @@
             <Label prefWidth="100.0" text="Email:" GridPane.rowIndex="2" />
             <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label prefWidth="100.0" text="Media Platform:" GridPane.rowIndex="3" />
-            <TextField fx:id="tfMediaPlatform" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="tfSocial" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label prefWidth="100.0" text="Account Name:" GridPane.rowIndex="4" />
-            <TextField fx:id="tfAccountName" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="tfAccount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefWidth="100.0" text="Group:" GridPane.rowIndex="5" />
             <TextField fx:id="tfGroup" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Birthday:" GridPane.rowIndex="6" />

@@ -155,32 +155,46 @@ public class CreatePhoneController implements Initializable {
     //palitan mamaya yung tfPhoneNumber etc after mabago yung UI design --raf
     @FXML
     public void onSubmit(ActionEvent actionEvent) throws Exception {
+        // Get values from input fields
+        String name = tfName.getText().trim();
+        String phoneNumber = tfPhoneNumber.getText().trim();
+        String account = tfAccount.getText().trim();
+        String email = tfEmail.getText().trim();
+        java.sql.Date birthday = dpBirthDate.getValue() != null ? java.sql.Date.valueOf(dpBirthDate.getValue()) : null;
+        Group group = cbGroup.getSelectionModel().getSelectedItem();
+        Social social = cbSocial.getSelectionModel().getSelectedItem();
+
+        // Validate required fields
+        if (name.isEmpty() || phoneNumber.isEmpty()) {
+            // Show an error message to the user
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText("Missing Required Fields");
+            alert.setContentText("Please provide both Name and Phone Number.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Create a Phone object with input values
         Phone phone = new Phone();
-        phone.setName(tfName.getText());
-        phone.setPhoneNumber(tfPhoneNumber.getText());
-        phone.setAccount(tfAccount.getText());
-        phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
-        phone.setEmail(tfEmail.getText());
+        phone.setName(name);
+        phone.setPhoneNumber(phoneNumber);
+        phone.setAccount(account);
+        phone.setBirthday(birthday);
+        phone.setEmail(email);
         phone.setImageURL(imageUri);
 
-        Group group = cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
             phone.setGroupId(group.getId());
             phone.setGroupName(group.getName());
         }
 
-        Social social = cbSocial.getSelectionModel().getSelectedItem();
         if (social != null) {
             phone.setSocialId(social.getId());
             phone.setSocialName(social.getName());
-        } else {
-            System.out.println("No social selected or social is null.");
-            return;
         }
 
-
-
-        System.out.println("Phone details before save: " + phone + " group: " + group + " social: " + social + "imageURL: " + phone.getImageURL());
+        System.out.println("Phone details before save: " + phone + " group: " + group + " social: " + social + " imageURL: " + phone.getImageURL());
 
         phone = phoneService.create(phone);
         phoneBookController.refresh();

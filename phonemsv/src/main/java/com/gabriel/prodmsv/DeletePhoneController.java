@@ -43,17 +43,24 @@ public class DeletePhoneController implements Initializable {
     @javafx.fxml.FXML
     private TextField tfGroup;
     @javafx.fxml.FXML
-    private TextField tfSocial;
-    @javafx.fxml.FXML
     private ImageView contactImage;
     @javafx.fxml.FXML
     private TextField tfEmail;
     @javafx.fxml.FXML
     private TextField tfBirthDate;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    @javafx.fxml.FXML
+    private ImageView phoneImage;
+    @javafx.fxml.FXML
+    private Button closeButton;
+    @javafx.fxml.FXML
+    private Label txtitle;
+    @javafx.fxml.FXML
+    private TextField tfSocial;
     @javafx.fxml.FXML
     private TextField tfAccount;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public void refresh(){
 
         Phone phone = PhoneBookController.phone;
@@ -159,5 +166,9 @@ public class DeletePhoneController implements Initializable {
         alert.setHeaderText(message);
         alert.getDialogPane().setExpandableContent(new ScrollPane(new TextArea(addtlMessage)));
         alert.showAndWait();
+    }
+
+    @javafx.fxml.FXML
+    public void onClose(ActionEvent actionEvent) {
     }
 }
