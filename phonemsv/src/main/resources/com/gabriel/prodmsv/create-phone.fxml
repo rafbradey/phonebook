@@ -36,19 +36,17 @@
       <Circle fill="#a17dcd" layoutX="349.0" layoutY="592.0" radius="23.0" stroke="#a17dcd" strokeType="INSIDE" />
       <Circle fill="#a17dcd" layoutX="312.0" layoutY="600.0" radius="23.0" stroke="#a17dcd" strokeType="INSIDE" />
       <Circle fill="#a17dcd" layoutX="326.0" layoutY="586.0" radius="23.0" stroke="#a17dcd" strokeType="INSIDE" />
-      <GridPane alignment="CENTER" hgap="2.0" layoutX="34.0" layoutY="552.0">
+      <GridPane alignment="CENTER" hgap="2.0" layoutX="88.0" layoutY="552.0">
          <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.4" minWidth="10.0" prefWidth="96.4" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="94.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="94.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Button fx:id="btnBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" GridPane.columnIndex="1" />
-            <Button fx:id="btnNext" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onNext" prefWidth="80.0" text="Next &gt;&gt;" GridPane.columnIndex="3" />
             <Button fx:id="btnSubmit" alignment="CENTER" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" textAlignment="CENTER" GridPane.columnIndex="2" />
          </children>
       </GridPane>
