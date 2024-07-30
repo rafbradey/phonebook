@@ -115,6 +115,13 @@ public class PhoneBookController implements Initializable {
         onSearch();
     }
 
+    private void highlightContactButton() {
+        Platform.runLater(() -> {
+            contactButton.getStyleClass().add("highlighted-button");
+            contactButton.requestFocus();
+        });
+    }
+
     @FXML
     public void onRefresh(ActionEvent actionEvent) {
         try {
@@ -124,7 +131,6 @@ public class PhoneBookController implements Initializable {
             showErrorDialog("Failed to reload the scene: " + e.getMessage());
         }
     }
-
 
 
     //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
@@ -180,12 +186,11 @@ public class PhoneBookController implements Initializable {
         }
     }
 
-
-
     void refresh() throws Exception {
         phoneService = PhoneService.getService();
         Phone[] phones = phoneService.getPhones();
         phoneList.setAll(phones); // Update the phone list
+        highlightContactButton(); // Highlight the contact button
     }
 
     @Override
@@ -195,60 +200,53 @@ public class PhoneBookController implements Initializable {
 
         txsearch.setPromptText("Search...");
 
-        phoneList = FXCollections.observableArrayList(); // Initialize phoneList
+        phoneList = FXCollections.observableArrayList();
 
-        // Create a filtered list
         filteredData = new FilteredList<>(phoneList, p -> true);
         SortedList<Phone> sortedData = new SortedList<>(filteredData);
         lvContacts.setItems(sortedData);
         lvContacts.setCellFactory(listView -> new PhoneListCell());
 
-        // Add an event handler for the search button
         btnSearch.setOnAction(event -> onSearch());
-
 
         try {
             refresh();
             try {
                 phoneImage.setImage(PhoneIcon);
 
-                // Load the edit icon and set it to the update button
                 Image contactsIcon = new Image(getClass().getResourceAsStream("images/contactW.png"));
                 ImageView contactsIconView = new ImageView(contactsIcon);
                 contactsIconView.setFitWidth(18);
                 contactsIconView.setFitHeight(18);
-
                 contactButton.setGraphic(contactsIconView);
-                contactButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+                contactButton.setContentDisplay(ContentDisplay.TOP);
 
-                // Load the edit icon and set it to the update button
                 Image updateIcon = new Image(getClass().getResourceAsStream("images/editW.png"));
                 ImageView updateIconView = new ImageView(updateIcon);
                 updateIconView.setFitWidth(18);
                 updateIconView.setFitHeight(18);
                 updateButton.setGraphic(updateIconView);
-                updateButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+                updateButton.setContentDisplay(ContentDisplay.TOP);
 
-                // Load the edit icon and set it to the update button
                 Image deleteIcon = new Image(getClass().getResourceAsStream("images/deleteW.png"));
                 ImageView deleteIconView = new ImageView(deleteIcon);
                 deleteIconView.setFitWidth(18);
                 deleteIconView.setFitHeight(18);
                 deleteButton.setGraphic(deleteIconView);
-                deleteButton.setContentDisplay(ContentDisplay.TOP); // Set the content display to place image above text
+                deleteButton.setContentDisplay(ContentDisplay.TOP);
 
-                // Load the edit icon and set it to the update button
                 Image settingsIcon = new Image(getClass().getResourceAsStream("images/settings.jpg"));
                 ImageView settingsIconView = new ImageView(settingsIcon);
                 settingsIconView.setFitWidth(16);
                 settingsIconView.setFitHeight(16);
                 settingsButton.setGraphic(settingsIconView);
-            }
-            catch(Exception ex){
+
+                // Set the contact button to be focused to apply the highlight style immediately after loading
+                Platform.runLater(() -> contactButton.requestFocus());
+            } catch (Exception ex) {
                 System.out.println("Error with image: " + ex.getMessage());
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             showErrorDialog("Message: " + ex.getMessage());
         }
     }
@@ -339,12 +337,13 @@ public class PhoneBookController implements Initializable {
                 stage.setScene(createViewScene);
                 stage.show();
             }
-            else{
+            else {
                 stage.setScene(createViewScene);
                 stage.show();
             }
             createPhoneController.clearControlTexts();
             clearControlTexts();
+            highlightContactButton(); // Highlight the contact button
         }
         catch(Exception ex){
             System.out.println("PhoneBook: : "+ ex.getMessage());
@@ -355,7 +354,6 @@ public class PhoneBookController implements Initializable {
     public void onUpdate(ActionEvent actionEvent) {
         System.out.println("PhoneBook: :onUpdate ");
         Node node = ((Node) (actionEvent.getSource()));
-        //Alert if no contact is selected
         if (lvContacts.getSelectionModel().getSelectedItem() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("No contact selected");
@@ -379,23 +377,24 @@ public class PhoneBookController implements Initializable {
                 String css = this.getClass().getResource("/css/main.css").toExternalForm();
                 updateViewScene.getStylesheets().add(css);
             }
-            else{
+            else {
                 updatePhoneController.refresh();
             }
             stage.setTitle("PhoneBook");
             stage.setScene(updateViewScene);
             stage.show();
+            highlightContactButton(); // Highlight the contact button
         }
         catch(Exception ex){
             System.out.println("PhoneBook: : "+ ex.getMessage());
             ex.printStackTrace();  //print stack error; -raf
         }
     }
+
     @FXML
     public void onDelete(ActionEvent actionEvent) {
         System.out.println("PhoneBook: :onDelete ");
         Node node = ((Node) (actionEvent.getSource()));
-        //Alert if no contact is selected
         if(lvContacts.getSelectionModel().getSelectedItem() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("No contact selected");
@@ -416,20 +415,21 @@ public class PhoneBookController implements Initializable {
                 deletePhoneController.setStage(this.stage);
                 deletePhoneController.setParentScene(currentScene);
                 deleteViewScene = new Scene(root, 360, 600);
+                String css = this.getClass().getResource("/css/main.css").toExternalForm();
+                deleteViewScene.getStylesheets().add(css);
             }
-            else{
+            else {
                 deletePhoneController.refresh();
             }
             stage.setTitle("PhoneBook");
             stage.setScene(deleteViewScene);
             stage.show();
+            highlightContactButton(); // Highlight the contact button
         }
         catch(Exception ex){
             System.out.println("PhoneBook: : "+ ex.getMessage());
             ex.printStackTrace();  //print stack error; -raf
-
         }
-
     }
 
     @FXML
@@ -473,4 +473,9 @@ public class PhoneBookController implements Initializable {
         lvContacts.getItems().add(phone);
     }
 
+    @FXML
+    public void onContact(ActionEvent actionEvent) {
+        contactButton.requestFocus(); // Set focus to the contact button to highlight it
+        System.out.println("PhoneBook: onContact");
+    }
 }

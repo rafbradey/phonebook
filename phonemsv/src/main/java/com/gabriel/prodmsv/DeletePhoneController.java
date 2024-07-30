@@ -3,7 +3,9 @@ package com.gabriel.prodmsv;
 import com.gabriel.prodmsv.ServiceImpl.PhoneService;
 import com.gabriel.prodmsv.model.Phone;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -61,6 +63,8 @@ public class DeletePhoneController implements Initializable {
     @javafx.fxml.FXML
     private TextField tfAccount;
 
+    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
+
     public void refresh(){
 
         Phone phone = PhoneBookController.phone;
@@ -96,6 +100,7 @@ public class DeletePhoneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        phoneImage.setImage(PhoneIcon);
         System.out.println("DeletePhoneController: initialize");
         tfId=new TextField("");
         refresh();
@@ -168,7 +173,13 @@ public class DeletePhoneController implements Initializable {
         alert.showAndWait();
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void onClose(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            Platform.exit();
+        }
     }
+
 }
