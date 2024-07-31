@@ -24,10 +24,11 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 @Setter
-public class DeletePhoneController implements Initializable {
+public class ViewPhoneController implements Initializable {
     public TextField tfId;
     @javafx.fxml.FXML
     public TextField tfName;
+
     @Setter
     Stage stage;
     @Setter
@@ -39,8 +40,6 @@ public class DeletePhoneController implements Initializable {
     @javafx.fxml.FXML
     private Button btnBack;
     @javafx.fxml.FXML
-    private Button btnSubmit;
-    @javafx.fxml.FXML
     private TextField tfPhoneNumber;
     @javafx.fxml.FXML
     private TextField tfGroup;
@@ -48,8 +47,6 @@ public class DeletePhoneController implements Initializable {
     private ImageView contactImage;
     @javafx.fxml.FXML
     private TextField tfEmail;
-    @javafx.fxml.FXML
-    private TextField tfBirthDate;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     @javafx.fxml.FXML
@@ -60,10 +57,14 @@ public class DeletePhoneController implements Initializable {
     private Label txtitle;
     @javafx.fxml.FXML
     private TextField tfSocial;
-    @javafx.fxml.FXML
-    private TextField tfAccount;
 
     Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
+    @FXML
+    private Button btnEdit;
+    @FXML
+    private TextField tfAccountName;
+    @FXML
+    private TextField tfBirthDate;
 
     public void refresh(){
 
@@ -76,7 +77,6 @@ public class DeletePhoneController implements Initializable {
         tfEmail.setText(phone.getEmail());
 
 
-
         if (phone.getBirthday() != null){
             Date birthday = phone.getBirthday(); // Get the Date object
             LocalDate localDate = birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // Convert to LocalDate
@@ -86,7 +86,7 @@ public class DeletePhoneController implements Initializable {
             tfBirthDate.setText("");
         }
 
-        tfAccount.setText(phone.getAccount());
+        tfAccountName.setText(phone.getAccount());
         String ImageUri = phone.getImageURL();
 
         if(ImageUri!=null){
@@ -108,7 +108,8 @@ public class DeletePhoneController implements Initializable {
         tfSocial.setEditable(false);
         tfEmail.setEditable(false);
         tfBirthDate.setEditable(false);
-        tfAccount.setEditable(false);
+        tfAccountName.setEditable(false);
+
         phoneImage.setImage(PhoneIcon);
         System.out.println("DeletePhoneController: initialize");
         tfId=new TextField("");
@@ -131,24 +132,29 @@ public class DeletePhoneController implements Initializable {
     public void onSubmit(ActionEvent actionEvent) {
         //Show alert
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Are you sure you want to delete this phone?");
-            alert.setContentText("This action cannot be undone.");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Are you sure you want to delete this phone?");
+        alert.setContentText("This action cannot be undone.");
 
-            if(alert.showAndWait().get() == ButtonType.CANCEL){
-                return;
-            }
+        if(alert.showAndWait().get() == ButtonType.CANCEL){
+            return;
+        }
 
 
         try {
+
             Phone phone = toObject(true);
             PhoneService.getService().delete(phone.getId());
+
+
             controller.refresh();
             controller.clearControlTexts();
             Node node = ((Node) (actionEvent.getSource()));
             Window window = node.getScene().getWindow();
             window.hide();
+
+
             stage.setTitle("Manage Phone");
             stage.setScene(parentScene);
             stage.show();
@@ -166,8 +172,6 @@ public class DeletePhoneController implements Initializable {
                 phone.setId(Integer.parseInt(tfId.getText()));
             }
             phone.setName(tfName.getText());
-
-            //tfPhoneNumber talaga to dapat --raf
             phone.setPhoneNumber(tfPhoneNumber.getText());
         }catch (Exception e){
             showErrorDialog("Error" ,e.getMessage());
@@ -191,4 +195,6 @@ public class DeletePhoneController implements Initializable {
         }
     }
 
+    public void setPhoneBookController(PhoneBookController phoneBookController) {
+    }
 }

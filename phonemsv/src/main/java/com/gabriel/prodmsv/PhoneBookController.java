@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,8 +25,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
@@ -46,6 +51,8 @@ public class PhoneBookController implements Initializable {
     Scene updateViewScene;
     @Setter
     Scene deleteViewScene;
+    @Setter
+    Scene viewViewScene;
 
     Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
 
@@ -88,6 +95,7 @@ public class PhoneBookController implements Initializable {
     UpdatePhoneController updatePhoneController;
     DeletePhoneController deletePhoneController;
     CreatePhoneController createPhoneController;
+    ViewPhoneController viewPhoneController;
     PhoneService phoneService;
     ImageService imageService;
 
@@ -133,7 +141,7 @@ public class PhoneBookController implements Initializable {
     }
 
 
-    //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
+    /* Old Design, revert if panget
     public class PhoneListCell extends ListCell<Phone> {
         @Override
         protected void updateItem(Phone phone, boolean empty) {
@@ -185,7 +193,89 @@ public class PhoneBookController implements Initializable {
             setGraphic(imageView);
         }
     }
+*/
 
+    ///* New Design
+    public class PhoneListCell extends ListCell<Phone> {
+        private ListView<Phone> listView;
+
+        public PhoneListCell(ListView<Phone> listView) {
+            this.listView = listView;
+        }
+
+        @Override
+        protected void updateItem(Phone phone, boolean empty) {
+            super.updateItem(phone, empty);
+
+            if (empty || phone == null) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                // Create the ImageView
+                ImageView imageView = new ImageView();
+                String imageUri = phone.getImageURL();
+
+                if (imageUri != null && !imageUri.isEmpty()) {
+                    try {
+                        Image image = new Image(imageUri);
+                        if (image.isError()) {
+                            throw new Exception("Image not found at URI: " + imageUri);
+                        }
+                        imageView.setImage(image);
+                    } catch (Exception e) {
+                        Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+                        imageView.setImage(defaultImage);
+                    }
+                } else {
+                    Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
+                    imageView.setImage(defaultImage);
+                }
+                imageView.setFitHeight(50);
+                imageView.setFitWidth(50);
+                imageView.setClip(new Circle(25, 25, 25));
+
+                VBox textBox = new VBox();
+                Text nameText = new Text(phone.getName());
+                Text phoneText = new Text(phone.getPhoneNumber());
+                textBox.getChildren().addAll(nameText, phoneText);
+                textBox.setSpacing(0); // Adjust spacing between name and phone number
+                textBox.setAlignment(Pos.CENTER_LEFT);
+
+                Button viewButton = new Button("View");
+                viewButton.getStyleClass().add("view-button");
+                phone = listView.getSelectionModel().getSelectedItem();
+
+
+                viewButton.setOnAction(e -> {
+                    // Get the ListView from the scene
+                    ListView<Phone> listView = (ListView<Phone>) getListView();
+                    if (listView != null) {
+                        // Select the item at the current index
+                        listView.getSelectionModel().select(getIndex());
+
+                        // Retrieve the selected item
+                        Phone selectedPhone = listView.getSelectionModel().getSelectedItem();
+                        if (selectedPhone != null) {
+                            viewButtonClicked(selectedPhone);
+                        } else {
+                            System.out.println("No item selected in the ListView.");
+                        }
+                    }
+
+                });
+
+
+                HBox hbox = new HBox();
+                hbox.setSpacing(10);
+                hbox.setAlignment(Pos.CENTER_LEFT); // Aligns contents to the left
+                hbox.getChildren().addAll(imageView, textBox, new Region(), viewButton);
+                HBox.setHgrow(hbox.getChildren().get(2), Priority.ALWAYS);
+                setGraphic(hbox);
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            }
+        }
+    }
+    //*/
     void refresh() throws Exception {
         phoneService = PhoneService.getService();
         Phone[] phones = phoneService.getPhones();
@@ -205,7 +295,9 @@ public class PhoneBookController implements Initializable {
         filteredData = new FilteredList<>(phoneList, p -> true);
         SortedList<Phone> sortedData = new SortedList<>(filteredData);
         lvContacts.setItems(sortedData);
-        lvContacts.setCellFactory(listView -> new PhoneListCell());
+
+        // Pass the ListView to the PhoneListCell
+        lvContacts.setCellFactory(listView -> new PhoneListCell(listView));
 
         btnSearch.setOnAction(event -> onSearch());
 
@@ -274,6 +366,7 @@ public class PhoneBookController implements Initializable {
         tfSocial.setText("");
     }
 
+
     @FXML
     public void onMouseClicked(MouseEvent mouseEvent) {
         phone = lvContacts.getSelectionModel().getSelectedItem();
@@ -283,6 +376,8 @@ public class PhoneBookController implements Initializable {
         tfId.setText(Integer.toString(phone.getId()));
         setControlTexts(phone);
         System.out.println("clicked on " + phone);
+
+
         // GO to update-phone.fxml when clicked
 /*
         Scene currentScene = lvContacts.getScene();
@@ -311,7 +406,51 @@ public class PhoneBookController implements Initializable {
 */
 
     }
+    @FXML
+    public void viewButtonClicked(Phone phone){
+        System.out.println("PhoneBook: :onDelete ");
+    }
 
+    @FXML
+    public void onViewButton(ActionEvent actionEvent){
+        System.out.println("PhoneBook: :onDelete ");
+        Node node = ((Node) (actionEvent.getSource()));
+        if(lvContacts.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No contact selected");
+            alert.setContentText("Please select a contact to delete");
+            alert.showAndWait();
+            return;
+        }
+
+        Scene currentScene = node.getScene();
+        Window window = currentScene.getWindow();
+        window.hide();
+        try {
+            if(deleteViewScene  ==null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("delete-phone.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                deletePhoneController = fxmlLoader.getController();
+                deletePhoneController.setController(this);
+                deletePhoneController.setStage(this.stage);
+                deletePhoneController.setParentScene(currentScene);
+                deleteViewScene = new Scene(root, 360, 600);
+                String css = this.getClass().getResource("/css/main.css").toExternalForm();
+                deleteViewScene.getStylesheets().add(css);
+            }
+            else {
+                deletePhoneController.refresh();
+            }
+            stage.setTitle("PhoneBook");
+            stage.setScene(deleteViewScene);
+            stage.show();
+            highlightContactButton(); // Highlight the contact button
+        }
+        catch(Exception ex){
+            System.out.println("PhoneBook: : "+ ex.getMessage());
+            ex.printStackTrace();  //print stack error; -raf
+        }
+    }
 
     @FXML
     public void onCreate(ActionEvent actionEvent) {

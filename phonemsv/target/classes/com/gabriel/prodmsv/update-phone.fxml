@@ -20,7 +20,7 @@
          </children>
       </HBox>
       <ImageView fx:id="contactImage" fitHeight="123.0" fitWidth="168.0" layoutX="123.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
-      <GridPane layoutX="80.0" layoutY="554.0">
+      <GridPane layoutX="84.0" layoutY="554.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
