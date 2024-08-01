@@ -25,68 +25,80 @@ import java.util.ResourceBundle;
 
 @Setter
 public class ViewPhoneController implements Initializable {
-    public TextField tfId;
-    @javafx.fxml.FXML
-    public TextField tfName;
-
     @Setter
-    Stage stage;
+    private Stage stage;
     @Setter
     Scene parentScene;
     @Setter
+    PhoneBookController controller;
+    @Setter
     PhoneService phoneService;
     @Setter
-    PhoneBookController controller;
-    @javafx.fxml.FXML
+    private Phone phone;
+    @FXML
     private Button btnBack;
-    @javafx.fxml.FXML
-    private TextField tfPhoneNumber;
-    @javafx.fxml.FXML
-    private TextField tfGroup;
-    @javafx.fxml.FXML
-    private ImageView contactImage;
-    @javafx.fxml.FXML
-    private TextField tfEmail;
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    @javafx.fxml.FXML
+    @FXML
     private ImageView phoneImage;
-    @javafx.fxml.FXML
-    private Button closeButton;
-    @javafx.fxml.FXML
-    private Label txtitle;
-    @javafx.fxml.FXML
-    private TextField tfSocial;
-
-    Image PhoneIcon = new Image(getClass().getResourceAsStream("images/splashIcon.png"));
     @FXML
     private Button btnEdit;
     @FXML
-    private TextField tfAccountName;
+    private ImageView contactImage;
+    @FXML
+    private TextField tfName;
+    @FXML
+    private TextField tfEmail;
     @FXML
     private TextField tfBirthDate;
+    @FXML
+    private TextField tfSocial;
+    @FXML
+    private TextField tfPhoneNumber;
+    @FXML
+    private TextField tfGroup;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Label txtitle;
 
-    public void refresh(){
+    @FXML
+    private TextField tfAccount;
+    @FXML
+    private TextField tfId;
 
-        Phone phone = PhoneBookController.phone;
-        tfId.setText(Integer.toString(phone.getId()));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        refresh();
+    }
+
+    public void refresh() {
+
+        tfName.setEditable(false);
+        tfPhoneNumber.setEditable(false);
+        tfGroup.setEditable(false);
+        tfSocial.setEditable(false);
+        tfEmail.setEditable(false);
+        tfBirthDate.setEditable(false);
+        tfAccount.setEditable(false);
+
+        //ERROR HAPPENS HERE WHERE IT CAUSES APPLICATION TO CRASH
+       // try{
+        /*
+        tfId.setText(String.valueOf(phone.getId()));
         tfName.setText(phone.getName());
         tfPhoneNumber.setText(phone.getPhoneNumber());
         tfGroup.setText(phone.getGroupName());
-        tfSocial.setText(phone.getSocialName());
         tfEmail.setText(phone.getEmail());
 
-
-        if (phone.getBirthday() != null){
-            Date birthday = phone.getBirthday(); // Get the Date object
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if (phone.getBirthday() != null) {
+            Date birthday = phone.getBirthday();
             LocalDate localDate = birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // Convert to LocalDate
-            tfBirthDate.setText(localDate.format(formatter)); // Format and set the text
+            tfBirthDate.setText(localDate.format(formatter));
         }
         else {
             tfBirthDate.setText("");
         }
-
-        tfAccountName.setText(phone.getAccount());
+        tfAccount.setText(phone.getAccount());
         String ImageUri = phone.getImageURL();
 
         if(ImageUri!=null){
@@ -97,104 +109,18 @@ public class ViewPhoneController implements Initializable {
             contactImage.setImage(defaultImage);
         }
 
-
+         */
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        tfName.setEditable(false);
-        tfPhoneNumber.setEditable(false);
-        tfGroup.setEditable(false);
-        tfSocial.setEditable(false);
-        tfEmail.setEditable(false);
-        tfBirthDate.setEditable(false);
-        tfAccountName.setEditable(false);
-
-        phoneImage.setImage(PhoneIcon);
-        System.out.println("DeletePhoneController: initialize");
-        tfId=new TextField("");
-        refresh();
-    }
-
-    @javafx.fxml.FXML
+    @FXML
     public void onBack(ActionEvent actionEvent) {
-        System.out.println("CreatePhoneController:onBack ");
-        Node node = ((Node) (actionEvent.getSource()));
-        Window window = node.getScene().getWindow();
-        window.hide();
-
-        stage.setScene(parentScene);
-        stage.show();
-    }
-
-
-    @javafx.fxml.FXML
-    public void onSubmit(ActionEvent actionEvent) {
-        //Show alert
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText("Are you sure you want to delete this phone?");
-        alert.setContentText("This action cannot be undone.");
-
-        if(alert.showAndWait().get() == ButtonType.CANCEL){
-            return;
-        }
-
-
-        try {
-
-            Phone phone = toObject(true);
-            PhoneService.getService().delete(phone.getId());
-
-
-            controller.refresh();
-            controller.clearControlTexts();
-            Node node = ((Node) (actionEvent.getSource()));
-            Window window = node.getScene().getWindow();
-            window.hide();
-
-
-            stage.setTitle("Manage Phone");
-            stage.setScene(parentScene);
-            stage.show();
-        }
-        catch (Exception e){
-            String message="Error encountered deleting phone";
-            showErrorDialog(message,e.getMessage());
-        }
-    }
-
-    protected Phone toObject(boolean isEdit){
-        Phone phone = new Phone();
-        try {
-            if(isEdit) {
-                phone.setId(Integer.parseInt(tfId.getText()));
-            }
-            phone.setName(tfName.getText());
-            phone.setPhoneNumber(tfPhoneNumber.getText());
-        }catch (Exception e){
-            showErrorDialog("Error" ,e.getMessage());
-        }
-        return phone;
-    }
-
-    public void showErrorDialog(String message,String addtlMessage){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(message);
-        alert.getDialogPane().setExpandableContent(new ScrollPane(new TextArea(addtlMessage)));
-        alert.showAndWait();
     }
 
     @FXML
     public void onClose(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.YES) {
-            Platform.exit();
-        }
     }
 
-    public void setPhoneBookController(PhoneBookController phoneBookController) {
+    @FXML
+    public void onSubmit(ActionEvent actionEvent) {
     }
 }

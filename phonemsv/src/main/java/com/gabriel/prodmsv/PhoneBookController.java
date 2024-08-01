@@ -140,8 +140,6 @@ public class PhoneBookController implements Initializable {
         }
     }
 
-
-    /* Old Design, revert if panget
     public class PhoneListCell extends ListCell<Phone> {
         @Override
         protected void updateItem(Phone phone, boolean empty) {
@@ -193,9 +191,9 @@ public class PhoneBookController implements Initializable {
             setGraphic(imageView);
         }
     }
-*/
 
-    ///* New Design
+
+    /* New Design
     public class PhoneListCell extends ListCell<Phone> {
         private ListView<Phone> listView;
 
@@ -275,7 +273,8 @@ public class PhoneBookController implements Initializable {
             }
         }
     }
-    //*/
+
+    */
     void refresh() throws Exception {
         phoneService = PhoneService.getService();
         Phone[] phones = phoneService.getPhones();
@@ -297,7 +296,7 @@ public class PhoneBookController implements Initializable {
         lvContacts.setItems(sortedData);
 
         // Pass the ListView to the PhoneListCell
-        lvContacts.setCellFactory(listView -> new PhoneListCell(listView));
+        //lvContacts.setCellFactory(listView -> new PhoneListCell(listView));
 
         btnSearch.setOnAction(event -> onSearch());
 
@@ -406,13 +405,16 @@ public class PhoneBookController implements Initializable {
 */
 
     }
+
+/*
     @FXML
     public void viewButtonClicked(Phone phone){
         System.out.println("PhoneBook: :onDelete ");
     }
-
     @FXML
     public void onViewButton(ActionEvent actionEvent){
+        System.out.println("PhoneBook: :onDelete ");
+
         System.out.println("PhoneBook: :onDelete ");
         Node node = ((Node) (actionEvent.getSource()));
         if(lvContacts.getSelectionModel().getSelectedItem() == null){
@@ -427,19 +429,19 @@ public class PhoneBookController implements Initializable {
         Window window = currentScene.getWindow();
         window.hide();
         try {
-            if(deleteViewScene  ==null) {
-                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("delete-phone.fxml"));
+            if(viewViewScene  ==null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(SplashApp.class.getResource("view-phone.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
-                deletePhoneController = fxmlLoader.getController();
-                deletePhoneController.setController(this);
-                deletePhoneController.setStage(this.stage);
-                deletePhoneController.setParentScene(currentScene);
-                deleteViewScene = new Scene(root, 360, 600);
+                viewPhoneController = fxmlLoader.getController();
+                viewPhoneController.setController(this);
+                viewPhoneController.setStage(this.stage);
+                viewPhoneController.setParentScene(currentScene);
+                viewViewScene = new Scene(root, 360, 600);
                 String css = this.getClass().getResource("/css/main.css").toExternalForm();
-                deleteViewScene.getStylesheets().add(css);
+                viewViewScene.getStylesheets().add(css);
             }
             else {
-                deletePhoneController.refresh();
+               viewPhoneController.refresh();
             }
             stage.setTitle("PhoneBook");
             stage.setScene(deleteViewScene);
@@ -450,7 +452,26 @@ public class PhoneBookController implements Initializable {
             System.out.println("PhoneBook: : "+ ex.getMessage());
             ex.printStackTrace();  //print stack error; -raf
         }
-    }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     public void onCreate(ActionEvent actionEvent) {

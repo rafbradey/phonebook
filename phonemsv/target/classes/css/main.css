@@ -74,7 +74,7 @@
     -fx-border-color: transparent;
 }
 
-#btnBack, #btnSubmit, #btnNext {
+#btnBack, #btnSubmit, #btnNext, #btnEdit {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-font-size: 14px;
