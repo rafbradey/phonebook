@@ -298,6 +298,7 @@ public class UpdatePhoneController implements Initializable {
         tfEmail.setEditable(true);
         dpBirthDate.getEditor().setDisable(false);
         dpBirthDate.setDisable(false);
+        disableDatePickerTextField(dpBirthDate);
         cbGroup.setDisable(false);
         cbSocial.setDisable(false);
         btnUpload.setDisable(false);
@@ -308,11 +309,13 @@ public class UpdatePhoneController implements Initializable {
     public void toggleONOFF(ActionEvent actionEvent) {
         if (btntoggleEdit.getText().equals("Edit: OFF")) {
             btntoggleEdit.setText("Edit: ON");
-            txtitle.setText("Edit Contact");
+            btnSubmit.setText("Submit");
+            txtitle.setText("Edit Contacts");
             fieldEnabler(actionEvent);
         } else {
             btntoggleEdit.setText("Edit: OFF");
-            txtitle.setText("View Contact");
+            btnSubmit.setText("");
+            txtitle.setText("View Contacts");
             fieldDisabler(actionEvent);
         }
     }
