@@ -89,3 +89,27 @@
 #lvContacts {
     -fx-font-size: 13px;
 }
+
+#contactButton:focused {
+    -fx-background-color: #b39ddb; /* Change this to the desired highlight color */
+    -fx-text-fill: white; /* Optional: Change the text color */
+}
+
+.highlighted-button {
+    -fx-background-color: #ffeb3b;
+}
+
+.combo-box:disabled {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-text-fill: black;
+    -fx-opacity: 1.0;
+    -fx-prompt-text-fill: black;
+}
+
+.date-picker-disabled .text-field {
+    -fx-opacity: 1;
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #999999;
+    -fx-border-color: #cccccc;
+}

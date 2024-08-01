@@ -77,8 +77,14 @@ public class UpdatePhoneController implements Initializable {
     public static Phone phone;
     @FXML
     private Button btnUpload;
+    @FXML
+    private Label txtitle;
+    @FXML
+    private Button btntoggleEdit;
 
     public void refresh() throws Exception {
+
+
         Phone phone = PhoneBookController.phone;
 
         currentImageUri = phone.getImageURL();
@@ -111,7 +117,6 @@ public class UpdatePhoneController implements Initializable {
         }
 
 
-
         try {
 
             cbGroup.getItems().clear();
@@ -123,7 +128,6 @@ public class UpdatePhoneController implements Initializable {
             Social socials[] = SocialService.getService().getSocials();
             System.out.println("Fetched socials: " + Arrays.toString(socials));
             cbSocial.getItems().addAll(socials);
-
 
 
             if (phone.getGroupName() != null || phone.getSocialName() != null) {
@@ -155,7 +159,13 @@ public class UpdatePhoneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         phoneImage.setImage(PhoneIcon);
         System.out.println("UpdatePhoneController: initialize");
+
+        btntoggleEdit.setText("Edit: OFF");
+        fieldDisabler(new ActionEvent());
+
+
         try {
+
             refresh();
             // Disable typing in the dpBirthDate DatePicker
             disableDatePickerTextField(dpBirthDate);
@@ -216,6 +226,7 @@ public class UpdatePhoneController implements Initializable {
             phone = PhoneService.getService().update(phone);
             controller.refresh();
             controller.setControlTexts(phone);
+            fieldDisabler(actionEvent);
             onBack(actionEvent);
             newImageUri = null;
         } catch (Exception ex) {
@@ -225,6 +236,7 @@ public class UpdatePhoneController implements Initializable {
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
+        fieldDisabler(actionEvent);
         System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
@@ -250,7 +262,7 @@ public class UpdatePhoneController implements Initializable {
 
     @FXML
     public void onClose(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? " , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Exit and loose changes? ", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             Platform.exit();
@@ -261,4 +273,51 @@ public class UpdatePhoneController implements Initializable {
         datePicker.getEditor().setDisable(true);
         datePicker.getEditor().setStyle("-fx-opacity: 1;"); // Maintain the default appearance
     }
+
+
+    @FXML
+    public void fieldDisabler(ActionEvent actionEvent) {
+
+        tfName.setEditable(false);
+        tfPhoneNumber.setEditable(false);
+        tfAccountName.setEditable(false);
+        tfEmail.setEditable(false);
+        dpBirthDate.setDisable(true);
+        dpBirthDate.getEditor().setDisable(true);
+        cbGroup.setDisable(true);
+        cbSocial.setDisable(true);
+        btnUpload.setDisable(true);
+        btnSubmit.setDisable(true);
+    }
+
+    @FXML
+    public void fieldEnabler(ActionEvent actionEvent) {
+        tfName.setEditable(true);
+        tfPhoneNumber.setEditable(true);
+        tfAccountName.setEditable(true);
+        tfEmail.setEditable(true);
+        dpBirthDate.getEditor().setDisable(false);
+        dpBirthDate.setDisable(false);
+        cbGroup.setDisable(false);
+        cbSocial.setDisable(false);
+        btnUpload.setDisable(false);
+        btnSubmit.setDisable(false);
+    }
+
+    @FXML
+    public void toggleONOFF(ActionEvent actionEvent) {
+        if (btntoggleEdit.getText().equals("Edit: OFF")) {
+            btntoggleEdit.setText("Edit: ON");
+            txtitle.setText("Edit Contact");
+            fieldEnabler(actionEvent);
+        } else {
+            btntoggleEdit.setText("Edit: OFF");
+            txtitle.setText("View Contact");
+            fieldDisabler(actionEvent);
+        }
+    }
 }
+
+
+
+
