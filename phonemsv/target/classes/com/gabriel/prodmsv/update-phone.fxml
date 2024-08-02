@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <Pane prefHeight="600.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gabriel.prodmsv.UpdatePhoneController">
    <children>
@@ -29,7 +30,7 @@
             <Label fx:id="txtitle" prefHeight="18.0" prefWidth="247.0" text="View Contacts" />
          </children>
       </HBox>
-      <ImageView fx:id="contactImage" fitHeight="123.0" fitWidth="168.0" layoutX="100.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="contactImage" fitHeight="123.0" fitWidth="168.0" layoutX="123.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
       <GridPane layoutX="84.0" layoutY="554.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,15 +41,16 @@
         </rowConstraints>
          <children>
             <Button fx:id="btnBack" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onBack" prefWidth="90.0" text="&lt;&lt; Back" />
-            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Submit" GridPane.columnIndex="1" />
+            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#onSubmit" prefWidth="90.0" text="Save" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="btnUpload" layoutX="137.0" layoutY="200.0" mnemonicParsing="false" onAction="#onUpload" text="Change Image" />
       <Button fx:id="closeButton" layoutX="322.0" layoutY="19.0" mnemonicParsing="false" onAction="#onClose" text="X" />
       <GridPane layoutX="34.0" layoutY="238.0" prefHeight="271.0" prefWidth="299.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.5999755859375" minWidth="10.0" prefWidth="116.5999755859375" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.39996337890625" minWidth="10.0" prefWidth="30.4000244140625" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -61,19 +63,24 @@
         </rowConstraints>
          <children>
             <Label prefWidth="100.0" text="Name:" />
-            <TextField fx:id="tfName" GridPane.columnIndex="1" />
+            <TextField fx:id="tfName" GridPane.columnIndex="2" />
             <Label prefWidth="100.0" text="Phone Number:" GridPane.rowIndex="1" />
-            <TextField fx:id="tfPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="tfPhoneNumber" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label prefWidth="100.0" text="Email:" GridPane.rowIndex="2" />
-            <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefWidth="100.0" text="Media Platform:" GridPane.rowIndex="3" />
-            <ComboBox fx:id="cbSocial" prefHeight="26.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label prefWidth="100.0" text="Account Name:" GridPane.rowIndex="4" />
-            <TextField fx:id="tfAccountName" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="tfEmail" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label prefHeight="18.0" prefWidth="139.0" text="Media Platform:" GridPane.rowIndex="3" />
+            <ComboBox fx:id="cbSocial" prefHeight="26.0" prefWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label prefHeight="18.0" prefWidth="144.0" text="Account Name:" GridPane.rowIndex="4" />
+            <TextField fx:id="tfAccountName" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Label prefWidth="100.0" text="Group:" GridPane.rowIndex="5" />
-            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="cbGroup" prefHeight="26.0" prefWidth="153.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label text="Birthday:" GridPane.rowIndex="6" />
-            <DatePicker fx:id="dpBirthDate" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <DatePicker fx:id="dpBirthDate" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Button fx:id="dpClear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ondpClear" prefWidth="23.0" text="X" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font size="6.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
       <Separator layoutX="8.0" layoutY="237.0" prefWidth="345.0" />
@@ -93,5 +100,6 @@
       <Circle fill="#a17dcd" layoutX="311.0" layoutY="600.0" radius="23.0" stroke="#a17dcd" strokeType="INSIDE" />
       <Circle fill="#a17dcd" layoutX="334.0" layoutY="592.0" radius="23.0" stroke="#a17dcd" strokeType="INSIDE" />
       <Button fx:id="btntoggleEdit" alignment="CENTER" layoutX="246.0" layoutY="19.0" mnemonicParsing="false" onAction="#toggleONOFF" prefHeight="25.0" prefWidth="65.0" text="Edit" />
+      <Button fx:id="btnClear" alignment="CENTER" layoutX="15.0" layoutY="70.0" mnemonicParsing="false" onAction="#onClear" prefHeight="25.0" prefWidth="90.0" text="Clear Image" />
    </children>
 </Pane>

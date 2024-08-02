@@ -50,7 +50,7 @@
     -fx-text-fill: White;
 }
 
-#closeButton:hover, #settingsButton:hover {
+#closeButton:hover, #btntoggleEdit:hover {
     -fx-background-color: linear-gradient(to right, #e4d8f2, #9570bd);
     -fx-text-fill: White;
 }
@@ -107,9 +107,17 @@
     -fx-prompt-text-fill: black;
 }
 
-.date-picker-disabled .text-field {
+.date-picker:disabled .text-field {
     -fx-opacity: 1;
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #999999;
     -fx-border-color: #cccccc;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-text-fill: black;
+    -fx-opacity: 1.0;
+    -fx-prompt-text-fill: black;
 }

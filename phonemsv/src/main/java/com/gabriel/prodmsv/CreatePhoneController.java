@@ -239,53 +239,6 @@ public class CreatePhoneController implements Initializable {
             System.out.println(e.getMessage());
         }
 
-
-
-/* nasayng na code
-        // Show the file chooser dialog and get the selected file
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            // Get the original filename and its extension
-            String originalFilename = file.getName();
-            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.'));
-
-            // Generate a unique image ID
-            String uniqueImageId = UUID.randomUUID().toString();
-
-            // Create a new filename with the unique image ID
-            String newFilename = uniqueImageId + fileExtension;
-            System.out.println("Selected file: " + originalFilename);
-            System.out.println("New filename: " + newFilename);
-
-            try {
-                // target dir for the file
-                Path targetDir = Path.of(fileDir);
-
-                // recreate directory if it does not exist
-                Files.createDirectories(targetDir);
-
-                Path targetFile = targetDir.resolve(newFilename);
-
-                // copy selected file to target dir
-                Files.copy(file.toPath(), targetFile, StandardCopyOption.REPLACE_EXISTING);
-
-                // Set the image view with current selected image --p.s alas natapos na rin after 3 hrs -raf
-
-
-
-                contactImage.setImage(new javafx.scene.image.Image(file.toURI().toString()));
-                System.out.println("Temp File saved to: " + targetFile.toAbsolutePath());
-                System.out.println("File Name with UUID is : " + newFilename);
-
-
-
-            } catch (IOException e){
-                System.out.println("Error saving file: " + e.getMessage());
-            }
-        } else {
-            System.out.println("No file selected.");
-        }
-*/
     }
 
     public String getImageUri() {

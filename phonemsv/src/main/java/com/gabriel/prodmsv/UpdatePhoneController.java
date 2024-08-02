@@ -81,6 +81,10 @@ public class UpdatePhoneController implements Initializable {
     private Label txtitle;
     @FXML
     private Button btntoggleEdit;
+    @FXML
+    private Button btnClear;
+    @FXML
+    private Button dpClear;
 
     public void refresh() throws Exception {
 
@@ -181,39 +185,54 @@ public class UpdatePhoneController implements Initializable {
 
     @FXML
     public void onSubmit(ActionEvent actionEvent) {
+        // Get values from input fields
+        String name = tfName.getText().trim();
+        String phoneNumber = tfPhoneNumber.getText().trim();
+        String account = tfAccountName.getText().trim();
+        String email = tfEmail.getText().trim();
+        LocalDate birthDate = dpBirthDate.getValue();
+
+        // Validate required fields
+        if (name.isEmpty() || phoneNumber.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText("Missing Required Fields");
+            alert.setContentText("Please provide both Name and Phone Number.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Create a Phone object with input values
         Phone phone = new Phone();
         phone.setId(id);
-        System.out.println("UpdatePhoneController:onSubmit id: " + id);
-        phone.setName(tfName.getText());
-        phone.setPhoneNumber(tfPhoneNumber.getText());
-        phone.setAccount(tfAccountName.getText());
-        phone.setBirthday(java.sql.Date.valueOf(dpBirthDate.getValue()));
-        phone.setEmail(tfEmail.getText());
+        phone.setName(name);
+        phone.setPhoneNumber(phoneNumber);
+        phone.setAccount(account);
+        phone.setEmail(email);
 
-        if (phone.getImageURL() != null) {
-            System.out.println("Phone has image URL: " + phone.getImageURL());
-            System.out.println("Submitting will not change the image.");
-        } else if (newImageUri != phone.getImageURL() && newImageUri != null) {
+        // Set birthday, handling potential null value
+        phone.setBirthday(birthDate != null ? java.sql.Date.valueOf(birthDate) : null);
+
+        /* @Depreciated -- Old image handler codde
+        // Handle image URLs
+        if (newImageUri != null && !newImageUri.equals(phone.getImageURL())) {
             phone.setImageURL(newImageUri);
             contactImage.setImage(new Image(newImageUri));
-            System.out.println("NEW IMAGE DETECTED! switching to the new image------00000----" +
-                    "-------------." + ":" + phone.getImageURL());
         } else if (newImageUri == null) {
-            System.out.println("No new image detected. Using the old image ------" +
-                    "------------------. " + ":" + phone.getImageURL());
             phone.setImageURL(currentImageUri);
+        }
+    */
+        // Handle image URLs
+        if (newImageUri != null && !newImageUri.equals(phone.getImageURL())) {
+            phone.setImageURL(newImageUri);
+            contactImage.setImage(new Image(newImageUri));
         } else {
-            System.out.println("No new image detected?. <<!@<!<!<!<!<.");
-            phone.setImageURL(phone.getImageURL());
+            // Use the default image if no new image URI is present
+            phone.setImageURL(currentImageUri != null ? currentImageUri : defaultImage.getUrl());
+            contactImage.setImage(defaultImage);
         }
 
-        LocalDate birthDate = dpBirthDate.getValue();
-        if (birthDate != null) {
-            phone.setBirthday(java.sql.Date.valueOf(birthDate));
-        } else {
-            phone.setBirthday(null);
-        }
-
+        // Set group and social if selected
         Group group = cbGroup.getSelectionModel().getSelectedItem();
         if (group != null) {
             phone.setGroupId(group.getId());
@@ -226,6 +245,7 @@ public class UpdatePhoneController implements Initializable {
             phone.setSocialName(social.getName());
         }
 
+        // Update phone and handle potential exceptions
         try {
             phone = PhoneService.getService().update(phone);
             controller.refresh();
@@ -234,13 +254,17 @@ public class UpdatePhoneController implements Initializable {
             onBack(actionEvent);
             newImageUri = null;
         } catch (Exception ex) {
-            System.out.println("CreatePhoneController:onSubmit Error: " + ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Update Error");
+            alert.setHeaderText("An error occurred during the update.");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
         }
     }
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
-        // Ensure the edit button is set to "OFF" and fields are disabled
+       //edit btn off by default
         btntoggleEdit.setText("Edit: OFF");
         fieldDisabler(new ActionEvent());
         txtitle.setText("View Contacts");
@@ -278,11 +302,11 @@ public class UpdatePhoneController implements Initializable {
 
     private void disableDatePickerTextField(DatePicker datePicker) {
         datePicker.getEditor().setDisable(true);
-        datePicker.getEditor().setStyle("-fx-opacity: 1;"); // Maintain the default appearance
+        datePicker.getEditor().setStyle("-fx-opacity: 1;");
     }
 
 
-    @FXML
+    @Deprecated
     public void fieldDisabler(ActionEvent actionEvent) {
         tfName.setEditable(false);
         tfPhoneNumber.setEditable(false);
@@ -293,12 +317,14 @@ public class UpdatePhoneController implements Initializable {
         cbGroup.setDisable(true);
         cbSocial.setDisable(true);
         btnUpload.setDisable(true);
-        btnUpload.setVisible(false); // Add this line
+        btnUpload.setVisible(false);
         btnSubmit.setDisable(true);
-        btnSubmit.setVisible(false);
+        btnSubmit.setDisable(true);
+        btnClear.setDisable(true);
+        dpClear.setDisable(true);
     }
 
-    @FXML
+    @Deprecated
     public void fieldEnabler(ActionEvent actionEvent) {
         tfName.setEditable(true);
         tfPhoneNumber.setEditable(true);
@@ -310,9 +336,17 @@ public class UpdatePhoneController implements Initializable {
         cbGroup.setDisable(false);
         cbSocial.setDisable(false);
         btnUpload.setDisable(false);
-        btnUpload.setVisible(true); // Add this line
+        btnUpload.setVisible(true);
         btnSubmit.setDisable(false);
         btnSubmit.setVisible(true);
+        dpClear.setDisable(false);
+        if (contactImage.getImage() != defaultImage) {
+            btnClear.setDisable(false);
+        }
+        else {
+            btnClear.setDisable(true);
+        }
+
     }
 
 
@@ -329,6 +363,19 @@ public class UpdatePhoneController implements Initializable {
             txtitle.setText("View Contacts");
             fieldDisabler(actionEvent);
         }
+    }
+
+    @FXML
+    public void onClear(ActionEvent actionEvent) {
+        //set image to default
+        Platform.runLater(() -> contactImage.setImage(defaultImage)); //allow for change image on fx runtime?
+        newImageUri = null;
+        currentImageUri = defaultImage.getUrl();
+    }
+
+    @FXML
+    public void ondpClear(ActionEvent actionEvent) {
+        dpBirthDate.setValue(null);
     }
 }
 
