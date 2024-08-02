@@ -117,7 +117,7 @@ public class PhoneBookController implements Initializable {
     public void onClear(ActionEvent actionEvent) {
         txsearch.setText("");
         onSearch();
-
+        cbLetterFilter.getSelectionModel().clearSelection();
     }
 
     private void highlightContactButton() {
@@ -141,18 +141,20 @@ public class PhoneBookController implements Initializable {
     //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
     public class PhoneListCell extends ListCell<Phone> {
         private VBox cellContent;
-        private Text separator;
+        private Text separatorText;
         private Text contactDetails;
         private ImageView imageView;
+        private Separator separatorLine; // Add a Separator
 
         public PhoneListCell() {
             cellContent = new VBox();
-            separator = new Text();
+            separatorText = new Text();
+            separatorLine = new Separator(); // Initialize the Separator
             contactDetails = new Text();
             imageView = new ImageView();
 
             HBox contactBox = new HBox(imageView, contactDetails);
-            cellContent.getChildren().addAll(separator, contactBox);
+            cellContent.getChildren().addAll(separatorText, separatorLine, contactBox); // Add the Separator to the layout
         }
 
         @Override
@@ -170,10 +172,12 @@ public class PhoneBookController implements Initializable {
                 // Set separator text based on the first letter of the contact's name
                 char firstLetter = phone.getName().toUpperCase().charAt(0);
                 if (isFirstOfLetter(phone)) {
-                    separator.setText(String.valueOf(firstLetter));
-                    separator.setVisible(true);
+                    separatorText.setText(String.valueOf(firstLetter));
+                    separatorText.setVisible(true);
+                    separatorLine.setVisible(true); // Show the Separator line
                 } else {
-                    separator.setVisible(false);
+                    separatorText.setVisible(false);
+                    separatorLine.setVisible(false); // Hide the Separator line
                 }
 
                 setGraphic(cellContent);
@@ -220,7 +224,7 @@ public class PhoneBookController implements Initializable {
         highlightContactButton(); // Highlight the contact button
     }
     @FXML
-    private ComboBox<String> cbLetterFilter; // Add this line
+    private ComboBox<String> cbLetterFilter;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("PhoneBookController: initialize");
