@@ -117,6 +117,7 @@ public class PhoneBookController implements Initializable {
     public void onClear(ActionEvent actionEvent) {
         txsearch.setText("");
         onSearch();
+
     }
 
     private void highlightContactButton() {
