@@ -24,8 +24,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
@@ -135,6 +137,21 @@ public class PhoneBookController implements Initializable {
 
     //ListView Factory for phone list para malagyan ng image :) -ty stackoverflow
     public class PhoneListCell extends ListCell<Phone> {
+        private VBox cellContent;
+        private Text separator;
+        private Text contactDetails;
+        private ImageView imageView;
+
+        public PhoneListCell() {
+            cellContent = new VBox();
+            separator = new Text();
+            contactDetails = new Text();
+            imageView = new ImageView();
+
+            HBox contactBox = new HBox(imageView, contactDetails);
+            cellContent.getChildren().addAll(separator, contactBox);
+        }
+
         @Override
         protected void updateItem(Phone phone, boolean empty) {
             super.updateItem(phone, empty);
@@ -144,16 +161,23 @@ public class PhoneBookController implements Initializable {
                 setGraphic(null);
             } else {
                 // Set the text and image for each cell
-                setText("  " + phone.getName() + "\n" + "  " + phone.getPhoneNumber());
+                contactDetails.setText(phone.getName() + "\n" + phone.getPhoneNumber());
                 loadImage(phone);
 
-            }
+                // Set separator text based on the first letter of the contact's name
+                char firstLetter = phone.getName().toUpperCase().charAt(0);
+                if (isFirstOfLetter(phone)) {
+                    separator.setText(String.valueOf(firstLetter));
+                    separator.setVisible(true);
+                } else {
+                    separator.setVisible(false);
+                }
 
+                setGraphic(cellContent);
+            }
         }
 
         private void loadImage(Phone phone) {
-            ImageView imageView = new ImageView();
-
             String imageUri = phone.getImageURL();
 
             if (imageUri != null && !imageUri.isEmpty()) {
@@ -164,25 +188,25 @@ public class PhoneBookController implements Initializable {
                         throw new Exception("Image not found at URI: " + imageUri);
                     }
                     imageView.setImage(image);
-                    System.out.println("Image found for phone: " + phone.getName());
                 } catch (Exception e) {
-                    // Use a default image in case of an error
-                    Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
                     imageView.setImage(defaultImage);
-                    System.out.println("No image found for phone: " + phone.getName() + ", reverting to DEFAULT IMAGE.");
                 }
             } else {
-                // Use a default image if imageUri is null or empty
-                Image defaultImage = new Image(getClass().getResourceAsStream("images/Default.jpg"));
                 imageView.setImage(defaultImage);
-                System.out.println("No image was set for phone: " + phone.getName() + ", reverting to DEFAULT IMAGE.");
             }
 
-            // Set image view properties
             imageView.setFitHeight(50);
             imageView.setFitWidth(50);
             imageView.setClip(new Circle(25, 25, 25));
-            setGraphic(imageView);
+        }
+
+        private boolean isFirstOfLetter(Phone phone) {
+            int index = getIndex();
+            if (index == 0) {
+                return true;
+            }
+            Phone previousPhone = getListView().getItems().get(index - 1);
+            return !phone.getName().substring(0, 1).equalsIgnoreCase(previousPhone.getName().substring(0, 1));
         }
     }
 
