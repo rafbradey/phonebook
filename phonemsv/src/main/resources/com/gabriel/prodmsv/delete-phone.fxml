@@ -56,9 +56,9 @@
             <TextField fx:id="tfPhoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefWidth="100.0" text="Email:" GridPane.rowIndex="2" />
             <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefWidth="100.0" text="Media Platform:" GridPane.rowIndex="3" />
+            <Label prefHeight="18.0" prefWidth="141.0" text="Media Platform:" GridPane.rowIndex="3" />
             <TextField fx:id="tfSocial" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label prefWidth="100.0" text="Account Name:" GridPane.rowIndex="4" />
+            <Label prefHeight="18.0" prefWidth="143.0" text="Account Name:" GridPane.rowIndex="4" />
             <TextField fx:id="tfAccount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefWidth="100.0" text="Group:" GridPane.rowIndex="5" />
             <TextField fx:id="tfGroup" GridPane.columnIndex="1" GridPane.rowIndex="5" />

@@ -221,7 +221,7 @@ public class PhoneBookController implements Initializable {
                 contactButton.setGraphic(contactsIconView);
                 contactButton.setContentDisplay(ContentDisplay.TOP);
 
-                Image updateIcon = new Image(getClass().getResourceAsStream("images/editW.png"));
+                Image updateIcon = new Image(getClass().getResourceAsStream("images/view.png"));
                 ImageView updateIconView = new ImageView(updateIcon);
                 updateIconView.setFitWidth(18);
                 updateIconView.setFitHeight(18);

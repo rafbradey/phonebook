@@ -93,6 +93,10 @@ public class UpdatePhoneController implements Initializable {
         currentSocial = phone.getSocialName();
         currentGroup = phone.getGroupName();
 
+        btntoggleEdit.setText("Edit: OFF");
+        fieldDisabler(new ActionEvent());
+        txtitle.setText("View Contacts");
+
         System.out.println("Current id: " + id);
         id = phone.getId();
 
@@ -236,7 +240,10 @@ public class UpdatePhoneController implements Initializable {
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
-        fieldDisabler(actionEvent);
+        // Ensure the edit button is set to "OFF" and fields are disabled
+        btntoggleEdit.setText("Edit: OFF");
+        fieldDisabler(new ActionEvent());
+        txtitle.setText("View Contacts");
         System.out.println("CreatePhoneController:onBack ");
         Node node = ((Node) (actionEvent.getSource()));
         Window window = node.getScene().getWindow();
@@ -277,7 +284,6 @@ public class UpdatePhoneController implements Initializable {
 
     @FXML
     public void fieldDisabler(ActionEvent actionEvent) {
-
         tfName.setEditable(false);
         tfPhoneNumber.setEditable(false);
         tfAccountName.setEditable(false);
@@ -287,7 +293,9 @@ public class UpdatePhoneController implements Initializable {
         cbGroup.setDisable(true);
         cbSocial.setDisable(true);
         btnUpload.setDisable(true);
+        btnUpload.setVisible(false); // Add this line
         btnSubmit.setDisable(true);
+        btnSubmit.setVisible(false);
     }
 
     @FXML
@@ -302,8 +310,11 @@ public class UpdatePhoneController implements Initializable {
         cbGroup.setDisable(false);
         cbSocial.setDisable(false);
         btnUpload.setDisable(false);
+        btnUpload.setVisible(true); // Add this line
         btnSubmit.setDisable(false);
+        btnSubmit.setVisible(true);
     }
+
 
     @FXML
     public void toggleONOFF(ActionEvent actionEvent) {

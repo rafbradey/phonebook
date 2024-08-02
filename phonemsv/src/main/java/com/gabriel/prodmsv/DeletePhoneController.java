@@ -104,6 +104,19 @@ public class DeletePhoneController implements Initializable {
         System.out.println("DeletePhoneController: initialize");
         tfId=new TextField("");
         refresh();
+
+        disableEditing();
+    }
+
+    private void disableEditing() {
+        tfId.setEditable(false);
+        tfName.setEditable(false);
+        tfPhoneNumber.setEditable(false);
+        tfGroup.setEditable(false);
+        tfEmail.setEditable(false);
+        tfBirthDate.setEditable(false);
+        tfSocial.setEditable(false);
+        tfAccount.setEditable(false);
     }
 
     @javafx.fxml.FXML
