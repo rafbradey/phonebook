@@ -38,6 +38,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
+
 @Data
 public class PhoneBookController implements Initializable {
     @Setter
@@ -216,7 +218,8 @@ public class PhoneBookController implements Initializable {
         phoneList.setAll(phones); // Update the phone list
         highlightContactButton(); // Highlight the contact button
     }
-
+    @FXML
+    private ComboBox<String> cbLetterFilter; // Add this line
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("PhoneBookController: initialize");
@@ -236,7 +239,11 @@ public class PhoneBookController implements Initializable {
         lvContacts.setCellFactory(listView -> new PhoneListCell());
 
         btnSearch.setOnAction(event -> onSearch());
-//
+
+        // Initialize ComboBox for letter selection
+        cbLetterFilter.setItems(FXCollections.observableArrayList(generateAlphabet()));
+        cbLetterFilter.setOnAction(this::onLetterFilterChanged);
+
         try {
             refresh();
             try {
@@ -278,6 +285,26 @@ public class PhoneBookController implements Initializable {
             showErrorDialog("Message: " + ex.getMessage());
         }
     }
+
+    private List<String> generateAlphabet() {
+        List<String> alphabet = new ArrayList<>();
+        for (char c = 'A'; c <= 'Z'; c++) {
+            alphabet.add(String.valueOf(c));
+        }
+        return alphabet;
+    }
+
+    @FXML
+    private void onLetterFilterChanged(ActionEvent event) {
+        String selectedLetter = cbLetterFilter.getSelectionModel().getSelectedItem();
+        filteredData.setPredicate(phone -> {
+            if (selectedLetter == null || selectedLetter.isEmpty()) {
+                return true; // No filter applied, show all contacts
+            }
+            return phone.getName().toLowerCase().startsWith(selectedLetter.toLowerCase());
+        });
+    }
+
 
 
     public  void disableControls(){
