@@ -236,7 +236,7 @@ public class PhoneBookController implements Initializable {
         lvContacts.setCellFactory(listView -> new PhoneListCell());
 
         btnSearch.setOnAction(event -> onSearch());
-
+//
         try {
             refresh();
             try {
