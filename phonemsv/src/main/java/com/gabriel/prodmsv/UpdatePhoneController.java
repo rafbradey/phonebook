@@ -178,6 +178,7 @@ public class UpdatePhoneController implements Initializable {
             clearIconView.setFitWidth(18);
             clearIconView.setFitHeight(18);
             dpClear.setGraphic(clearIconView);
+            dpClear.setContentDisplay(ContentDisplay.CENTER);
 
             refresh();
             // Disable typing in the dpBirthDate DatePicker

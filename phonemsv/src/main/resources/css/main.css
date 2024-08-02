@@ -121,3 +121,12 @@
     -fx-opacity: 1.0;
     -fx-prompt-text-fill: black;
 }
+
+#cbLetterFilter {
+    -fx-text-fill: Black;
+    -fx-font-family: "Century Gothic";
+    -fx-font-weight: Bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
