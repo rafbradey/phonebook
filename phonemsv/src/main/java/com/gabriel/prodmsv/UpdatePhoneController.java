@@ -173,6 +173,11 @@ public class UpdatePhoneController implements Initializable {
 
 
         try {
+            Image clear = new Image(getClass().getResourceAsStream("images/trashcanG.png"));
+            ImageView clearIconView = new ImageView(clear);
+            clearIconView.setFitWidth(18);
+            clearIconView.setFitHeight(18);
+            dpClear.setGraphic(clearIconView);
 
             refresh();
             // Disable typing in the dpBirthDate DatePicker
@@ -322,6 +327,8 @@ public class UpdatePhoneController implements Initializable {
         btnSubmit.setDisable(true);
         btnClear.setDisable(true);
         dpClear.setDisable(true);
+        btnClear.setVisible(false);
+        dpClear.setVisible(false);
     }
 
     @Deprecated
@@ -339,6 +346,8 @@ public class UpdatePhoneController implements Initializable {
         btnUpload.setVisible(true);
         btnSubmit.setDisable(false);
         btnSubmit.setVisible(true);
+        btnClear.setVisible(true);
+        dpClear.setVisible(true);
         dpClear.setDisable(false);
         if (contactImage.getImage() != defaultImage) {
             btnClear.setDisable(false);
