@@ -203,7 +203,11 @@ public class PhoneBookController implements Initializable {
         phoneList = FXCollections.observableArrayList();
 
         filteredData = new FilteredList<>(phoneList, p -> true);
+
+        // Sort the phoneList based on the first letter of the name
         SortedList<Phone> sortedData = new SortedList<>(filteredData);
+        sortedData.setComparator(Comparator.comparing(phone -> phone.getName().substring(0, 1).toLowerCase()));
+
         lvContacts.setItems(sortedData);
         lvContacts.setCellFactory(listView -> new PhoneListCell());
 
@@ -250,6 +254,7 @@ public class PhoneBookController implements Initializable {
             showErrorDialog("Message: " + ex.getMessage());
         }
     }
+
 
     public  void disableControls(){
         tfId.editableProperty().set(false);
