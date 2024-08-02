@@ -171,6 +171,8 @@ public class PhoneBookController implements Initializable {
 
                 // Set separator text based on the first letter of the contact's name
                 char firstLetter = phone.getName().toUpperCase().charAt(0);
+                //change separtor font size;
+                separatorText.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-fill: #000000;");
                 if (isFirstOfLetter(phone)) {
                     separatorText.setText(String.valueOf(firstLetter));
                     separatorText.setVisible(true);
